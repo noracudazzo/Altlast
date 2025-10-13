@@ -10,6 +10,10 @@
     <nav> </nav>
     <main class="kitchen"> 
       <div class="viewport">
+        <div id="popup" class="popup hidden">
+            <div id="popup-text"> </div>
+            <button id="popup-close">✖</button>
+        </div>
         <div class="scene">
           <img class="layer background" src="/src/assets/rooms/kitchen/background.png"> 
           <svg class="layer objects" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
@@ -120,7 +124,7 @@
             </defs>
             <g>
               <g class="objects">
-                <g class="object clickable clickable-object" id="big-plant">
+                <g class="object clickable hotspot" id="bigPlant">
                   <path id="straw" fill="#fff" d="M1052.55 574.27v73.3c0 .37-.11.74-.3 1.06l-7.49 12.29v16.36h-5.25v-16.92c0-.37.11-.73.3-1.06l7.49-12.29v-72.74c0-1.26 1.17-2.28 2.63-2.28s2.63 1.02 2.63 2.28Z"/>
                   <path id="liquid" fill="#33c8b3" d="M1051.96 669.81v5.13c0 1.62-1.32 2.94-2.94 2.94h-12.74c-1.62 0-2.94-1.32-2.94-2.94v-3.69c1.04-.18 2.09-.87 2.9-1.61 1.26-1.14 2.6-2.52 4.3-2.47 1.86.05 3.18 1.79 4.9 2.5 2.02.84 4.32.19 6.52.14Z"/>
                   <g id="glass-small" opacity=".5">
@@ -158,7 +162,7 @@
                     <circle cx="1069.44" cy="586.04" r="1.33" fill="#fff" opacity=".21"/>
                   </g>
                 </g>
-                <g class="object clickable clickable-object" id="small-plants">
+                <g class="object clickable hotspot" id="smallPlants">
                   <g id="plant-right">
                     <path fill="#33c8b3" d="M804.51 302.69c-.87-3.36-1.75-6.87-.97-10.25s3.8-6.52 7.25-6.17c2.87.29 5.12 2.78 7.97 3.24 1.88.3 3.92-.42 5.1-1.91s1.4-3.72.42-5.35c-1.61-2.69-5.32-2.89-8.3-3.84-2.66-.85-5.12-2.62-6.26-5.16-1.14-2.54-.67-5.87 1.49-7.63-1.01 3.94 1.77 8.44 5.75 9.3s8.36-2.1 9.07-6.1c-1.4 2.33-1.51 5.38-.28 7.81 1.39 2.73 4.36 4.85 4.35 7.91 0 2.4-1.95 4.37-4.04 5.56-2.08 1.19-4.44 1.92-6.35 3.38s-3.28 4.06-2.33 6.27c-.58-2.06-1.19-4.17-2.47-5.89s-3.4-2.97-5.51-2.62c-2.39.41-4.06 2.77-4.44 5.17s.24 4.83.85 7.17"/>
                     <g opacity=".25">
@@ -187,7 +191,7 @@
                     <circle cx="767.2" cy="271.42" r="1.11" fill="#fff" opacity=".21"/>
                   </g>
                 </g>
-                <g class="object clickable clickable-object" id="image">
+                <g class="object clickable hotspot" id="image">
                   <path id="glass-2" fill="#fff" d="M1030.03 213.47h97.51v81.68h-97.51z" opacity=".25"/>
                   <g id="image-2">
                     <g opacity=".15">
@@ -271,7 +275,7 @@
                     <path fill="#606060" d="m1052.5 295.04-.64.1c.08-.03.16-.07.23-.1h.41Z"/>
                   </g>
                 </g>
-                <g class="object clickable clickable-object" id="kitchen-machine">
+                <g class="object clickable hotspot" id="kitchenMachine">
                   <path id="background" fill="url(#Unbenannter_Verlauf_147)" d="M626.72 477.01h228.86v184.01H626.72z"/>
                   <path id="top" fill="url(#Unbenannter_Verlauf_476)" d="M841 466.75H631.72l-5 10.26h229.41L841 466.75z"/>
                   <path id="handle" fill="#180e23" d="M703.13 477.01h68.12c0 6.62-5.38 12-12 12h-44.12c-6.62 0-12-5.38-12-12Z" opacity=".45"/>
@@ -349,7 +353,7 @@
                     <path fill="#180e23" d="M809.15 515v-2.89h1v5.04h-1.04l-1.03-2.89v2.89h-.99v-5.04h1.05l1.03 2.89Z"/>
                   </g>
                 </g>
-                <g class="object clickable clickable-object" id="fridge">
+                <g class="object clickable hotspot" id="fridge">
                   <path id="fridge-background" fill="url(#Unbenannter_Verlauf_5)" d="M195.8 189.84h202.06v377.23H195.8z"/>
                   <g id="UI">
                     <path fill="#180e23" d="M226.73 318.96h140.54v108.57H226.73z"/>
@@ -489,7 +493,7 @@
                   </g>
                   <path id="snowflake" fill="#00c3ff" d="M367.74 199.39h-22.91l9.55-9.55h-5.65l-9.55 9.55h-15.47l9.11-9.11c.13-.13.24-.28.33-.44h-5.55l-9.54 9.55h-19.23v-9.55h-4v9.55H275.6l-9.54-9.55h-5.55c.09.16.2.31.33.44l9.11 9.11h-15.47l-9.55-9.55h-5.65l9.55 9.55h-22.92c-1.1 0-2 .9-2 2s.9 2 2 2h22.92l-14.11 14.11c-.78.78-.78 2.04 0 2.82.39.4.9.59 1.42.59s1.02-.19 1.41-.59l16.93-16.93h15.47l-9.11 9.11a2.004 2.004 0 0 0 1.41 3.42c.51 0 1.02-.2 1.42-.59l11.93-11.94h16.64l-22.94 22.94h-24.13c-1.1 0-2 .9-2 2s.9 2 2 2h20.13l-18.28 18.28a2.004 2.004 0 0 0 1.41 3.42c.51 0 1.02-.2 1.41-.59l18.11-18.11v19.77c0 1.1.9 2 2 2s2-.9 2-2v-23.77l22.87-22.87v16.31l-11.94 11.94c-.78.78-.78 2.05 0 2.83.78.78 2.05.78 2.83 0l9.11-9.11v15.46l-16.93 16.93c-.78.78-.78 2.05 0 2.83.78.78 2.05.78 2.83 0l14.11-14.11v22.91c0 1.1.9 2 2 2s2-.9 2-2v-22.91l14.11 14.11c.39.39.9.59 1.41.59s1.02-.2 1.41-.59c.78-.78.78-2.05 0-2.83l-16.93-16.93v-15.46l9.11 9.11c.39.39.9.59 1.41.59s1.02-.2 1.41-.59c.78-.78.78-2.05 0-2.83l-11.94-11.94V206.2l22.87 22.87v24.13c0 1.1.9 2 2 2s2-.9 2-2v-20.13l18.28 18.28c.39.39.9.59 1.41.59s1.02-.2 1.41-.59c.78-.78.78-2.05 0-2.83l-18.11-18.11h19.77c1.1 0 2-.9 2-2s-.9-2-2-2h-23.77l-23.02-23.02h16.38l11.93 11.94a1.993 1.993 0 0 0 2.83 0c.78-.78.78-2.05 0-2.83l-9.11-9.11h15.47l16.93 16.93c.39.4.9.59 1.41.59s1.02-.19 1.42-.59c.78-.78.78-2.04 0-2.82l-14.11-14.11h22.91c1.1 0 2-.9 2-2s-.9-2-2-2Z"/>
                 </g>
-                <g class="object clickable clickable-object" id="view">
+                <g class="object clickable hotspot" id="view">
                   <path id="sky" fill="url(#Unbenannter_Verlauf_25)" d="M1366 5.28V768h-22.52L1170.2 660.89V107.11L1366 5.28z"/>
                   <g id="houses">
                     <path fill="url(#Unbenannter_Verlauf_565)" d="m1239.16 709.06-51-37.04v-238.1l51 7.42v267.72z"/>

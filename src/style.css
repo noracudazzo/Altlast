@@ -45,18 +45,22 @@ table {
 	border-spacing: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 /* General CSS */
 
 body {
   background-color: #180e23;
   cursor: url(/src/assets/ui/cursor.png), auto;
   height: 100%;
+  overflow: hidden;
 }
 
 .viewport {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 }
 
 .scene {
@@ -74,18 +78,23 @@ body {
   max-height: 100%;
 }
 
-.scene .background { z-index: -99; pointer-events: none;}
+.scene .background { z-index: -1; pointer-events: none;}
 .scene .objects { z-index: 0;}
-.scene .foreground { z-index: 99; pointer-events: none;}
+.scene .foreground { z-index: 1; pointer-events: none;}
 
-/* Hover effects */
+/* Popup */
 
-.clickable:hover {
-  cursor: url(/src/assets/ui/cursor-investigate.png), zoom-in;
-}
-
-.clickable-object:hover {
-  filter: drop-shadow(0 0 5px white);
+.popup {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 700px;
+  background: #180e23;
+  color: white;
+  padding: 1rem;
+  z-index: 2;
+  border: solid 4px rgb(230, 9, 208);
 }
 
 /* Shake */
@@ -99,7 +108,7 @@ body {
   100% { transform: translate(0,0); }
 }
 
-.scene.shake {
+.viewport.shake {
   animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97);
   animation-iteration-count: infinite;
 }
