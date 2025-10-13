@@ -26,8 +26,20 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+/* Font */
+
+@font-face {
+  font-family: "AldotheApache";
+  src: url("/src/assets/css/fonts/AldotheApache.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+  letter-spacing: 3em;
+}
+
 body {
-	line-height: 1;
+	line-height: 1.5;
+  font-family: Outfit, "AldotheApache", sans-serif;
+  font-size: 18px;
 }
 ol, ul {
 	list-style: none;
@@ -86,7 +98,7 @@ body {
 
 .popup {
   position: absolute;
-  bottom: 10%;
+  top: 30%;
   left: 50%;
   transform: translateX(-50%);
   max-width: 700px;
@@ -95,6 +107,12 @@ body {
   padding: 1rem;
   z-index: 2;
   border: solid 4px rgb(230, 9, 208);
+}
+
+.popup button {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 /* Shake */

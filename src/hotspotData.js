@@ -34,9 +34,9 @@ export const hotspots = {
 
   image: {
     scale: 3,
-    origin: "100% 30%",
+    origin: "88% 30%",
     text: {
-      name: { title: "rofl", data: "?" },
+      name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
       status: { title: "...", data: "..." },
       belongsTo: { title: "...", data: "..." },
@@ -85,7 +85,7 @@ export const hotspots = {
     scale: 2.5,
     origin: "100% 55%",
     text: {
-      name: { title: "rofl", data: "?" },
+      name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
       status: { title: "...", data: "..." },
       belongsTo: { title: "...", data: "..." },

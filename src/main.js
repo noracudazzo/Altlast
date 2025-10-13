@@ -32,6 +32,11 @@ function zoomTo (hotspot) {
   scene.style.transform = `scale(${config.scale})`;
 }
 
+function zoomOut() {
+  zoomed = false;
+  scene.style.transform = "scale(1)";
+}
+
 function showPopUp (hotspot) {
   popupShown = true;
   const id = hotspot.id;
@@ -88,6 +93,7 @@ document.querySelectorAll(".hotspot").forEach(hotspot => {
 
 popupClose.addEventListener("click", () => {
   popup.classList.add("hidden"); 
+  zoomOut();
 });
 
 // Hover effects
