@@ -11,8 +11,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "50%",
+        top: "60%",
     }
   },
   
@@ -23,12 +23,13 @@ export const hotspots = {
       name: { title: "Objektname", data: "FoodSynth Sixteen" },
       year: { title: "Herstellungsjahr", data: "55" },
       status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
-      belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt, Lizenz: Standard Living Unit"},
+      belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt"},
+      license: { title: "Lizenz", data: "Lizenz: Standard Living Unit"},
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "20%",
+        top: "10%",
     }
   },
 
@@ -43,8 +44,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "50%",
+        top: "70%",
     }
   },
 
@@ -60,8 +61,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "50%",
+        top: "7%",
     }
   },
 
@@ -76,8 +77,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "...",
+        top: "...",
     }
   },
 
@@ -92,8 +93,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        x: "...",
-        y: "...",
+        left: "...",
+        top: "...",
     }
   },
 };

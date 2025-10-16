@@ -8,13 +8,13 @@ const popupClose = document.getElementById("popup-close");
 
 let zoomed = false;
 let clicked = false;
-let popupShown = true;
+let popupShown = false;
 
 // Functions
 
 function startHoverHotspot(hotspot) {
   viewport.classList.add("shake");
-  // hotspot.style.filter = "drop-shadow(0 0 5px white)";
+  // hotspot.style.filter = "drop-shadow(0 0 3px white)";
   hotspot.style.cursor = "url(/src/assets/ui/cursor-investigate.png), zoom-in";
 }
 
@@ -37,49 +37,64 @@ function zoomOut() {
   scene.style.transform = "scale(1)";
 }
 
-function showPopUp (hotspot) {
+function showPopUp(hotspot) {
   popupShown = true;
   const id = hotspot.id;
   const config = hotspots[id];
-  popupText.innerHTML = ""; // reset
+  popup.style.left = config.textLocation.left;
+  popup.style.top = config.textLocation.top;
+  popupText.innerHTML = ""; // Reset text
 
   const texts = [];
-  for (const key in config.text) { // loop 
+  for (const key in config.text) { 
     const field = config.text[key];
     const p = document.createElement("p");
-    popupText.appendChild(p); // br
-    texts.push({ el: p, text: `${field.title}: ${field.data}`});
+
+    // Titel (zunächst unsichtbar)
+    const strong = document.createElement("strong");
+    strong.textContent = field.title + ": ";
+    strong.style.opacity = 0;   
+    p.appendChild(strong);
+
+    // Beschreibung wird in Array gepusht
+    const span = document.createElement("span");
+    p.appendChild(span);
+
+    popupText.appendChild(p); 
+
+    texts.push({ strong, el: span, text: field.data });
   }
 
-  popup.classList.remove("hidden");
-
-  // Typewriter
+  setTimeout(() => popup.classList.add("visible"), 10); //  Verzögerung, damit die Transition greift
+  
+  // Typewriter Effekt
   let i = 0;
 
   function typeNext() {
     if (i >= texts.length) return;
-    const { el, text } = texts[i];
+    const { strong, el, text } = texts[i];
     let j = 0;
 
-    function type() {
-      if (j < text.length) {
-        el.textContent += text[j];
-        j++;
-        setTimeout(type, 50); // Geschwindigkeit
-      } else {
-        i++;
-        typeNext(); // nächster Absatz
-      }
-    }
+    // Titel einblenden
+    strong.style.opacity = 1;
 
-    type();
+    setTimeout(() => {
+      function type() {
+        if (j < text.length) {
+          el.textContent += text[j];
+          j++;
+          setTimeout(type, 50);
+        } else {
+          i++;
+          typeNext();
+        }
+      }
+      type();
+    }, 500); // Fade
   }
 
-  typeNext();
+  setTimeout(typeNext, 100);
 }
-
-
-// await, asynch
 
 // Zoom on click
 
@@ -92,7 +107,7 @@ document.querySelectorAll(".hotspot").forEach(hotspot => {
 }); 
 
 popupClose.addEventListener("click", () => {
-  popup.classList.add("hidden"); 
+  popup.classList.remove("visible"); 
   zoomOut();
 });
 
