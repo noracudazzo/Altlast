@@ -9,10 +9,9 @@ export const hotspots = {
       belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       license: { title: "Lizenz", data: "Urban Gardening"}
     },
-    comment: "...",
     textLocation: {
         left: "50%",
-        top: "60%",
+        bottom: "15%",
     }
   },
   
@@ -28,14 +27,14 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        left: "20%",
+        left: "12%",
         top: "10%",
     }
   },
 
   image: {
     scale: 3,
-    origin: "88% 30%",
+    origin: "95% 30%",
     text: {
       name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
@@ -45,7 +44,7 @@ export const hotspots = {
     comment: "...",
     textLocation: {
         left: "50%",
-        top: "70%",
+        bottom: "15%",
     }
   },
 
@@ -67,8 +66,8 @@ export const hotspots = {
   },
 
   fridge: {
-    scale: 2,
-    origin: "0% 60%",
+    scale: 3,
+    origin: "7% 56%",
     text: {
       name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
@@ -77,8 +76,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        left: "...",
-        top: "...",
+        right: "15%",
+        bottom: "15%",
     }
   },
 
@@ -93,8 +92,8 @@ export const hotspots = {
     },
     comment: "...",
     textLocation: {
-        left: "...",
-        top: "...",
+        left: "10%",
+        top: "40%",
     }
   },
 };

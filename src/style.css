@@ -27,7 +27,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 button:hover, a:hover {
-  cursor: url(/src/assets/ui/cursor-click.png), auto;
+  cursor: url(/src/assets/imgs/ui/cursor-click.png), auto;
 }
 
 /* Font */
@@ -80,11 +80,16 @@ strong {
   font-weight: bold;
 }
 
+.visible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* General CSS */
 
 body {
   background-color: #180e23;
-  cursor: url(/src/assets/ui/cursor.png), auto;
+  cursor: url(/src/assets/imgs/ui/cursor.png), auto;
   height: 100%;
   overflow: hidden;
 }
@@ -105,13 +110,14 @@ body {
 
 .layer {
   position: absolute;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
 .scene .objects { z-index: 0;}
 .scene .foreground { z-index: 1; pointer-events: none;}
+
+.navigation, .assistant { z-index: 5;}
 
 .visually-hidden:not(:focus):not(:active) { /* accessible hiding */
     clip: rect(0 0 0 0);
@@ -123,51 +129,167 @@ body {
     width: 1px;
 }
 
+/* AI Assistant */
+
+.assistant {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.assistant button {
+  background: none;
+  border: solid 2px white;
+  height: 5.5rem;
+  width: 5.5rem;
+  background: #180e23;
+  border-radius: 100%;
+  transition: ease .2s;
+}
+
+.assistant button .assistant-icon {
+  height: 60%;
+  transition: ease .2s;
+}
+
+.assistant button:hover .assistant-icon {
+  transform: scale(1.1);
+}
+
+.assistant button:hover {
+  filter: drop-shadow(0 0 25px #33c8b3);
+}
+
+.assistant .speechbubble {
+  background: #180e23;
+  border: solid 2px white;
+  color: white;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: .5rem 0 0 .5rem;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.assistant.active button .assistant-icon {
+  animation: pulseScale 2s infinite;
+}
+
+.assistant.active button {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Pfeil */
+
+.assistant .speechbubble:before,
+.assistant .speechbubble:after {
+  content: "";
+  position: absolute;
+  top: 1.05rem;
+  width: 0;
+  height: 0;
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent;
+}
+
+.assistant .speechbubble:before {
+  left: -1rem;
+  border-right: 1rem solid white; 
+}
+
+.assistant .speechbubble:after {
+  left: calc(-.95rem + 2px);
+  border-right: 1rem solid #180e23; 
+}
+
+/* Navigation */
+
+.assistant, .main-navigation {
+  margin: 2rem;
+  position: absolute;
+}
+
+.assistant {
+  margin: 2rem;
+}
+
+.main-navigation {
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.main-navigation a {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #180e23;
+  border: solid 1.5px white;
+}
+
+.main-navigation a:hover {
+  box-shadow: 0 0 15px #ffffff71;
+}
+
+.main-navigation a img {
+  object-fit: cover;
+  margin: .85rem;
+}
+
+.main-navigation .home-button img {
+  object-fit: cover;
+  margin: 1.1rem;
+}
+
 /* Popup */
 
 .popup {
   position: absolute;
-  top: 0%;
-  left: 0%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 50%;
   background: #180e23;
   color: white;
   padding: 2rem;
   z-index: 2;
-  border: solid 2px #33c8b3;
-  min-width: 30rem;
+  border: solid 1.5px white;
+  min-width: 40rem;
   max-width: 70vw;
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;
-}
-
-.popup.visible {
-  visibility: visible;
-  opacity: 1;
+  font-size: 1.4rem;
 }
 
 .popup button {
   position: absolute;
   right: 0;
   top: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 1rem;
+  margin: 1.5rem;
   border: none;
   border-radius: 20rem;
   background: #180e23;
-  color: white;
-  background-image: url("/src/assets/ui/close.svg");
-  background-position: center;
-  background-size: cover;
+  padding: 0;
+}
+
+.popup button img {
+  width: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
 }
 
 #popup-text strong {
   transition: opacity 0.7s ease;
 }
 
-/* Shake */
+/* Animations */
 
 @keyframes shake {
   0%   { transform: translate(0,0); }
@@ -181,4 +303,16 @@ body {
 .viewport.shake {
   animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97);
   animation-iteration-count: infinite;
+}
+
+@keyframes pulseScale {
+0% { transform: scale(1);}
+50% { transform: scale(1.15);}
+100% { transform: scale(1);}
+}
+
+@keyframes pulseGlow {
+0% { filter: drop-shadow(0 0 10px #33c8b3);}
+50% { filter: drop-shadow(0 0 25px #33c8b3);}
+100% { filter: drop-shadow(0 0 10px #33c8b3);}
 }

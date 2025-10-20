@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <nav> </nav>
+    <aside id="assistant" class="assistant navigation">
+      <button aria-label="assistant"> 
+        <svg class="assistant-icon" viewBox="0 0 177.48 234.29"><defs><style>.diamond{fill:url(#Unbenannter_Verlauf_47);}</style><linearGradient id="Unbenannter_Verlauf_47" x1="88.74" y1="0" x2="88.74" y2="234.29" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#33c8b3"/><stop offset=".16" stop-color="#4ecfbd"/><stop offset=".51" stop-color="#94e2d7"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><g><polygon class="diamond" points="177.48 117.14 88.74 234.29 0 117.14 88.74 0 177.48 117.14"/></g></svg>
+      </button>
+      <div id="speechbubble" class="speechbubble"> </div>
+    </aside>
     <main> 
       <div class="viewport">
         <div id="popup" class="popup">
-          <button id="popup-close"><span class="visually-hidden">Schließen</span></button>
+          <button id="popup-close" aria-label="close"><img src="/src/assets/imgs/ui/close-icon.svg"></button>
           <div id="popup-text"> </div>
         </div>
         <div class="scene kitchen">
-          <img class="layer background" src="/src/assets/rooms/kitchen/background.png"> 
+          <img class="layer background" src="/src/assets/imgs/rooms/kitchen/background.png"> 
           <svg class="layer objects" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
             <defs>
               <linearGradient id="Unbenannter_Verlauf_61" x1="1062.27" x2="1095.55" y1="309.25" y2="275.97" gradientUnits="userSpaceOnUse">
@@ -510,10 +515,14 @@
               </g>
             </g>
           </svg>
-          <img class="layer foreground" src="/src/assets/rooms/kitchen/foreground.png"> 
+          <img class="layer foreground" src="/src/assets/imgs/rooms/kitchen/foreground.png"> 
         </div>
       </div>
     </main>
+    <nav class="main-navigation navigation"> 
+      <a aria-label="home" class="home-button"> <img src="/src/assets/imgs/ui/home-icon.svg"> </a>
+      <a aria-label="options" class="options-button"> <img src="/src/assets/imgs/ui/options-icon.svg"> </a>
+    </nav>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
