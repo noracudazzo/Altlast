@@ -110,7 +110,7 @@ body {
 
 .layer {
   position: absolute;
-  width: 100%;
+  height: 100%;
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
@@ -182,6 +182,10 @@ body {
   animation: pulseGlow 2s infinite;
 }
 
+.assistant.active button:hover {
+  filter: unset;
+}
+
 /* Pfeil */
 
 .assistant .speechbubble:before,
@@ -235,7 +239,7 @@ body {
 }
 
 .main-navigation a:hover {
-  box-shadow: 0 0 15px #ffffff71;
+  box-shadow: 0 0 20px #ffffff9e;
 }
 
 .main-navigation a img {

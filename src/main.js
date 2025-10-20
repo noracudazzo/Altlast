@@ -65,6 +65,7 @@ async function showAssistantMessage(comment = null) {
   } else {
     await typeText(p, currentNarrative, 40); // Sonst normale Narrative
   }
+  setTimeout(() => closeAssistantMessage(), 30000);
 }
 
 function closeAssistantMessage() {
@@ -127,13 +128,16 @@ async function showPopUp(hotspot) {
 
   // Typewriter
   for (const { strong, el, text } of texts) {
+    if (!popupShown) return; // falls Popup geschlossen wurde
     strong.style.opacity = 1; // Titel einblenden
     await new Promise(r => setTimeout(r, 300)); // Fade-Pause
+    if (!popupShown) return; // falls Popup geschlossen wurde
     await typeText(el, text, 50); // Text tippen
+    if (!popupShown) return; // falls Popup geschlossen wurde
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
   }
 
-  if (config.comment) {
+  if (popupShown && config.comment) {
     showAssistantMessage(config.comment);
   };
 }
@@ -152,6 +156,7 @@ popupClose.addEventListener("click", () => {
   popup.classList.remove("visible"); 
   zoomOut();
   closeAssistantMessage();
+  popupShown = false;
 });
 
 assistant.addEventListener("click", () => {

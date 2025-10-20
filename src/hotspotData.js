@@ -41,7 +41,7 @@ export const hotspots = {
       status: { title: "...", data: "..." },
       belongsTo: { title: "...", data: "..." },
     },
-    comment: "...",
+    comment: "Wie klein du damals noch warst!",
     textLocation: {
         left: "50%",
         bottom: "15%",
