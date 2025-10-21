@@ -97,15 +97,17 @@ body {
 .viewport {
   width: 100vw;
   height: 100vh;
+  
 }
 
 .scene {
   height: 100%;
-  width: 100%;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.6s ease;
+  position: relative;
 }
 
 .layer {
@@ -132,20 +134,18 @@ body {
 /* AI Assistant */
 
 .assistant {
-  position: absolute;
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
 }
 
 .assistant button {
-  background: none;
-  border: solid 2px white;
   height: 5.5rem;
   width: 5.5rem;
   background: #180e23;
   border-radius: 100%;
   transition: ease .2s;
+  border: solid 2px #33c8b3;
 }
 
 .assistant button .assistant-icon {
@@ -216,10 +216,6 @@ body {
   position: absolute;
 }
 
-.assistant {
-  margin: 2rem;
-}
-
 .main-navigation {
   bottom: 0;
   right: 0;
@@ -229,8 +225,8 @@ body {
 }
 
 .main-navigation a {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,17 +235,17 @@ body {
 }
 
 .main-navigation a:hover {
-  box-shadow: 0 0 20px #ffffff9e;
+  box-shadow: 0 0 15px #ffffff9e;
 }
 
 .main-navigation a img {
   object-fit: cover;
-  margin: .85rem;
+  margin: 1rem;
 }
 
 .main-navigation .home-button img {
   object-fit: cover;
-  margin: 1.1rem;
+  margin: 1.2rem;
 }
 
 /* Popup */

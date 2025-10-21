@@ -128,12 +128,12 @@ async function showPopUp(hotspot) {
 
   // Typewriter
   for (const { strong, el, text } of texts) {
-    if (!popupShown) return; // falls Popup geschlossen wurde
+    if (!popupShown) return; 
     strong.style.opacity = 1; // Titel einblenden
     await new Promise(r => setTimeout(r, 300)); // Fade-Pause
-    if (!popupShown) return; // falls Popup geschlossen wurde
+    if (!popupShown) return; 
     await typeText(el, text, 50); // Text tippen
-    if (!popupShown) return; // falls Popup geschlossen wurde
+    if (!popupShown) return; 
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
   }
 
