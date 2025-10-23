@@ -81,6 +81,11 @@ export const hotspots = {
     }
   },
 
+  fridgeActivated: {
+    scale: 2.2,
+    origin: "7% 56%",
+  },
+
   view: {
     scale: 2.5,
     origin: "100% 55%",

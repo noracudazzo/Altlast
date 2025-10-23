@@ -27,7 +27,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 button:hover, a:hover {
-  cursor: url(/src/assets/imgs/ui/cursor-click.png), auto;
+  cursor: url(/src/assets/imgs/ui/cursor-click.png), pointer;
 }
 
 /* Font */
@@ -90,14 +90,12 @@ strong {
 body {
   background-color: #180e23;
   cursor: url(/src/assets/imgs/ui/cursor.png), auto;
-  height: 100%;
   overflow: hidden;
 }
 
 .viewport {
   width: 100vw;
   height: 100vh;
-  
 }
 
 .scene {
@@ -112,14 +110,15 @@ body {
 
 .layer {
   position: absolute;
-  height: 100%;
+  width: 100%;
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
 .scene .objects { z-index: 0;}
-.scene .foreground { z-index: 1; pointer-events: none;}
+.scene .foreground { z-index: 5; pointer-events: none;}
+.scene .canBeActivated { display: none; z-index: 2; }
 
-.navigation, .assistant { z-index: 5;}
+.navigation, .assistant { z-index: 99;}
 
 .visually-hidden:not(:focus):not(:active) { /* accessible hiding */
     clip: rect(0 0 0 0);
@@ -129,6 +128,23 @@ body {
     position: absolute;
     white-space: nowrap;
     width: 1px;
+}
+
+/* Buttons */
+
+.activationButton {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.activationButton.active {
+  cursor: pointer;
+  pointer-events: all;
+  cursor: url(/src/assets/imgs/ui/cursor-click.png), pointer;
+}
+
+.activationButton.active:focus {
+  outline: none;
 }
 
 /* AI Assistant */
@@ -267,6 +283,7 @@ body {
   font-size: 1.4rem;
 }
 
+/*
 .popup button {
   position: absolute;
   right: 0;
@@ -276,7 +293,7 @@ body {
   border-radius: 20rem;
   background: #180e23;
   padding: 0;
-}
+} */
 
 .popup button img {
   width: 100%;
@@ -316,3 +333,4 @@ body {
 50% { filter: drop-shadow(0 0 25px #33c8b3);}
 100% { filter: drop-shadow(0 0 10px #33c8b3);}
 }
+
