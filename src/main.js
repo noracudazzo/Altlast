@@ -4,57 +4,85 @@ const viewport = document.querySelector(".viewport");
 const scene = document.querySelector(".scene");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
-// const popupClose = document.getElementById("popup-close");
 const assistant = document.getElementById("assistant");
+const assistantButton = document.querySelector("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
+const activeAssistant = document.querySelector(".activeAssistant");
+const activeButton = document.querySelector(".activeButton");
+
+
+// Cursor Manager
+const CURSORS = {
+  default: "url(/src/assets/imgs/ui/cursor.png), auto",
+  zoomIn: "url(/src/assets/imgs/ui/cursor-zoomin.png), zoom-in",
+  zoomOut: "url(/src/assets/imgs/ui/cursor-zoomout.png), zoom-out",
+  click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
+};
 
 let zoomed = false;
-let clicked = false;
 let popupShown = false;
 let assistantShown = false;
-let relatedButtonActivated = false;
-let activateableElementShown = false;
+let activateableButtonActive = false;
+let activateableElementActivated = false;
 
+let currentCursor = "default";
 let currentNarrative = "Durchsuche zunächst die Küche.";
 
 // Functions
 
-function startHoverHotspot(hotspot) {
-  // viewport.classList.add("shake");
-  hotspot.style.filter = "drop-shadow(0 0 6px white)";
-  hotspot.style.cursor = "url(/src/assets/imgs/ui/cursor-investigate.png), zoom-in";
+function setCursor(type) {
+  if (currentCursor === type) return; 
+  currentCursor = type;
+  document.body.style.cursor = CURSORS[type] || CURSORS.default;
 }
 
-function endHoverHotspot(hotspot) {  
-  viewport.classList.remove("shake");
-  hotspot.style.filter = "unset";
-  hotspot.style.cursor = "unset";
+function startHoverHotspot(hotspot) {
+  hotspot.classList.add("hovered");
+}
+
+function endHoverHotspot(hotspot) {
+  hotspot.classList.remove("hovered");
 }
 
 function zoomTo(hotspot) {
-  console.log(hotspot);
   zoomed = true;
   const id = hotspot.id;
   const config = hotspots[id];
-  console.log(config);
+  if (!config) return;
+
+  // Zoom transition (Origin & Scale)
   scene.style.transformOrigin = config.origin;
   scene.style.transform = `scale(${config.scale})`;
+
+  // Klasse adden
   hotspot.classList.add("zoomed");
+
+    // Potentiellen Button aktivieren
+  const relatedButton = document.getElementById(`${id}Button`);
+  
+  // Button aktivieren, falls vorhanden
+  if (relatedButton) {
+    prepareButton(relatedButton, id);
+    activateableButtonActive = true;
+  }
 }
 
 function zoomOut() {
+
+  // Zoom entfernen
   zoomed = false;
   scene.style.transform = "scale(1)";
-  const zoomedElement = document.querySelector(".zoomed");
-  if (zoomedElement) zoomedElement.classList.remove("zoomed");
-  relatedButtonActivated = false;
 
-  // potentiell aktivierte Elemente deaktivieren
-  const activeElements = document.querySelectorAll("[id$='Activated']");
-  activeElements.forEach(el => {
-    const baseId = el.id.replace("Activated", "");
-    deactivateElement(baseId);
+  document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
+  document.querySelectorAll("[id$='Activated']").forEach(el => {
+    deactivateElement(el.id.replace("Activated", ""));
   });
+
+  // Popup schließen
+  closePopup();
+
+  // Assistant schließen
+  closeAssistantMessage();
 }
 
 async function typeText(el, text, speed = 50) {
@@ -67,38 +95,38 @@ async function typeText(el, text, speed = 50) {
 
 async function showAssistantMessage(comment = null) {
   assistantShown = true;
-  assistantSpeechbubble.innerHTML = ""; // reset
+  assistantSpeechbubble.innerHTML = ""; // Reset von bestehendem Inhalt
 
-  const p = document.createElement("p"); // p erstellen
+  const p = document.createElement("p"); // Paragraph Element erstellen
   assistantSpeechbubble.appendChild(p);
 
-  assistantSpeechbubble.classList.add("visible");
-  assistant.classList.add("active");
+  assistantSpeechbubble.style.display = "block";
+  assistant.classList.add("activeAssistant");
 
-  if (comment) {
+  if (comment) { 
     await typeText(p, comment, 40); // Falls Kommentar vorhanden
   } else {
     await typeText(p, currentNarrative, 40); // Sonst normale Narrative
   }
-  setTimeout(() => closeAssistantMessage(), 30000);
 }
 
 function closeAssistantMessage() {
   assistantShown = false;
-  assistantSpeechbubble.classList.remove("visible");
-  assistant.classList.remove("active");
+  assistantSpeechbubble.style.display = "none";
+  assistant.classList.remove("activeAssistant");
 };
 
 function closePopup() {
-  popup.classList.remove("visible"); 
   popupShown = false;
+  popup.classList.remove("visible"); 
 }
 
 async function showPopUp(hotspot) {
-  popup.style.transform = "unset";
   popupShown = true;
   const id = hotspot.id;
   const config = hotspots[id];
+
+  popup.style.transform = "unset"; // Style Reset
 
   // Position setzen
   if (config.textLocation.left != null) { 
@@ -121,7 +149,7 @@ async function showPopUp(hotspot) {
     popup.style.transform = "translateX(-50%)";
   }
 
-  popupText.innerHTML = ""; // Reset text
+  popupText.innerHTML = ""; // Text reset
 
   const texts = [];
   for (const key in config.text) { 
@@ -141,14 +169,6 @@ async function showPopUp(hotspot) {
     popupText.appendChild(p); 
 
     texts.push({ strong, el: span, text: field.data });
-  }
-
-  // Potentiellen Button aktivieren
-  const relatedButton = document.getElementById(`${id}Button`);
-  
-  if (relatedButton) {
-    prepareButton(relatedButton, id);
-    relatedButtonActivated = true;
   }
 
   // Popup einblenden
@@ -171,31 +191,38 @@ async function showPopUp(hotspot) {
 }
 
 function prepareButton(button, parentId) {
-  button.classList.add("active");
-  button.setAttribute("tabindex", "0");
 
-  button.addEventListener("click", () => {
-    if (!button.classList.contains("active")) return;
-    activateElement(parentId);
-  });
+  if (!button.classList.contains("activeButton")) {
+    button.classList.add("activeButton");
+    button.setAttribute("tabindex", "0");
+
+    button.addEventListener("click", () => {
+      if (!button.classList.contains("activeButton")) return;
+      activateElement(parentId);
+    });
+  }
 }
 
 function activateElement(baseId) {
-
   const baseElement = document.getElementById(baseId);
   const activatedElement = document.getElementById(baseId + "Activated");
 
+  // alles schließen
   closePopup();
   closeAssistantMessage();
-  zoomTo(activatedElement);
+  zoomTo(activatedElement); // an Element ranzoomen
 
-  // Sichtbar machen
-  baseElement.style.display = "none";
-  activatedElement.style.display = "block";
+  setTimeout(() => activatedElement.style.display = "block", 800); // aktiviertes Element sichtbar machen
+  setTimeout(() => baseElement.style.display = "none", 800); // parent unsichtbar machen
+  activatedElement.classList.add("activatedElement");
 
    // Booleans
-  activateableElementShown = true;
-  relatedButtonActivated = true;
+  activateableElementActivated = true;
+
+  // Aktiven Button deaktivieren
+  const activeButton = document.querySelector(".activeButton");
+  activateableButtonActive = false; // Button wird inaktiv wenn Element bereits aktiviert wurde
+  if (activeButton) activatedElement.classList.remove("activeButton");
 }
 
 function deactivateElement(baseId) {
@@ -209,101 +236,121 @@ function deactivateElement(baseId) {
   baseElement.style.display = "block";
 
   // Booleans
-  activateableElementShown = false;
-  relatedButtonActivated = false;
+  activateableElementActivated = false;
+  activateableButtonActive = false;
 }
 
 
-function isInsideZoomArea(e, buffer = 30) { // Ist Maus innerhalb des Elements (+ Buffer)?
-  const zoomedElement = document.querySelector(".zoomed");
-  if (!zoomedElement) return false;
 
-  const rect = zoomedElement.getBoundingClientRect();
-  return (
-    e.clientX >= rect.left - buffer &&
-    e.clientX <= rect.right + buffer &&
-    e.clientY >= rect.top - buffer &&
-    e.clientY <= rect.bottom + buffer
-  );
-}
 
-function isClickIgnored(e) {
-  if (!e.target) return false;
 
-  // Liste von Selektoren, die Klicks auslösen dürfen
-  const ignoreSelectors = [
-    '.activationButton', '.navigation', '.button', '.popup',
-  ];
 
-  // wenn der Klick in einem dieser Elemente liegt -> ignorieren
-  for (const sel of ignoreSelectors) {
-    if (e.target.closest(sel)) return true;
+// Haupt Cursor Logik!
+
+document.addEventListener("mousemove", e => {
+  const target = e.target;
+  const hotspot = target.closest(".hotspot");
+
+  // Fall 0: Immer fixe UI-Elemente
+  if (target.closest(".main-navigation") || target.closest(".assistant .assistantButton")) {
+    console.log("Target close to Nav or Assistant");
+    setCursor("click");
+    return;
   }
 
-  return false;
-}
+  if (target.closest(".speechbubble")) {
+    console.log("Target close to Assistant Speechbubble");
+    setCursor("default");
+    return;
+  } 
 
+  // Fall 1: Nicht gezoomt
+  if (!zoomed) {
+    if (hotspot) setCursor("zoomIn");
+    else setCursor("default");
+    return;
+  }
 
-// Zoom on click
+  // Fall 2: Gezoomt
+  if (zoomed && !activateableElementActivated) {
 
-document.querySelectorAll(".hotspot").forEach(hotspot => {
-  hotspot.addEventListener("click", () => {
-    if (zoomed) return; 
-    zoomTo(hotspot);
-    showPopUp(hotspot);
-    clicked = true;
-  }); 
-}); 
+    // Wenn Activation Button vorhanden
+    if (target.closest(".activeButton") && activateableButtonActive) {
+      setCursor("click");
+      return;
+    }
 
-/* .addEventListener("click", () => {
-  zoomOut();
-  closeAssistantMessage();
-  closePopup();
-}); */
+    // Wenn über gezoomtem Element oder Popup 
+    if (target.closest(".zoomed") || target.closest(".popup")) {
+      console.log("Target is zoomed Element or Popup");
+      setCursor("default");
+      return;
+    } 
 
-assistant.addEventListener("click", () => {
-  if (assistantShown === false) { showAssistantMessage(); }
-  else { closeAssistantMessage(); }
+    setCursor("zoomOut"); // Sonst: Zoom out
+    return;
+  }
+
+  // Fall 2: Gezoomt und aktiviertes Objekt
+  if (zoomed && activateableElementActivated) {
+
+    // Wenn über Element Body oder Popup 
+    if (target.closest(".activateableBody") || target.closest(".popup")) {
+      console.log("Target is activatedBody");
+      setCursor("default");
+      return;
+    } 
+
+    // Wenn über Objekt
+    if (target.closest(".activatedElement .hotspot")) {
+      console.log("Target is hotspot");
+      setCursor("zoomIn");
+      return;
+    } 
+
+    setCursor("zoomOut"); // Sonst: Zoom out
+    return;
+  }
+
 });
 
-document.addEventListener("click", (e) => {
-  if (!zoomed) return;
+// Click & Hover (Hotspots)
 
-  if (isInsideZoomArea(e)) return; // Falls Klick im Hotspot Bereich
-  if (isClickIgnored(e)) return; // Falls Klick auf Elemente, die ausgenommen sind (popup, Nav, Buttons, ...)
+document.querySelectorAll(".hotspot").forEach(hs => {
+  hs.addEventListener("mouseenter", () => {
+    // Nur erlaubt, wenn nicht gezoomt ODER aktivierbares Objekt sichtbar
+    if (!zoomed || (zoomed && activateableElementActivated)) startHoverHotspot(hs);
+  });
 
-  // Ansonsten: Rauszoomen
-  zoomOut();
-  closeAssistantMessage();
-  closePopup();
-});
+  hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
 
-
-// Hover effects
-
-document.querySelectorAll(".hotspot").forEach(hotspot => { // Hover glow Element
-  hotspot.addEventListener("mouseenter", () => { // Start hover
-    if (!zoomed || activateableElementShown) {
-      startHoverHotspot(hotspot)
+  hs.addEventListener("click", () => {
+    if (!zoomed) {
+      zoomTo(hs);
+      showPopUp(hs);
     }
   });
-  hotspot.addEventListener("mouseleave", () => { // End hover
-    endHoverHotspot(hotspot);
-  });
-  hotspot.addEventListener("click", () => { // End hover fallback
-    endHoverHotspot(hotspot);
-  });
-}); 
-
-document.addEventListener("mousemove", (e) => { // Zoom out
-  if (!zoomed) return;
-
-  const popup = document.getElementById("popup");
-  const overPopup = popup && popup.contains(e.target);
-
-  if (!isInsideZoomArea(e) && !overPopup) {
-    document.body.style.cursor = "url(/src/assets/imgs/ui/cursor-zoom-out.png), zoom-out";
-  } else {
-    document.body.style.cursor = "";
-  }
 });
+
+// Click (Assistant)
+assistant.addEventListener("click", () => {
+  if (!assistantShown) showAssistantMessage();
+  else closeAssistantMessage();
+});
+
+// Click (Zoom Out)
+document.addEventListener("click", e => {
+  if (!zoomed) return;
+  console.log("zoomed, zoomout-click listener active");
+  if (
+    e.target.closest(".main-navigation") || 
+    e.target.closest("#popup.popup") ||
+    e.target.closest("#assistant .assistantButton") ||
+    e.target.closest("#assistant .speechbubble") ||
+    e.target.closest(".zoomed") 
+  )
+  return;
+  zoomOut();
+});
+
+

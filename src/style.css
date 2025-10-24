@@ -26,9 +26,10 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-button:hover, a:hover {
-  cursor: url(/src/assets/imgs/ui/cursor-click.png), pointer;
+.hotspot.hovered {
+  filter: drop-shadow(0 0 6px white);
 }
+
 
 /* Font */
 
@@ -89,7 +90,7 @@ strong {
 
 body {
   background-color: #180e23;
-  cursor: url(/src/assets/imgs/ui/cursor.png), auto;
+  cursor: url(/src/assets/imgs/ui/cursor.png), default;
   overflow: hidden;
 }
 
@@ -114,11 +115,10 @@ body {
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
-.scene .objects { z-index: 0;}
+.scene .object { z-index: 0;}
 .scene .foreground { z-index: 5; pointer-events: none;}
-.scene .canBeActivated { display: none; z-index: 2; }
-
-.navigation, .assistant { z-index: 99;}
+.scene .activateableObject { display: none; z-index: 2; }
+#assistant, #main-navigation { z-index: 99;}
 
 .visually-hidden:not(:focus):not(:active) { /* accessible hiding */
     clip: rect(0 0 0 0);
@@ -132,20 +132,19 @@ body {
 
 /* Buttons */
 
-.activationButton {
-  cursor: not-allowed;
-  pointer-events: none;
-}
 
-.activationButton.active {
-  cursor: pointer;
+.activeButton {
   pointer-events: all;
-  cursor: url(/src/assets/imgs/ui/cursor-click.png), pointer;
 }
 
-.activationButton.active:focus {
+.activationButton:focus {
   outline: none;
 }
+
+button, .assistantButton {
+  cursor: inherit !important;
+}
+
 
 /* AI Assistant */
 
@@ -182,23 +181,21 @@ body {
   border: solid 2px white;
   color: white;
   padding: 1.25rem 2rem;
-  display: flex;
   align-items: center;
   position: relative;
   margin: .5rem 0 0 .5rem;
-  visibility: hidden;
-  opacity: 0;
+  display: none;
 }
 
-.assistant.active button .assistant-icon {
+.assistant.activeAssistant button .assistant-icon {
   animation: pulseScale 2s infinite;
 }
 
-.assistant.active button {
+.assistant.activeAssistant button {
   animation: pulseGlow 2s infinite;
 }
 
-.assistant.active button:hover {
+.assistant.activeAssistant button:hover {
   filter: unset;
 }
 

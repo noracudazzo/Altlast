@@ -8,7 +8,7 @@
   </head>
   <body>
     <aside id="assistant" class="assistant navigation">
-      <button aria-label="assistant"> 
+      <button aria-label="assistant" class="assistantButton"> 
         <svg class="assistant-icon" viewBox="0 0 177.48 234.29"><defs><style>.diamond{fill:url(#Unbenannter_Verlauf_47);}</style><linearGradient id="Unbenannter_Verlauf_47" x1="88.74" y1="0" x2="88.74" y2="234.29" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#33c8b3"/><stop offset=".16" stop-color="#4ecfbd"/><stop offset=".51" stop-color="#94e2d7"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><g><polygon class="diamond" points="177.48 117.14 88.74 234.29 0 117.14 88.74 0 177.48 117.14"/></g></svg>
       </button>
       <div id="speechbubble" class="speechbubble"> </div>
@@ -686,8 +686,8 @@
                   <path d="M1347.02 544.81h73.32v222.95h-73.32z"/>
                 </g>
               </g>
-              <g class="object canBeActivated" id="fridgeActivated">
-                <g id="fridgeBody">
+              <g class="object activateableObject" id="fridgeActivated">
+                <g class="activateableBody" id="fridgeBody">
                   <path fill="url(#Unbenannter_Verlauf_62)" d="M195.8 189.84h202.06v402.65H195.8z"/>
                   <path fill="url(#Unbenannter_Verlauf_129)" d="m368.47 568.61 29.39 13.37V189.84l-29.39 10.26v368.51z"/>
                   <path fill="url(#Unbenannter_Verlauf_129-2)" d="m237.62 568.62-41.82 13.36V189.84l41.82 10.26v368.52z"/>
@@ -958,7 +958,7 @@
         </div>
       </div>
     </main>
-    <nav class="main-navigation navigation"> 
+    <nav class="main-navigation navigation" id="main-navigation"> 
       <a aria-label="home" class="home-button"> <img src="/src/assets/imgs/ui/home-icon.svg"> </a>
       <a aria-label="options" class="options-button"> <img src="/src/assets/imgs/ui/options-icon.svg"> </a>
     </nav>

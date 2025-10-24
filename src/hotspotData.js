@@ -2,6 +2,7 @@ export const hotspots = {
   smallPlants: {
     scale: 4,
     origin: "59% 40%",
+    hasBeenClicked: false,
     text: {
       name: { title: "Objektname", data: "GreenUnit Delta" },
       year: { title: "Herstellungsjahr", data: "..." },
@@ -18,6 +19,7 @@ export const hotspots = {
   bigPlant: {
     scale: 3,
     origin: "85% 90%",
+    hasBeenClicked: false,
     text: {
       name: { title: "Objektname", data: "FoodSynth Sixteen" },
       year: { title: "Herstellungsjahr", data: "55" },
@@ -35,6 +37,7 @@ export const hotspots = {
   image: {
     scale: 3,
     origin: "95% 30%",
+    hasBeenClicked: false,
     text: {
       name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
@@ -51,6 +54,7 @@ export const hotspots = {
   kitchenMachine: {
     scale: 3,
     origin: "56% 70%",
+    hasBeenClicked: false,
     text: {
       name: { title: "Objektname", data: "FoodSynth Sixteen 1" },
       year: { title: "Herstellungsjahr", data: "55" },
@@ -68,6 +72,7 @@ export const hotspots = {
   fridge: {
     scale: 3,
     origin: "7% 56%",
+    hasBeenClicked: false,
     text: {
       name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
@@ -83,12 +88,13 @@ export const hotspots = {
 
   fridgeActivated: {
     scale: 2.2,
-    origin: "7% 56%",
+    origin: "5% 50%",
   },
 
   view: {
     scale: 2.5,
     origin: "100% 55%",
+    hasBeenClicked: false,
     text: {
       name: { title: "...", data: "..." },
       year: { title: "...", data: "..." },
