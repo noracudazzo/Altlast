@@ -6,7 +6,7 @@ const sceneWrapper = document.querySelector(".scene-wrapper");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
 const assistant = document.getElementById("assistant");
-const assistantButton = document.querySelector("assistantButton");
+const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
 const activeAssistant = document.querySelector(".activeAssistant");
 const activeButton = document.querySelector(".activeButton");
@@ -48,6 +48,10 @@ function endHoverHotspot(hotspot) {
 }
 
 function zoomTo(hotspot) {
+  scene.classList.add('glitch');
+  setTimeout(() => scene.classList.remove('glitch'), 400);
+
+  endHoverHotspot(hotspot);
   zoomed = true;
   const id = hotspot.id;
   const roomData = hotspots[currentRoom];
@@ -58,23 +62,22 @@ function zoomTo(hotspot) {
 
   const sceneWidth = scene.offsetWidth;
   const sceneHeight = scene.offsetHeight;
-  console.log(sceneWidth, sceneHeight);
 
   // Original-Szene: 3072x5464
   const scaleX = sceneWidth / 5464; 
   const scaleY = sceneHeight / 3072;
-  console.log(scaleX, scaleY);
 
   // Pixel-Koordinaten der Zoom-Punkte (in config)
   const originX = config.originX * scaleX;
   const originY = config.originY * scaleY;
-  console.log(config.originX, config.originY);
-  console.log(originX, originY);
 
   // Zoom Transition
-  scene.style.transition = "transform 0.8s ease"; 
+  scene.style.transition = "transform 0.9s cubic-bezier(0.33, 1, 0.68, 1)";
   scene.style.transformOrigin = `${originX}px ${originY}px`;
-  scene.style.transform = `scale(${config.scale})`; 
+
+  requestAnimationFrame(() => {
+  scene.style.transform = `scale(${config.scale})`;
+  });
 
   // Zoomed Klasse adden
   hotspot.classList.add("zoomed");
@@ -91,8 +94,10 @@ function zoomTo(hotspot) {
 function zoomOut() {
   zoomed = false;
 
-  scene.style.transform = "scale(1)"; // Scale zurück auf 1
-  scene.style.transformOrigin = "center center"; // Standard Origin
+  scene.style.transition = "transform 0.9s cubic-bezier(0.33, 1, 0.68, 1)";
+  requestAnimationFrame(() => {
+    scene.style.transform = "scale(1)";
+  });
 
   // Klasse entfernen
   document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
@@ -100,7 +105,13 @@ function zoomOut() {
   // Elemente deaktivieren
   document.querySelectorAll("[id$='Activated']").forEach(el => {
     deactivateElement(el.id.replace("Activated", ""));
+    activateableElementActivated = false;
   });
+    document.querySelectorAll(".activeButton").forEach(el => {
+    el.classList.remove("activeButton");
+    activateableButtonActive = false;
+  });
+
 
   // Popup schließen
   closePopup();
@@ -153,23 +164,54 @@ async function showPopUp(hotspot) {
 
   if (!config) return;
 
-  popup.style.transform = "unset"; // Style Reset
+  const viewportWidth = viewport.offsetWidth;
+  const viewportHeight = viewport.offsetHeight;
+
+  // Original-Szene: 3072x5464
+  const scaleX = viewportWidth / 5464; 
+  const scaleY = viewportHeight / 3072;
 
   // Position setzen
-  if (config.textLocation.left != null) { 
-    popup.style.left = config.textLocation.left; 
+
+  // X-Achse
+  if (config.textLocation.left === "center" || config.textLocation.right === "center") { 
+    console.log("Fall 1");
+    const popupWidth = popup.getBoundingClientRect().width;
+    const left = (viewportWidth - popupWidth) / 2; 
+    popup.style.left = `${left}px`; 
+    popup.style.right = "unset"; 
+  } 
+
+  else if (typeof config.textLocation.left === "number") { 
+    console.log("Fall 2");
+    popup.style.left = `${config.textLocation.left * scaleX}px`;
     popup.style.right = "unset"; 
   }
-  if (config.textLocation.right != null) { 
-    popup.style.right = config.textLocation.right; 
+
+  else if (typeof config.textLocation.right === "number") { 
+    console.log("Fall 3");
+    popup.style.right = `${config.textLocation.right * scaleX}px`;
     popup.style.left = "unset"; 
   }
-  if (config.textLocation.top != null) { 
-    popup.style.top = config.textLocation.top; 
+
+  // Y-Achse
+  if (config.textLocation.top === "center" || config.textLocation.bottom === "center") { 
+    console.log("Fall 4");
+    const popupHeight = popup.getBoundingClientRect().height;
+    const top = (viewportHeight - popupHeight) / 2; 
+    popup.style.top = `${top}px`; 
+    popup.style.bottom = "unset"; 
+  } 
+
+  else if (typeof config.textLocation.top === "number") { 
+    console.log("Fall 5");
+    popup.style.top = `${config.textLocation.top * scaleY}px`;
     popup.style.bottom = "unset"; 
   }
-  if (config.textLocation.bottom != null) { 
-    popup.style.bottom = config.textLocation.bottom; 
+  
+  else if (typeof config.textLocation.bottom === "number") { 
+    console.log("Fall 6");
+    popup.style.bottom = `${config.textLocation.bottom * scaleY}px`;
     popup.style.top = "unset"; 
   }
 
@@ -200,7 +242,7 @@ async function showPopUp(hotspot) {
 
   // Schauen, ob Raum fertig ist
   if(areAllHotspotsClicked(currentRoom)) {
-  }
+  } // wichtig, tbd
 
   // Popup einblenden
   setTimeout(() => popup.classList.add("visible"), 10);
@@ -249,11 +291,6 @@ function activateElement(baseId) {
 
    // Booleans
   setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
-
-  // Aktiven Button deaktivieren
-  const activeButton = document.querySelector(".activeButton");
-  activateableButtonActive = false; // Button wird inaktiv wenn Element bereits aktiviert wurde
-  if (activeButton) activatedElement.classList.remove("activeButton");
 }
 
 function deactivateElement(baseId) {
@@ -291,7 +328,7 @@ document.addEventListener("mousemove", e => {
   const hotspot = target.closest(".hotspot");
 
   // Fall 0: Immer fixe UI-Elemente
-  if (target.closest(".main-navigation") || target.closest(".assistant .assistantButton")) {
+  if (target.closest(".main-navigation") || target.closest(".assistant #assistantButton")) {
     setCursor("click");
     return;
   }
@@ -367,7 +404,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
 });
 
 // Click (Assistant)
-assistant.addEventListener("click", () => {
+assistantButton.addEventListener("click", () => {
   if (!assistantShown) showAssistantMessage();
   else closeAssistantMessage();
 });
@@ -378,7 +415,7 @@ document.addEventListener("click", e => {
   if (
     e.target.closest(".main-navigation") || 
     e.target.closest("#popup.popup") ||
-    e.target.closest("#assistant .assistantButton") ||
+    e.target.closest("#assistant #assistantButton") ||
     e.target.closest("#assistant .speechbubble") ||
     e.target.closest(".zoomed") 
   )

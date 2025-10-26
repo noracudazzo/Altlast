@@ -7,7 +7,7 @@ export const hotspots = {
 
     smallPlants: {
       scale: 4,
-      originX: 3200,
+      originX: 3250,
       originY: 1200, 
       hasBeenClicked: false,
       text: {
@@ -18,14 +18,14 @@ export const hotspots = {
         license: { title: "Lizenz", data: "Urban Gardening"}
       },
       textLocation: {
-          left: "50%",
-          bottom: "15%",
+          left: "center",
+          bottom: 450,
       }
     },
   
     bigPlant: {
       scale: 3,
-      originX: 5000,
+      originX: 5100,
       originY: 2750, 
       hasBeenClicked: false,
       text: {
@@ -37,14 +37,14 @@ export const hotspots = {
       },
       comment: "...",
       textLocation: {
-          left: "12%",
-          top: "10%",
+        left: "center",
+        top: 350,
       }
     },
 
     image: {
       scale: 3,
-      originX: 5000,
+      originX: 5200,
       originY: 1000, 
       hasBeenClicked: false,
       text: {
@@ -55,8 +55,8 @@ export const hotspots = {
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {
-          left: "50%",
-          bottom: "15%",
+        left: "center",
+        bottom: 450,
       }
     },
 
@@ -74,15 +74,15 @@ export const hotspots = {
       },
       comment: "...",
       textLocation: {
-          left: "50%",
-          top: "7%",
+        left: "center",
+        top: 350,
       }
     },
 
     view: {
       scale: 2.5,
       originX: 5464,
-      originY: 1700, 
+      originY: 1525, 
       hasBeenClicked: false,
       text: {
         name: { title: "...", data: "..." },
@@ -92,15 +92,15 @@ export const hotspots = {
       },
       comment: "...",
       textLocation: {
-          left: "10%",
-          top: "40%",
+        left: 500,
+        top: "center",
       }
     },
 
     fridge: {
-      scale: 3,
-      originX: 800,
-      originY: 1650, 
+      scale: 2.3,
+      originX: 700,
+      originY: 1500, 
       hasBeenClicked: false,
       text: {
         name: { title: "...", data: "..." },
@@ -110,21 +110,18 @@ export const hotspots = {
       },
       comment: "Schau besser mal rein.",
       textLocation: {
-          right: "15%",
-          bottom: "15%",
+          right: "center",
+          bottom: 400,
       }
     },
 
     fridgeActivated: {
-      scale: 2.2,
-      originX: 400,
-      originY: 1600, 
+      scale: 2.3,
+      originX: 700,
+      originY: 1500, 
     },
 
     pomegranate: {
-      scale: 5,
-      originX: 1100,
-      originY: 2100, 
       hasBeenClicked: false,
       text: {
         name: { title: "...", data: "..." },
@@ -134,15 +131,12 @@ export const hotspots = {
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {
-          left: "50%",
-          bottom: "15%",
+          right: 300,
+          bottom: "center",
       }
     },
 
     liquids: {
-      scale: 3.5,
-      originX: 900,
-      originY: 1200, 
       hasBeenClicked: false,
       text: {
         name: { title: "...", data: "..." },
@@ -152,15 +146,12 @@ export const hotspots = {
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {
-          left: "50%",
-          bottom: "15%",
+          right: 300,
+          bottom: "center",
       }
     },
 
-    meat: {
-      scale: 5,
-      originX: 1000,
-      originY: 1800, 
+    meat: { 
       hasBeenClicked: false,
       text: {
         name: { title: "...", data: "..." },
@@ -170,10 +161,9 @@ export const hotspots = {
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {
-          left: "50%",
-          bottom: "15%",
+          right: 300,
+          bottom: "center",
       }
     },
-
   }
 };

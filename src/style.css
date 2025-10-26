@@ -59,7 +59,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1.5;
   font-family: "SpaceMono", sans-serif;
-  font-size: 18px;
 }
 ol, ul {
 	list-style: none;
@@ -92,7 +91,6 @@ body {
   background-color: #180e23;
   cursor: url(/src/assets/imgs/ui/cursor.png), default;
   overflow: hidden;
-  font-size: 20px;
 }
 
 .viewport {
@@ -193,6 +191,7 @@ button, .assistantButton {
   margin: .5rem 0 0 .5rem;
   display: none;
   height: fit-content;
+  font-size: 1.3rem;
 }
 
 .assistant.activeAssistant button .assistant-icon {
@@ -280,12 +279,12 @@ button, .assistantButton {
   padding: 2rem;
   z-index: 2;
   border: solid 1.5px white;
-  min-width: 40rem;
+  min-width: 50rem;
   max-width: 70vw;
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 /*
@@ -313,12 +312,6 @@ button, .assistantButton {
 
 /* Animations */
 
-
-.scene.zooming {
-  transform: scale(var(--scale, 1));
-  transform-origin: var(--origin, 50% 50%);
-}
-
 @keyframes shake {
   0%   { transform: translate(0,0); }
   20%  { transform: translate(0, -1.25px); }
@@ -345,3 +338,8 @@ button, .assistantButton {
 100% { filter: drop-shadow(0 0 10px #33c8b3);}
 }
 
+/* Kitchen */
+.kitchen .activationButton.activeButton:hover .fridge-button-background {
+  fill: white;
+  transition: ease 0.1s;
+}
