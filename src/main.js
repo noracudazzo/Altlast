@@ -2,6 +2,7 @@ import {hotspots} from "./hotspotData";
 
 const viewport = document.querySelector(".viewport");
 const scene = document.querySelector(".scene");
+const sceneWrapper = document.querySelector(".scene-wrapper");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
 const assistant = document.getElementById("assistant");
@@ -9,6 +10,16 @@ const assistantButton = document.querySelector("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
 const activeAssistant = document.querySelector(".activeAssistant");
 const activeButton = document.querySelector(".activeButton");
+
+let zoomed = false;
+let popupShown = false;
+let assistantShown = false;
+let activateableButtonActive = false;
+let activateableElementActivated = false;
+
+let currentRoom = "kitchen";
+let currentCursor = "default";
+let currentNarrative = "Durchsuche zunächst die Küche.";
 
 
 // Cursor Manager
@@ -19,14 +30,6 @@ const CURSORS = {
   click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
 };
 
-let zoomed = false;
-let popupShown = false;
-let assistantShown = false;
-let activateableButtonActive = false;
-let activateableElementActivated = false;
-
-let currentCursor = "default";
-let currentNarrative = "Durchsuche zunächst die Küche.";
 
 // Functions
 
@@ -47,20 +50,38 @@ function endHoverHotspot(hotspot) {
 function zoomTo(hotspot) {
   zoomed = true;
   const id = hotspot.id;
-  const config = hotspots[id];
+  const roomData = hotspots[currentRoom];
+  if (!roomData) return;
+
+  const config = roomData[id];
   if (!config) return;
 
-  // Zoom transition (Origin & Scale)
-  scene.style.transformOrigin = config.origin;
-  scene.style.transform = `scale(${config.scale})`;
+  const sceneWidth = scene.offsetWidth;
+  const sceneHeight = scene.offsetHeight;
+  console.log(sceneWidth, sceneHeight);
 
-  // Klasse adden
+  // Original-Szene: 3072x5464
+  const scaleX = sceneWidth / 5464; 
+  const scaleY = sceneHeight / 3072;
+  console.log(scaleX, scaleY);
+
+  // Pixel-Koordinaten der Zoom-Punkte (in config)
+  const originX = config.originX * scaleX;
+  const originY = config.originY * scaleY;
+  console.log(config.originX, config.originY);
+  console.log(originX, originY);
+
+  // Zoom Transition
+  scene.style.transition = "transform 0.8s ease"; 
+  scene.style.transformOrigin = `${originX}px ${originY}px`;
+  scene.style.transform = `scale(${config.scale})`; 
+
+  // Zoomed Klasse adden
   hotspot.classList.add("zoomed");
 
     // Potentiellen Button aktivieren
   const relatedButton = document.getElementById(`${id}Button`);
-  
-  // Button aktivieren, falls vorhanden
+
   if (relatedButton) {
     prepareButton(relatedButton, id);
     activateableButtonActive = true;
@@ -68,12 +89,15 @@ function zoomTo(hotspot) {
 }
 
 function zoomOut() {
-
-  // Zoom entfernen
   zoomed = false;
-  scene.style.transform = "scale(1)";
 
+  scene.style.transform = "scale(1)"; // Scale zurück auf 1
+  scene.style.transformOrigin = "center center"; // Standard Origin
+
+  // Klasse entfernen
   document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
+
+  // Elemente deaktivieren
   document.querySelectorAll("[id$='Activated']").forEach(el => {
     deactivateElement(el.id.replace("Activated", ""));
   });
@@ -123,8 +147,11 @@ function closePopup() {
 
 async function showPopUp(hotspot) {
   popupShown = true;
+
   const id = hotspot.id;
-  const config = hotspots[id];
+  const config = hotspots[currentRoom][id];
+
+  if (!config) return;
 
   popup.style.transform = "unset"; // Style Reset
 
@@ -144,9 +171,6 @@ async function showPopUp(hotspot) {
   if (config.textLocation.bottom != null) { 
     popup.style.bottom = config.textLocation.bottom; 
     popup.style.top = "unset"; 
-  }
-  if (popup.style.left === "50%") { 
-    popup.style.transform = "translateX(-50%)";
   }
 
   popupText.innerHTML = ""; // Text reset
@@ -169,6 +193,13 @@ async function showPopUp(hotspot) {
     popupText.appendChild(p); 
 
     texts.push({ strong, el: span, text: field.data });
+  }
+
+  // Element als geklickt vermerken
+  config.hasBeenClicked = true;
+
+  // Schauen, ob Raum fertig ist
+  if(areAllHotspotsClicked(currentRoom)) {
   }
 
   // Popup einblenden
@@ -217,7 +248,7 @@ function activateElement(baseId) {
   activatedElement.classList.add("activatedElement");
 
    // Booleans
-  activateableElementActivated = true;
+  setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
 
   // Aktiven Button deaktivieren
   const activeButton = document.querySelector(".activeButton");
@@ -240,8 +271,16 @@ function deactivateElement(baseId) {
   activateableButtonActive = false;
 }
 
+function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht ist
+  const room = hotspots[roomId];
+  if (!room) return false;
 
+  // Alle Hotspots durchgehen und prüfen, ob alle angeklickt wurden
+  const clickableHotspots = Object.values(room)
+    .filter(item => Object.prototype.hasOwnProperty.call(item, "hasBeenClicked"));
 
+  return clickableHotspots.every(item => item.hasBeenClicked === true);
+}
 
 
 
@@ -253,13 +292,11 @@ document.addEventListener("mousemove", e => {
 
   // Fall 0: Immer fixe UI-Elemente
   if (target.closest(".main-navigation") || target.closest(".assistant .assistantButton")) {
-    console.log("Target close to Nav or Assistant");
     setCursor("click");
     return;
   }
 
   if (target.closest(".speechbubble")) {
-    console.log("Target close to Assistant Speechbubble");
     setCursor("default");
     return;
   } 
@@ -282,7 +319,6 @@ document.addEventListener("mousemove", e => {
 
     // Wenn über gezoomtem Element oder Popup 
     if (target.closest(".zoomed") || target.closest(".popup")) {
-      console.log("Target is zoomed Element or Popup");
       setCursor("default");
       return;
     } 
@@ -296,14 +332,12 @@ document.addEventListener("mousemove", e => {
 
     // Wenn über Element Body oder Popup 
     if (target.closest(".activateableBody") || target.closest(".popup")) {
-      console.log("Target is activatedBody");
       setCursor("default");
       return;
     } 
 
     // Wenn über Objekt
     if (target.closest(".activatedElement .hotspot")) {
-      console.log("Target is hotspot");
       setCursor("zoomIn");
       return;
     } 
@@ -325,7 +359,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
 
   hs.addEventListener("click", () => {
-    if (!zoomed) {
+    if (!zoomed || (zoomed && activateableElementActivated)) {
       zoomTo(hs);
       showPopUp(hs);
     }
@@ -341,7 +375,6 @@ assistant.addEventListener("click", () => {
 // Click (Zoom Out)
 document.addEventListener("click", e => {
   if (!zoomed) return;
-  console.log("zoomed, zoomout-click listener active");
   if (
     e.target.closest(".main-navigation") || 
     e.target.closest("#popup.popup") ||
