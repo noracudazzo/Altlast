@@ -143,6 +143,9 @@ async function showAssistantMessage(comment = null) {
   } else {
     await typeText(p, currentNarrative, 40); // Sonst normale Narrative
   }
+  setTimeout(() => {
+    closeAssistantMessage();
+  }, 30000);
 }
 
 function closeAssistantMessage() {

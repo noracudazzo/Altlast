@@ -279,8 +279,7 @@ button, .assistantButton {
   padding: 2rem;
   z-index: 2;
   border: solid 1.5px white;
-  min-width: 50rem;
-  max-width: 70vw;
+  width: 50rem;
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;

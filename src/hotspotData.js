@@ -11,11 +11,11 @@ export const hotspots = {
       originY: 1200, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta" },
-        year: { title: "Herstellungsjahr", data: "..." },
-        status: { title: "Status", data: "Gesund, automatische Bewässerung aktiv" },
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Urban Gardening"}
+        license: { title: "Lizenz", data: "Urban Gardening"},
       },
       textLocation: {
           left: "center",
@@ -29,13 +29,12 @@ export const hotspots = {
       originY: 2750, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "FoodSynth Sixteen" },
-        year: { title: "Herstellungsjahr", data: "55" },
-        status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
+        name: { title: "Objektname", data: "GreenUnit Gamma C" },
+        year: { title: "Herstellungsjahr", data: "53" },
+        status: { title: "Status", data: "Gesund, automatische Bewässerung aktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt"},
-        license: { title: "Lizenz", data: "Lizenz: Standard Living Unit"},
+        license: { title: "Lizenz", data: "Urban Gardening"},
       },
-      comment: "...",
       textLocation: {
         left: "center",
         top: 350,
@@ -48,10 +47,11 @@ export const hotspots = {
       originY: 1000, 
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Objektname", data: "MemoryFrame HIF-7" },
+        year: { title: "Herstellungsjahr", data: "40" },
+        status: { title: "Status", data: "Aktiv, Fotopanel noch zu 47% intakt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+        content: { title: "Inhalt", data: "Ellen #56890 mit Enkelkind." },
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {
@@ -67,15 +67,15 @@ export const hotspots = {
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "FoodSynth Sixteen 1" },
-        year: { title: "Herstellungsjahr", data: "55" },
-        status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
+        year: { title: "Herstellungsjahr", data: "48" },
+        status: { title: "Status", data: "Inaktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Standard Living Unit"}
+        license: { title: "Lizenz", data: "Standard Living Unit"},
+        description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine mit optimierter Funktionalität zur Nährstofferzeugung."},
       },
-      comment: "...",
       textLocation: {
         left: "center",
-        top: 350,
+        top: 300,
       }
     },
 
@@ -85,12 +85,11 @@ export const hotspots = {
       originY: 1525, 
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Sichtbarer Bereich", data: "Zentralstadt Cluster E Nord" },
+        year: { title: "Grundsteinlegung", data: "19" },
+        belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
+        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet mit vielen Entspannungsmöglichkeiten und GreenZones. "},
       },
-      comment: "...",
       textLocation: {
         left: 500,
         top: "center",
@@ -99,70 +98,74 @@ export const hotspots = {
 
     fridge: {
       scale: 2.3,
-      originX: 700,
+      originX: 1000,
       originY: 1500, 
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Objektname", data: "SmartFridge 6.0" },
+        year: { title: "Herstellungsjahr", data: "48" },
+        status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        license: { title: "Lizenz", data: "Standard Living Unit"},
+        description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem mit diversen Analysefunktionen."},
       },
-      comment: "Schau besser mal rein.",
+      comment: "Abgelaufene Lebensmittel? Das solltest du besser mal überprüfen.",
       textLocation: {
-          right: "center",
-          bottom: 400,
+        right: 300,
+        top: 1300,
       }
     },
 
     fridgeActivated: {
       scale: 2.3,
-      originX: 700,
+      originX: 1000,
       originY: 1500, 
     },
 
     pomegranate: {
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Objektname", data: "Punica granatum (Heritage fruit)" },
+        year: { title: "Herstellungsjahr", data: "55" },
+        location: { title: "Herstellungsort", data: "Hydroponikfarm Süd C" },
+        status: { title: "Status", data: "Verdorben" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        license: { title: "Lizenz", data: "Heritage Food Permit"},
+        nutritionalValues: { title: "Nährstoffwerte", data: "Außergewöhnlich hoher Vitamingehalt"},
       },
-      comment: "Wie klein du damals noch warst!",
       textLocation: {
-          right: 300,
-          bottom: "center",
+        right: 300,
+        top: 1300,
       }
     },
 
     liquids: {
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Objektname", data: "Verschiedene LiquidCalorie Rationen" },
+        year: { title: "Herstellungsjahr", data: "55" },
+        location: { title: "Herstellungsort", data: "VerticalFarm Nord D-LCZF" },
+        status: { title: "Status", data: "Genießbar" },
+        nutritionalValues: { title: "Nährstoffwerte", data: "Alle Nährstoffbedürfnisse abgedeckt"},
       },
-      comment: "Wie klein du damals noch warst!",
       textLocation: {
-          right: 300,
-          bottom: "center",
+        right: 300,
+        top: 1300,
       }
     },
 
     meat: { 
       hasBeenClicked: false,
       text: {
-        name: { title: "...", data: "..." },
-        year: { title: "...", data: "..." },
-        status: { title: "...", data: "..." },
-        belongsTo: { title: "...", data: "..." },
+        name: { title: "Objektname", data: "InVitro ProteinBase" },
+        year: { title: "Herstellungsjahr", data: "55" },
+        location: { title: "Herstellungsort", data: "CrueltyFree Basis Cluster E" },
+        status: { title: "Status", data: "Genießbar" },
+        nutritionalValues: { title: "Nährstoffwerte", data: "Hoher Proteingehalt"},
       },
-      comment: "Wie klein du damals noch warst!",
       textLocation: {
-          right: 300,
-          bottom: "center",
+        right: 300,
+        top: 1300,
       }
     },
   }
