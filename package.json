@@ -12,6 +12,8 @@
     "vite": "^7.1.7"
   },
   "dependencies": {
-    "gsap": "^3.13.0"
+    "@pixi/filter-glitch": "^5.1.1",
+    "gsap": "^3.13.0",
+    "pixi.js": "^7.4.2"
   }
 }

@@ -1,4 +1,7 @@
 import {hotspots} from "./hotspotData";
+import { gsap } from "gsap";
+import { initParticles, startParticles } from "./effects.js";
+
 
 const viewport = document.querySelector(".viewport");
 const scene = document.querySelector(".scene");
@@ -30,6 +33,9 @@ const CURSORS = {
   click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
 };
 
+// Pixi Partikel initialisieren & kontinuierlich erzeugen
+initParticles(scene);
+startParticles(100); 
 
 // Functions
 
@@ -48,8 +54,6 @@ function endHoverHotspot(hotspot) {
 }
 
 function zoomTo(hotspot) {
-  scene.classList.add('glitch');
-  setTimeout(() => scene.classList.remove('glitch'), 400);
 
   endHoverHotspot(hotspot);
   zoomed = true;
@@ -71,12 +75,25 @@ function zoomTo(hotspot) {
   const originX = config.originX * scaleX;
   const originY = config.originY * scaleY;
 
-  // Zoom Transition
-  scene.style.transition = "transform 0.9s cubic-bezier(0.33, 1, 0.68, 1)";
+  // Transform-Origin setzen
   scene.style.transformOrigin = `${originX}px ${originY}px`;
 
-  requestAnimationFrame(() => {
-  scene.style.transform = `scale(${config.scale})`;
+// GSAP Timeline für smoother Blur
+  const tl = gsap.timeline();
+
+  // 1️⃣ Zoom + Blur hoch
+  tl.to(scene, {
+    scale: config.scale,
+    filter: "blur(2px)",
+    duration: 0.4,
+    ease: "power2.inOut"
+  });
+
+  // 2️⃣ Blur sanft zurücknehmen
+  tl.to(scene, {
+    filter: "blur(0px)",
+    duration: 0.5,
+    ease: "power1.out"
   });
 
   // Zoomed Klasse adden
@@ -178,7 +195,6 @@ async function showPopUp(hotspot) {
 
   // X-Achse
   if (config.textLocation.left === "center" || config.textLocation.right === "center") { 
-    console.log("Fall 1");
     const popupWidth = popup.getBoundingClientRect().width;
     const left = (viewportWidth - popupWidth) / 2; 
     popup.style.left = `${left}px`; 
@@ -186,20 +202,17 @@ async function showPopUp(hotspot) {
   } 
 
   else if (typeof config.textLocation.left === "number") { 
-    console.log("Fall 2");
     popup.style.left = `${config.textLocation.left * scaleX}px`;
     popup.style.right = "unset"; 
   }
 
   else if (typeof config.textLocation.right === "number") { 
-    console.log("Fall 3");
     popup.style.right = `${config.textLocation.right * scaleX}px`;
     popup.style.left = "unset"; 
   }
 
   // Y-Achse
   if (config.textLocation.top === "center" || config.textLocation.bottom === "center") { 
-    console.log("Fall 4");
     const popupHeight = popup.getBoundingClientRect().height;
     const top = (viewportHeight - popupHeight) / 2; 
     popup.style.top = `${top}px`; 
@@ -207,13 +220,11 @@ async function showPopUp(hotspot) {
   } 
 
   else if (typeof config.textLocation.top === "number") { 
-    console.log("Fall 5");
     popup.style.top = `${config.textLocation.top * scaleY}px`;
     popup.style.bottom = "unset"; 
   }
   
   else if (typeof config.textLocation.bottom === "number") { 
-    console.log("Fall 6");
     popup.style.bottom = `${config.textLocation.bottom * scaleY}px`;
     popup.style.top = "unset"; 
   }
@@ -406,6 +417,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   });
 });
 
+
 // Click (Assistant)
 assistantButton.addEventListener("click", () => {
   if (!assistantShown) showAssistantMessage();
@@ -425,5 +437,3 @@ document.addEventListener("click", e => {
   return;
   zoomOut();
 });
-
-
