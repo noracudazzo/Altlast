@@ -283,7 +283,7 @@ button, .assistantButton {
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   display: inline-block;
   overflow: hidden;
   transform-origin: center;

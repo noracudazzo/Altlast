@@ -1,4 +1,4 @@
-import {hotspots} from "./hotspotData";
+import { hotspots } from "./hotspotData";
 import { gsap } from "gsap";
 import { initParticles, startParticles } from "./effects.js";
 
@@ -20,10 +20,17 @@ let assistantShown = false;
 let activateableButtonActive = false;
 let activateableElementActivated = false;
 
-let currentRoom = "kitchen";
 let currentCursor = "default";
-let currentNarrative = "Durchsuche zunächst die Küche.";
 
+// Rooms
+const ROOMS = ["elevator", "hallwayBuilding", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
+let currentRoom = ROOMS[3]; 
+let lastUnlockedRoom = ROOMS[3]; 
+let nextRoomIndex = ROOMS.indexOf(lastUnlockedRoom) + 1;
+let nextRoom = ROOMS[nextRoomIndex];
+
+let lastUnlockedRoomData = hotspots[currentRoom];
+let currentNarrative = lastUnlockedRoomData.narrative;
 
 // Cursor Manager
 const CURSORS = {
@@ -129,13 +136,15 @@ function zoomOut() {
     activateableButtonActive = false;
   });
 
-
   // Popup schließen
   closePopup();
 
   // Assistant schließen
   closeAssistantMessage();
-}
+
+  // Raum Fortschritt prüfen
+  canNextRoomBeUnlocked();
+} 
 
 async function typeText(el, text, speed = 50) {
   el.textContent = ""; // leeren
@@ -254,10 +263,6 @@ async function showPopUp(hotspot) {
   // Element als geklickt vermerken
   config.hasBeenClicked = true;
 
-  // Schauen, ob Raum fertig ist
-  if(areAllHotspotsClicked(currentRoom)) {
-  } // wichtig, tbd
-
   // Popup einblenden
   setTimeout(() => popup.classList.add("visible"), 10);
 
@@ -333,6 +338,21 @@ function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht is
   return clickableHotspots.every(item => item.hasBeenClicked === true);
 }
 
+function canNextRoomBeUnlocked() { // tbd 2 Narratives? pro Raum (1st + danach) Oder finished Narrative zu jedem Raum + new Narrative next Room
+  if (areAllHotspotsClicked(lastUnlockedRoom)) {
+
+    // Wenn es einen nächsten Raum gibt: freischalten
+    if (nextRoom && hotspots[nextRoom]) { 
+      lastUnlockedRoom = ROOMS[nextRoomIndex];
+      hotspots[lastUnlockedRoom].isUnlocked = true;
+      currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
+      showAssistantMessage(currentNarrative);
+      currentNarrative = hotspots[lastUnlockedRoom].narrative;
+    } else {
+      currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
+    }
+  }
+}
 
 
 // Haupt Cursor Logik!
@@ -410,8 +430,11 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
 
   hs.addEventListener("click", () => {
-    if (!zoomed || (zoomed && activateableElementActivated)) {
+    if (!zoomed) {
       zoomTo(hs);
+      showPopUp(hs);
+    }
+    else if (zoomed && activateableElementActivated) {
       showPopUp(hs);
     }
   });

@@ -3,7 +3,7 @@ export const hotspots = {
   kitchen: {
 
     isUnlocked: true,
-    narrative: "Durchsuche zunächst die Küche.",
+    narrative: "Durchsuche die Küche.",
 
     smallPlants: {
       scale: 4,
@@ -71,7 +71,7 @@ export const hotspots = {
         status: { title: "Status", data: "Inaktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         license: { title: "Lizenz", data: "Standard Living Unit"},
-        description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine mit optimierter Funktionalität zur Nährstofferzeugung."},
+        description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine."},
       },
       textLocation: {
         left: "center",
@@ -88,7 +88,7 @@ export const hotspots = {
         name: { title: "Sichtbarer Bereich", data: "Zentralstadt Cluster E Nord" },
         year: { title: "Grundsteinlegung", data: "19" },
         belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
-        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet mit vielen Entspannungsmöglichkeiten und GreenZones. "},
+        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet. "},
       },
       textLocation: {
         left: 500,
@@ -107,7 +107,7 @@ export const hotspots = {
         status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         license: { title: "Lizenz", data: "Standard Living Unit"},
-        description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem mit diversen Analysefunktionen."},
+        description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
       },
       comment: "Abgelaufene Lebensmittel? Das solltest du besser mal überprüfen.",
       textLocation: {
@@ -168,5 +168,32 @@ export const hotspots = {
         top: 1300,
       }
     },
-  }
+  },
+
+
+
+  livingRoom: {
+
+    isUnlocked: false,
+    startNarrative: "Du hast die Küche fertig durchsucht. Durchsuche nun das Wohnzimmer.",
+    narrative: "Durchsuche das Wohnzimmer.",
+
+    smallPlants: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        license: { title: "Lizenz", data: "Urban Gardening"},
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+  },
 };
