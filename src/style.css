@@ -91,6 +91,7 @@ body {
   background-color: #180e23;
   cursor: url(/src/assets/imgs/ui/cursor.png), default;
   overflow: hidden;
+  font-size: 24px;
 }
 
 .viewport {
@@ -191,7 +192,6 @@ button, .assistantButton {
   margin: .5rem 0 0 .5rem;
   display: none;
   height: fit-content;
-  font-size: 1.3rem;
 }
 
 .assistant.activeAssistant button .assistant-icon {
@@ -270,7 +270,7 @@ button, .assistantButton {
 
 /* Popup */
 
-.popup {
+body .popup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -279,11 +279,10 @@ button, .assistantButton {
   padding: 2rem;
   z-index: 2;
   border: solid 1.5px white;
-  width: 45%;
+  width: 40em;
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;
-  font-size: 1.3rem;
   display: inline-block;
   overflow: hidden;
   transform-origin: center;
@@ -362,3 +361,21 @@ button, .assistantButton {
   fill: white;
   transition: ease 0.1s;
 }
+
+/* Media queries */
+
+@media (max-width: 1500px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+/* 
+Breakpoint	Class	Dimensions
+X-Small	None	< 576px
+Small	sm	≥ 576px
+Medium	md	≥ 768px
+Large	lg	≥ 992px
+Extra large	xl	≥ 1200px
+Extra extra large	xxl	≥ 1400px 
+*/

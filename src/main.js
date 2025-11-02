@@ -302,7 +302,9 @@ function activateElement(baseId) {
   // alles schließen
   closePopup();
   closeAssistantMessage();
-  zoomTo(activatedElement); // an Element ranzoomen
+  
+  // Zoomed Klasse adden
+  activatedElement.classList.add("zoomed");
 
   setTimeout(() => activatedElement.style.display = "block", 800); // aktiviertes Element sichtbar machen
   setTimeout(() => baseElement.style.display = "none", 800); // parent unsichtbar machen
@@ -409,7 +411,7 @@ document.addEventListener("mousemove", e => {
 
     // Wenn über Objekt
     if (target.closest(".activatedElement .hotspot")) {
-      setCursor("zoomIn");
+      setCursor("click");
       return;
     } 
 
