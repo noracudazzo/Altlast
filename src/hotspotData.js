@@ -15,7 +15,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Urban Gardening"},
       },
       textLocation: {
           left: "center",
@@ -33,7 +32,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "53" },
         status: { title: "Status", data: "Gesund, automatische Bewässerung aktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt"},
-        license: { title: "Lizenz", data: "Urban Gardening"},
       },
       textLocation: {
         left: "center",
@@ -70,7 +68,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "48" },
         status: { title: "Status", data: "Inaktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Standard Living Unit"},
         description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine."},
       },
       textLocation: {
@@ -106,7 +103,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "48" },
         status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Standard Living Unit"},
         description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
       },
       comment: "Abgelaufene Lebensmittel? Das solltest du besser mal überprüfen.",
@@ -130,7 +126,6 @@ export const hotspots = {
         location: { title: "Herstellungsort", data: "Hydroponikfarm Süd C" },
         status: { title: "Status", data: "Verdorben" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Heritage Food Permit"},
         nutritionalValues: { title: "Nährstoffwerte", data: "Außergewöhnlich hoher Vitamingehalt"},
       },
       textLocation: {
@@ -188,7 +183,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        license: { title: "Lizenz", data: "Urban Gardening"},
       },
       textLocation: {
           left: "center",

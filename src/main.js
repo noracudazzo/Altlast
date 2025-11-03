@@ -4,8 +4,6 @@ import { initParticles, startParticles } from "./effects.js";
 
 
 const viewport = document.querySelector(".viewport");
-const scene = document.querySelector(".scene");
-const sceneWrapper = document.querySelector(".scene-wrapper");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
 const assistant = document.getElementById("assistant");
@@ -28,6 +26,7 @@ let currentRoom = ROOMS[3];
 let lastUnlockedRoom = ROOMS[3]; 
 let nextRoomIndex = ROOMS.indexOf(lastUnlockedRoom) + 1;
 let nextRoom = ROOMS[nextRoomIndex];
+let scene = document.querySelector("." + currentRoom);
 
 let lastUnlockedRoomData = hotspots[currentRoom];
 let currentNarrative = lastUnlockedRoomData.narrative;
@@ -38,6 +37,7 @@ const CURSORS = {
   zoomIn: "url(/src/assets/imgs/ui/cursor-zoomin.png), zoom-in",
   zoomOut: "url(/src/assets/imgs/ui/cursor-zoomout.png), zoom-out",
   click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
+  leave: "url(/src/assets/imgs/ui/cursor-leave.png), s-resize",
 };
 
 // Pixi Partikel initialisieren & kontinuierlich erzeugen
@@ -243,21 +243,22 @@ async function showPopUp(hotspot) {
   const texts = [];
   for (const key in config.text) { 
     const field = config.text[key];
-    const p = document.createElement("p");
+    const li = document.createElement("li");
+    li.style.opacity = 0;  
 
     // Titel (zunächst unsichtbar)
     const strong = document.createElement("strong");
     strong.textContent = field.title + ": ";
     strong.style.opacity = 0;   
-    p.appendChild(strong);
+    li.appendChild(strong);
 
     // Beschreibung
     const span = document.createElement("span");
-    p.appendChild(span);
+    li.appendChild(span);
 
-    popupText.appendChild(p); 
+    popupText.appendChild(li); 
 
-    texts.push({ strong, el: span, text: field.data });
+    texts.push({ li, strong, el: span, text: field.data });
   }
 
   // Element als geklickt vermerken
@@ -265,14 +266,22 @@ async function showPopUp(hotspot) {
 
   // Popup einblenden
   setTimeout(() => popup.classList.add("visible"), 10);
+  await new Promise(r => setTimeout(r, 600));
 
   // Typewriter
-  for (const { strong, el, text } of texts) {
+  for (const { li, strong, el, text } of texts) {
     if (!popupShown) return; 
+
+    li.style.transition = "opacity 0.3s ease";
+    li.style.opacity = 1;
+
     strong.style.opacity = 1; // Titel einblenden
-    await new Promise(r => setTimeout(r, 300)); // Fade-Pause
+    
+    await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
+
     if (!popupShown) return; 
     await typeText(el, text, 50); // Text tippen
+
     if (!popupShown) return; 
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
   }
@@ -356,12 +365,21 @@ function canNextRoomBeUnlocked() { // tbd 2 Narratives? pro Raum (1st + danach) 
   }
 }
 
+function leaveRoom() {
+  scene.classList.remove("leaveHovered");
+  setCursor("default");
+  
+  currentRoom = ROOMS[2]; 
+  scene = document.querySelector("." + currentRoom);
+}
+
 
 // Haupt Cursor Logik!
 
 document.addEventListener("mousemove", e => {
   const target = e.target;
   const hotspot = target.closest(".hotspot");
+  const threshold = window.innerHeight * 0.9; // untere 20%
 
   // Fall 0: Immer fixe UI-Elemente
   if (target.closest(".main-navigation") || target.closest(".assistant #assistantButton")) {
@@ -373,6 +391,14 @@ document.addEventListener("mousemove", e => {
     setCursor("default");
     return;
   } 
+  
+  if (e.clientY > threshold) {
+    setCursor("leave");
+    scene.classList.add("leaveHovered");
+    return;
+  } else {
+    scene.classList.remove("leaveHovered");
+  }
 
   // Fall 1: Nicht gezoomt
   if (!zoomed) {
@@ -448,6 +474,16 @@ assistantButton.addEventListener("click", () => {
   if (!assistantShown) showAssistantMessage();
   else closeAssistantMessage();
 });
+
+// Click (Leave)
+
+document.addEventListener("click", (e) => {
+  const threshold = window.innerHeight * 0.9;
+  if (e.clientY > threshold) {
+    leaveRoom();
+  }
+});
+
 
 // Click (Zoom Out)
 document.addEventListener("click", e => {

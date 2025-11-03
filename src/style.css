@@ -60,9 +60,16 @@ body {
 	line-height: 1.5;
   font-family: "SpaceMono", sans-serif;
 }
+
 ol, ul {
 	list-style: none;
 }
+
+li {
+	list-style: square;
+  margin-left: 2rem;
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -112,6 +119,24 @@ body {
   transition: transform 0.8s ease-out;
 }
 
+.scene:after {
+  opacity: 0;
+  content: "";
+  background: #8766d0;
+  height: 5vh;
+  left: -6rem;
+  bottom: 0;
+  width: calc(100% + 12rem);
+  filter: blur(4rem);
+  position: absolute;
+  z-index: 10;
+  transition: ease .2s;
+}
+
+.scene.leaveHovered:after {
+  opacity: 100;
+}
+
 
 .layer {
   position: absolute;
@@ -122,7 +147,7 @@ body {
 
 .scene .background { z-index: -1; pointer-events: none;}
 .scene .object { z-index: 0;}
-.scene .foreground { z-index: 5; pointer-events: none;}
+.scene .foreground { z-index: 4; pointer-events: none;}
 .scene .activateableObject { display: none; z-index: 2; }
 #assistant, #main-navigation { z-index: 99;}
 
@@ -287,6 +312,10 @@ body .popup {
   overflow: hidden;
   transform-origin: center;
   filter: none;
+}
+
+body .popup-text {
+  list-style: square;
 }
 
 
