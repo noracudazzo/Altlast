@@ -368,7 +368,7 @@ function canNextRoomBeUnlocked() { // tbd 2 Narratives? pro Raum (1st + danach) 
 function leaveRoom() {
   scene.classList.remove("leaveHovered");
   setCursor("default");
-  
+
   currentRoom = ROOMS[2]; 
   scene = document.querySelector("." + currentRoom);
 }
@@ -377,12 +377,23 @@ function leaveRoom() {
 // Haupt Cursor Logik!
 
 document.addEventListener("mousemove", e => {
+  const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
+  const threshold = window.innerHeight * 0.9;
+
+  // Fall 0.5: Leave-Zone check
+  if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation")) {
+    scene.classList.add("leaveHovered");
+    setCursor("leave");
+    return; 
+  } else {
+    scene.classList.remove("leaveHovered");
+  }
+
   const target = e.target;
   const hotspot = target.closest(".hotspot");
-  const threshold = window.innerHeight * 0.9; // untere 20%
 
   // Fall 0: Immer fixe UI-Elemente
-  if (target.closest(".main-navigation") || target.closest(".assistant #assistantButton")) {
+  if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton")) {
     setCursor("click");
     return;
   }
@@ -391,14 +402,6 @@ document.addEventListener("mousemove", e => {
     setCursor("default");
     return;
   } 
-  
-  if (e.clientY > threshold) {
-    setCursor("leave");
-    scene.classList.add("leaveHovered");
-    return;
-  } else {
-    scene.classList.remove("leaveHovered");
-  }
 
   // Fall 1: Nicht gezoomt
   if (!zoomed) {
