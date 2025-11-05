@@ -367,9 +367,11 @@ function canNextRoomBeUnlocked() { // tbd 2 Narratives? pro Raum (1st + danach) 
 
 function leaveRoom() {
   scene.classList.remove("leaveHovered");
-  setCursor("default");
+  setCursor("default"); // Cursor & Hover reset
 
-  currentRoom = ROOMS[2]; 
+  scene.style.display = "none"; // hide room
+
+  currentRoom = ROOMS[2]; // change room to hallway
   scene = document.querySelector("." + currentRoom);
 }
 

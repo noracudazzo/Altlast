@@ -76,14 +76,31 @@ export const hotspots = {
       }
     },
 
-    view: {
+    view1: {
+      scale: 2.5,
+      originX: 0,
+      originY: 1525, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Sichtbarer Bereich", data: "Komplex Ministerium für Harmonie" },
+        year: { title: "Baujahr", data: "04" },
+        belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
+        description: { title: "Beschreibung", data: "Ministerium für dein Wohlbefinden."},
+      },
+      textLocation: {
+        right: 500,
+        top: "center",
+      }
+    },
+
+    view2: {
       scale: 2.5,
       originX: 5464,
       originY: 1525, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Sichtbarer Bereich", data: "Zentralstadt Cluster E Nord" },
-        year: { title: "Grundsteinlegung", data: "19" },
+        name: { title: "Sichtbarer Bereich", data: "Wohnkomplex 5D-F Mitte" },
+        year: { title: "Baujahr", data: "19" },
         belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
         description: { title: "Beschreibung", data: "Beliebtes Wohngebiet. "},
       },

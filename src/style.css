@@ -122,7 +122,7 @@ body {
 .scene:after {
   opacity: 0;
   content: "";
-  background: #8766d0;
+  background: #00cbb2;
   height: 5vh;
   left: -6rem;
   bottom: 0;
