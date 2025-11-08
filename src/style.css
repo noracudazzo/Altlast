@@ -361,14 +361,14 @@ body .popup-text {
 
 @keyframes shake {
   0%   { transform: translate(0,0); }
-  20%  { transform: translate(0, -1.25px); }
-  40%  { transform: translate(1.25px, 0); }
-  60%  { transform: translate(0, -0.75px); }
-  80%  { transform: translate(0.75px, 0); }
+  20%  { transform: translate(0, -1.5px); }
+  40%  { transform: translate(1.5px, 0); }
+  60%  { transform: translate(0, -1px); }
+  80%  { transform: translate(1px, 0); }
   100% { transform: translate(0,0); }
 }
 
-.viewport.shake {
+.scene.shake {
   animation: shake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97);
   animation-iteration-count: infinite;
 }
@@ -396,6 +396,10 @@ body .popup-text {
 @media (max-width: 1500px) {
   body {
     font-size: 20px;
+  }
+
+  body .popup {
+    width: 50%;
   }
 }
 

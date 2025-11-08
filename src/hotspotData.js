@@ -1,5 +1,29 @@
 export const hotspots = {
 
+  hallway: {
+
+    isUnlocked: true,
+    startNarrative: "Hi.",
+    narrative: "Fahre in den 16. Stock.",
+
+    ventilation1: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+  },
+
   kitchen: {
 
     isUnlocked: true,

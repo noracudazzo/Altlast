@@ -373,6 +373,9 @@ function leaveRoom() {
 
   currentRoom = ROOMS[2]; // change room to hallway
   scene = document.querySelector("." + currentRoom);
+  scene.style.display = "block";
+  initParticles(scene);
+  startParticles(100); 
 }
 
 
