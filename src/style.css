@@ -414,6 +414,24 @@ body .popup-text {
   filter: drop-shadow(0 0 2px #00cbb2);
 }
 
+.hallway #floorCounter {
+  font-size: 3.5rem;
+  font-family: "AldotheApache";
+  fill: #fff173;
+}
+
+.hallway #height .top-arrow {
+  opacity: 0.4;
+}
+
+.hallway #height.active .top-arrow {
+  opacity: 1;
+}
+
+.hallway #height .bottom-arrow {
+  opacity: 0.4;
+}
+
 /* Kitchen */
 .kitchen .activationButton.activeButton:hover .fridge-button-background {
   fill: white;

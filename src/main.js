@@ -404,7 +404,7 @@ function openElevator() {
   
   // Door Animation
   const elevatorDoors = document.querySelector(".elevator-doors");
-  setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 3000);
+  setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
 }
 
 function unlockRoom(room) { 
