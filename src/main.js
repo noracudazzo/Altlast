@@ -15,7 +15,7 @@ const activeButton = document.querySelector(".activeButton");
 let zoomed = false;
 let popupShown = false;
 let assistantShown = false;
-let activateableButtonActive = false;
+let activateableButtonsActive = false;
 let activateableElementActivated = false;
 
 let currentCursor = "default";
@@ -100,19 +100,30 @@ function zoomTo(hotspot) {
   tl.to(scene, {
     filter: "blur(0px)",
     duration: 0.5,
-    ease: "power1.out"
+    ease: "power1.out",
   });
 
   // Zoomed Klasse adden
   hotspot.classList.add("zoomed");
 
-    // Potentiellen Button aktivieren
-  const relatedButton = document.getElementById(`${id}Button`);
+  // Potentielle Buttons aktivieren WICHTIG
+  const relatedButtons = document.querySelectorAll(`.${id}Button`);
 
-  if (relatedButton) {
-    prepareButton(relatedButton, id);
-    activateableButtonActive = true;
-  }
+  relatedButtons.forEach(button => {
+    prepareButton(button, id);
+    activateableButtonsActive = true;
+  });
+}
+
+function deactivateElements() {
+  document.querySelectorAll("[id$='Activated']").forEach(el => {
+    deactivateElement(el.id.replace("Activated", ""));
+    activateableElementActivated = false;
+  });
+    document.querySelectorAll(".activeButton").forEach(el => {
+    el.classList.remove("activeButton");
+    activateableButtonsActive = false;
+  });
 }
 
 function zoomOut() {
@@ -125,16 +136,13 @@ function zoomOut() {
 
   // Klasse entfernen
   document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
+}
+
+function resetZoom() {
+  zoomOut();
 
   // Elemente deaktivieren
-  document.querySelectorAll("[id$='Activated']").forEach(el => {
-    deactivateElement(el.id.replace("Activated", ""));
-    activateableElementActivated = false;
-  });
-    document.querySelectorAll(".activeButton").forEach(el => {
-    el.classList.remove("activeButton");
-    activateableButtonActive = false;
-  });
+  deactivateElements();
 
   // Popup schließen
   closePopup();
@@ -143,7 +151,9 @@ function zoomOut() {
   closeAssistantMessage();
 
   // Raum Fortschritt prüfen
-  canNextRoomBeUnlocked();
+  if (!scene.classList.contains("intro")) { // nur relevant wenn keine Intro Szene
+    canNextRoomBeUnlocked();
+  }
 } 
 
 async function typeText(el, text, speed = 50) {
@@ -186,12 +196,16 @@ function closePopup() {
 }
 
 async function showPopUp(hotspot) {
-  popupShown = true;
 
   const id = hotspot.id;
   const config = hotspots[currentRoom][id];
 
   if (!config) return;
+  // Element direkt als geklickt vermerken
+  config.hasBeenClicked = true;
+
+  if (!config.text) return;
+  popupShown = true;
 
   const viewportWidth = viewport.offsetWidth;
   const viewportHeight = viewport.offsetHeight;
@@ -261,9 +275,6 @@ async function showPopUp(hotspot) {
     texts.push({ li, strong, el: span, text: field.data });
   }
 
-  // Element als geklickt vermerken
-  config.hasBeenClicked = true;
-
   // Popup einblenden
   setTimeout(() => popup.classList.add("visible"), 10);
   await new Promise(r => setTimeout(r, 600));
@@ -298,8 +309,20 @@ function prepareButton(button, parentId) {
     button.setAttribute("tabindex", "0");
 
     button.addEventListener("click", () => {
-      if (!button.classList.contains("activeButton")) return;
-      activateElement(parentId);
+
+      // Activation button
+      if (button.classList.contains("activeButton") && button.classList.contains("activationButton")) {
+        activateElement(parentId);
+      }
+
+      // Elevator buttons
+      if (!button.classList.contains("controlsButton") && currentRoom === "hallway") return; // tbd hier && currentRoom === "hallway"
+      if (button.classList.contains("rightButton")) {
+        openElevator(); // aktiviertes Element sichtbar machen 
+        unlockRoom(nextRoom);
+      } else {
+        showAssistantMessage(hotspots.hallway.controls.falseClickMessage);
+      }
     });
   }
 }
@@ -335,7 +358,7 @@ function deactivateElement(baseId) {
 
   // Booleans
   activateableElementActivated = false;
-  activateableButtonActive = false;
+  activateableButtonsActive = false;
 }
 
 function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht ist
@@ -349,16 +372,12 @@ function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht is
   return clickableHotspots.every(item => item.hasBeenClicked === true);
 }
 
-function canNextRoomBeUnlocked() { // tbd 2 Narratives? pro Raum (1st + danach) Oder finished Narrative zu jedem Raum + new Narrative next Room
+function canNextRoomBeUnlocked() { 
   if (areAllHotspotsClicked(lastUnlockedRoom)) {
 
     // Wenn es einen nächsten Raum gibt: freischalten
     if (nextRoom && hotspots[nextRoom]) { 
-      lastUnlockedRoom = ROOMS[nextRoomIndex];
-      hotspots[lastUnlockedRoom].isUnlocked = true;
-      currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
-      showAssistantMessage(currentNarrative);
-      currentNarrative = hotspots[lastUnlockedRoom].narrative;
+      unlockRoom(nextRoom);
     } else {
       currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
     }
@@ -378,6 +397,21 @@ function leaveRoom() {
   startParticles(100); 
 }
 
+function openElevator() {
+  setTimeout(() => zoomOut(), 200);
+  deactivateElements();
+  scene.classList.add("shake");
+}
+
+function unlockRoom(room) { 
+  console.log("hi");
+  lastUnlockedRoom = ROOMS[nextRoomIndex];
+  hotspots[lastUnlockedRoom].isUnlocked = true;
+  currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
+  showAssistantMessage(currentNarrative);
+  currentNarrative = hotspots[lastUnlockedRoom].narrative;
+}
+
 
 // Haupt Cursor Logik!
 
@@ -386,7 +420,7 @@ document.addEventListener("mousemove", e => {
   const threshold = window.innerHeight * 0.9;
 
   // Fall 0.5: Leave-Zone check
-  if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation")) {
+  if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation") && hotspots[currentRoom].canBeLeft) {
     scene.classList.add("leaveHovered");
     setCursor("leave");
     return; 
@@ -419,7 +453,7 @@ document.addEventListener("mousemove", e => {
   if (zoomed && !activateableElementActivated) {
 
     // Wenn Activation Button vorhanden
-    if (target.closest(".activeButton") && activateableButtonActive) {
+    if (target.closest(".activeButton") && activateableButtonsActive) {
       setCursor("click");
       return;
     }
@@ -486,6 +520,7 @@ assistantButton.addEventListener("click", () => {
 // Click (Leave)
 
 document.addEventListener("click", (e) => {
+  if (!hotspots[currentRoom].canBeLeft) return;
   const threshold = window.innerHeight * 0.9;
   if (e.clientY > threshold) {
     leaveRoom();
@@ -504,5 +539,5 @@ document.addEventListener("click", e => {
     e.target.closest(".zoomed") 
   )
   return;
-  zoomOut();
+  resetZoom();
 });

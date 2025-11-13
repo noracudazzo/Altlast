@@ -5,6 +5,7 @@ export const hotspots = {
     isUnlocked: true,
     startNarrative: "Hi.",
     narrative: "Fahre in den 16. Stock.",
+    canBeLeft: false,
 
     ventilation1: {
       scale: 4,
@@ -22,12 +23,55 @@ export const hotspots = {
           bottom: 450,
       }
     },
+
+    ventilation2: {
+      scale: 4,
+      originX: 5464,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    stats: {
+      scale: 4,
+      originX: 800,
+      originY: 1450, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    controls: {
+      scale: 2.75,
+      originX: 5000,
+      originY: 1450, 
+      hasBeenClicked: false,
+      falseClickMessage: "Das Aufzug Control Panel ist momentan nur für den 26. Stock freigeschalten."
+    },
   },
 
   kitchen: {
 
     isUnlocked: true,
     narrative: "Durchsuche die Küche.",
+    canBeLeft: true,
 
     smallPlants: {
       scale: 4,

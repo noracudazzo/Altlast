@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-.hotspot.hovered {
+.hovered {
   filter: drop-shadow(0 0 6px white);
 }
 
@@ -168,7 +168,7 @@ body {
   pointer-events: all;
 }
 
-.activationButton:focus {
+.button:focus {
   outline: none;
 }
 
@@ -383,6 +383,34 @@ body .popup-text {
 0% { filter: drop-shadow(0 0 10px #33c8b3);}
 50% { filter: drop-shadow(0 0 25px #33c8b3);}
 100% { filter: drop-shadow(0 0 10px #33c8b3);}
+}
+
+/* Elevator */
+.hallway .elevator-doors .door {
+  z-index: -10 !important;
+  transform-box: fill-box; 
+}
+
+.hallway .elevator-doors .left-door {
+  transform-origin: left center;
+  transition: 3s cubic-bezier(.2,.9,.3,1);
+}
+
+.hallway .elevator-doors .right-door {
+  transform-origin: right center;
+  transition: 3s cubic-bezier(.2,.9,.3,1);
+}
+
+.hallway .elevator-doors.doorsOpen .left-door {
+  transform: translateX(-100%);
+}
+
+.hallway .elevator-doors.doorsOpen .right-door {
+  transform: translateX(100%);
+}
+
+.controlsButton.activeButton:hover {
+  filter: drop-shadow(0 0 2px #00cbb2);
 }
 
 /* Kitchen */
