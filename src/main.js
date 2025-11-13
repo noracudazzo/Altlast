@@ -398,9 +398,13 @@ function leaveRoom() {
 }
 
 function openElevator() {
-  setTimeout(() => zoomOut(), 200);
   deactivateElements();
-  scene.classList.add("shake");
+  setTimeout(() => zoomOut(), 200);
+  setTimeout(() => scene.classList.add("shake"), 1000);
+  
+  // Door Animation
+  const elevatorDoors = document.querySelector(".elevator-doors");
+  setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 3000);
 }
 
 function unlockRoom(room) { 

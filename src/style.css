@@ -146,6 +146,7 @@ body {
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
+.scene .background.way-back { z-index: -99; }
 .scene .object { z-index: 0;}
 .scene .foreground { z-index: 4; pointer-events: none;}
 .scene .activateableObject { display: none; z-index: 2; }
@@ -393,12 +394,12 @@ body .popup-text {
 
 .hallway .elevator-doors .left-door {
   transform-origin: left center;
-  transition: 3s cubic-bezier(.2,.9,.3,1);
+  transition: 5s cubic-bezier(.2,.9,.3,1);
 }
 
 .hallway .elevator-doors .right-door {
   transform-origin: right center;
-  transition: 3s cubic-bezier(.2,.9,.3,1);
+  transition: 5s cubic-bezier(.2,.9,.3,1);
 }
 
 .hallway .elevator-doors.doorsOpen .left-door {
