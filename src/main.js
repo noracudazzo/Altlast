@@ -11,6 +11,8 @@ const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
 const activeAssistant = document.querySelector(".activeAssistant");
 const activeButton = document.querySelector(".activeButton");
+const elevatorControls = document.getElementById("controls");
+const elevatorDoors = document.querySelector(".elevator-doors");
 
 let zoomed = false;
 let popupShown = false;
@@ -30,6 +32,7 @@ let scene = document.querySelector("." + currentRoom);
 
 let lastUnlockedRoomData = hotspots[currentRoom];
 let currentNarrative = lastUnlockedRoomData.narrative;
+let lastAssistantMessage = currentNarrative;
 
 // Cursor Manager
 const CURSORS = {
@@ -43,6 +46,7 @@ const CURSORS = {
 // Pixi Partikel initialisieren & kontinuierlich erzeugen
 initParticles(scene);
 startParticles(100); 
+
 
 // Functions
 
@@ -91,14 +95,14 @@ function zoomTo(hotspot) {
   // 1️⃣ Zoom + Blur hoch
   tl.to(scene, {
     scale: config.scale,
-    filter: "blur(2px)",
+    // filter: "blur(2px)",
     duration: 0.4,
     ease: "power2.inOut"
   });
 
   // 2️⃣ Blur sanft zurücknehmen
   tl.to(scene, {
-    filter: "blur(0px)",
+    // filter: "blur(0px)",
     duration: 0.5,
     ease: "power1.out",
   });
@@ -142,13 +146,19 @@ function resetZoom() {
   zoomOut();
 
   // Elemente deaktivieren
-  deactivateElements();
+  if(activateableElementActivated) {
+    deactivateElements();
+  }
 
   // Popup schließen
-  closePopup();
+  if (popupShown) {
+    closePopup();
+  }
 
   // Assistant schließen
-  closeAssistantMessage();
+  if (assistantShown) {
+    closeAssistantMessage();
+  }
 
   // Raum Fortschritt prüfen
   if (!scene.classList.contains("intro")) { // nur relevant wenn keine Intro Szene
@@ -164,8 +174,11 @@ async function typeText(el, text, speed = 50) {
   }
 }
 
-async function showAssistantMessage(comment = null) {
+async function showAssistantMessage(comment = null) { 
   assistantShown = true;
+
+  if (comment === lastAssistantMessage && assistantShown) return; // um doppelte Generierung zu vermeiden
+
   assistantSpeechbubble.innerHTML = ""; // Reset von bestehendem Inhalt
 
   const p = document.createElement("p"); // Paragraph Element erstellen
@@ -175,8 +188,10 @@ async function showAssistantMessage(comment = null) {
   assistant.classList.add("activeAssistant");
 
   if (comment) { 
+    lastAssistantMessage = comment;
     await typeText(p, comment, 40); // Falls Kommentar vorhanden
   } else {
+    lastAssistantMessage = currentNarrative;
     await typeText(p, currentNarrative, 40); // Sonst normale Narrative
   }
   setTimeout(() => {
@@ -316,12 +331,15 @@ function prepareButton(button, parentId) {
       }
 
       // Elevator buttons
-      if (!button.classList.contains("controlsButton") && currentRoom === "hallway") return; // tbd hier && currentRoom === "hallway"
-      if (button.classList.contains("rightButton")) {
-        openElevator(); // aktiviertes Element sichtbar machen 
-        unlockRoom(nextRoom);
-      } else {
-        showAssistantMessage(hotspots.hallway.controls.falseClickMessage);
+      if (button.classList.contains("controlsButton") && currentRoom === "hallway") {
+        if (button.classList.contains("rightButton")) {
+          elevatorControls.classList.remove("hotspot");
+          elevatorControls.classList.add("background");
+          openElevator(); // aktiviertes Element sichtbar machen
+          unlockRoom(nextRoom);
+        } else {
+          showAssistantMessage(hotspots.hallway.controls.falseClickMessage);
+        }
       }
     });
   }
@@ -399,20 +417,36 @@ function leaveRoom() {
 
 function openElevator() {
   deactivateElements();
-  setTimeout(() => zoomOut(), 200);
+  setTimeout(() => resetZoom(), 500);
   setTimeout(() => scene.classList.add("shake"), 1000);
-  
-  // Door Animation
-  const elevatorDoors = document.querySelector(".elevator-doors");
-  setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
+
+  const heightDisplay = document.getElementById("height-display");
+  setTimeout(() => heightDisplay.classList.add("active"), 500);
+
+  setTimeout(() => animateFloorCount(), 1000);
+
+  function animateFloorCount() {
+  for (let i = 1; i <= 26; i++) {
+    setTimeout(() => {
+      floorCounter.textContent = i;
+
+      if (i === 26) {
+        scene.classList.remove("shake");
+        setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
+        heightDisplay.classList.remove("active");
+      }
+    }, i * 300); 
+  }
+}
 }
 
 function unlockRoom(room) { 
-  console.log("hi");
   lastUnlockedRoom = ROOMS[nextRoomIndex];
   hotspots[lastUnlockedRoom].isUnlocked = true;
   currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
-  showAssistantMessage(currentNarrative);
+  if (!scene.classList.contains("intro")) { 
+    showAssistantMessage(currentNarrative);
+  };
   currentNarrative = hotspots[lastUnlockedRoom].narrative;
 }
 

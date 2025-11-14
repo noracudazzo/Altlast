@@ -420,15 +420,17 @@ body .popup-text {
   fill: #fff173;
 }
 
-.hallway #height .top-arrow {
+.hallway #height-display .top-arrow {
   opacity: 0.4;
+  transition: 1s ease-in;
 }
 
-.hallway #height.active .top-arrow {
+.hallway #height-display.active .top-arrow {
   opacity: 1;
+  filter: drop-shadow(0 0 6px #fff173);
 }
 
-.hallway #height .bottom-arrow {
+.hallway #height-display .bottom-arrow {
   opacity: 0.4;
 }
 

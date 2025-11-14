@@ -1,5 +1,6 @@
+// das ist ein Problem für später lol
 import * as PIXI from "pixi.js";
-import { gsap } from "gsap";
+import { gsap } from "gsap"; 
 
 let app;
 let particlesContainer;
@@ -30,6 +31,8 @@ export function initParticles(targetElement = document.body) {
       if (p.x < -10) p.x = app.screen.width + 10;
     });
   });
+  // TEST Deaktivieren tbd!!!!!!!!!!!
+  app.ticker.stop();
 }
 
 export function createParticle() {
