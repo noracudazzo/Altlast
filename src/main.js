@@ -47,6 +47,10 @@ const CURSORS = {
 initParticles(scene);
 startParticles(100); 
 
+// Audio
+
+let currentMusic = undefined;
+playMusic(currentRoom);
 
 // Functions
 
@@ -413,7 +417,26 @@ function leaveRoom() {
   scene.style.display = "block";
   initParticles(scene);
   startParticles(100); 
+
+  // das sollte in enterRoom!!! Musik
+  playMusic(currentRoom);
 }
+
+function playMusic(room) {
+  const musicFile = hotspots[room]?.music;
+  if (!musicFile) return; // Abbruch falls keine Datei existiert
+
+  // Aktuelle Musik stoppen, falls nötig
+  if (currentMusic) {
+    currentMusic.pause();
+    currentMusic.currentTime = 0;
+  }
+
+  // Neue Musik starten
+  currentMusic = new Audio(`src/assets/sounds/music/${musicFile}`);
+  currentMusic.play();
+}
+
 
 function openElevator() {
   deactivateElements();

@@ -6,6 +6,7 @@ export const hotspots = {
     startNarrative: "Hi.",
     narrative: "Fahre in den 16. Stock.",
     canBeLeft: false,
+    music: "mesa-10550.mp3",
 
     ventilation1: {
       scale: 4,
@@ -72,6 +73,7 @@ export const hotspots = {
     isUnlocked: true,
     narrative: "Durchsuche die Küche.",
     canBeLeft: true,
+    music: "moebius-21329.mp3",
 
     smallPlants: {
       scale: 4,
