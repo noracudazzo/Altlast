@@ -9,8 +9,7 @@ const popupText = document.getElementById("popup-text");
 const assistant = document.getElementById("assistant");
 const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
-const activeAssistant = document.querySelector(".activeAssistant");
-const activeButton = document.querySelector(".activeButton");
+const optionsButton = document.querySelector(".options-button");
 const elevatorControls = document.getElementById("controls");
 const elevatorDoors = document.querySelector(".elevator-doors");
 
@@ -20,7 +19,28 @@ let assistantShown = false;
 let activateableButtonsActive = false;
 let activateableElementActivated = false;
 
+// Audio
+const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
+const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
+const zoomOutSfx = new Audio(`/sounds/effects/812687__audiopapkin__sound-design-elements-whoosh-sfx-050.wav`);
+const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
+const unlockedSfx = new Audio(`public/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`);
+const errorSfx = new Audio(`public/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
+
+const typeSfxPool = [];
+const typeSfxs = [
+  "/sounds/effects/370849__cabled_mess__clack_minimal-ui-sounds.wav", "/sounds/effects/515522__waveplaysfx__audacity-high-pitched-beep.wav",
+  "/sounds/effects/517379__newlocknew__ui_3-3-fhsandal-sinussytrusarpegiomultiprocessingrsmpl.wav", "/sounds/effects/517377__newlocknew__ui_7-1-confusion-blip-2sytrusarpegiomultiprocessingrsmpl.wav",
+]
+
+let currentMusic = undefined; 
+// tbd currentMusic.loop = true; 
+
 let currentCursor = "default";
+
+// Settings
+let musicOn = false;
+let soundEffectsOn = false;
 
 // Rooms
 const ROOMS = ["elevator", "hallwayBuilding", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
@@ -46,11 +66,6 @@ const CURSORS = {
 // Pixi Partikel initialisieren & kontinuierlich erzeugen
 initParticles(scene);
 startParticles(100); 
-
-// Audio
-
-let currentMusic = undefined;
-playMusic(currentRoom);
 
 // Functions
 
@@ -92,6 +107,9 @@ function zoomTo(hotspot) {
 
   // Transform-Origin setzen
   scene.style.transformOrigin = `${originX}px ${originY}px`;
+
+  // Audio
+  setTimeout(() => zoomInSfx.play(), 200);
 
 // GSAP Timeline für smoother Blur
   const tl = gsap.timeline();
@@ -170,16 +188,50 @@ function resetZoom() {
   }
 } 
 
-async function typeText(el, text, speed = 50) {
-  el.textContent = ""; // leeren
+async function typeText(el, text, speed = 50, isSpeaking) {
+  // el.textContent = ""; // leeren
+
   for (let i = 0; i < text.length; i++) {
     el.textContent += text[i];
+
+    if(!isSpeaking) {
+      if (text[i] !== " ") {   // keine Sounds bei Leerzeichen
+        playTypeSound();
+      }
+    }
+
     await new Promise(r => setTimeout(r, speed));
   }
 }
 
+function speakTextRobot(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    // Roboter-Effekt
+    utterance.rate = 1.1;   // langsamer → mechanisch
+
+    speechSynthesis.speak(utterance);
+}
+
+
+function playTypeSound() {
+    let audio = typeSfxPool.find(a => a.paused || a.ended);
+
+    if (!audio) {
+        audio = new Audio();
+        typeSfxPool.push(audio);
+    }
+
+    audio.src = typeSfxs[Math.floor(Math.random() * typeSfxs.length)];
+    audio.playbackRate = 0.4 + Math.random() * 0.15; // Pitch
+    audio.volume = 0.1;
+    audio.currentTime = 0;
+    audio.play();
+}
+
 async function showAssistantMessage(comment = null) { 
   assistantShown = true;
+  assistantSfx.play();
 
   if (comment === lastAssistantMessage && assistantShown) return; // um doppelte Generierung zu vermeiden
 
@@ -191,12 +243,15 @@ async function showAssistantMessage(comment = null) {
   assistantSpeechbubble.style.display = "block";
   assistant.classList.add("activeAssistant");
 
+
   if (comment) { 
     lastAssistantMessage = comment;
-    await typeText(p, comment, 40); // Falls Kommentar vorhanden
+    speakTextRobot(lastAssistantMessage);
+    await typeText(p, comment, 40, true); // Falls Kommentar vorhanden
   } else {
     lastAssistantMessage = currentNarrative;
-    await typeText(p, currentNarrative, 40); // Sonst normale Narrative
+    speakTextRobot(lastAssistantMessage);
+    await typeText(p, currentNarrative, 40, true); // Sonst normale Narrative
   }
   setTimeout(() => {
     closeAssistantMessage();
@@ -310,7 +365,7 @@ async function showPopUp(hotspot) {
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
     if (!popupShown) return; 
-    await typeText(el, text, 50); // Text tippen
+    await typeText(el, text, 50, false); // Text tippen
 
     if (!popupShown) return; 
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
@@ -332,16 +387,19 @@ function prepareButton(button, parentId) {
       // Activation button
       if (button.classList.contains("activeButton") && button.classList.contains("activationButton")) {
         activateElement(parentId);
+        clickSfx.play();
       }
 
       // Elevator buttons
       if (button.classList.contains("controlsButton") && currentRoom === "hallway") {
         if (button.classList.contains("rightButton")) {
+          clickSfx.play();
           elevatorControls.classList.remove("hotspot");
           elevatorControls.classList.add("background");
           openElevator(); // aktiviertes Element sichtbar machen
           unlockRoom(nextRoom);
         } else {
+          errorSfx.play();
           showAssistantMessage(hotspots.hallway.controls.falseClickMessage);
         }
       }
@@ -433,8 +491,13 @@ function playMusic(room) {
   }
 
   // Neue Musik starten
-  currentMusic = new Audio(`src/assets/sounds/music/${musicFile}`);
+  currentMusic = new Audio(`/sounds/music/${musicFile}`);
   currentMusic.play();
+  currentMusic.volume = 0.3;
+}
+
+function stopMusic(music) {
+    music.pause();
 }
 
 
@@ -468,6 +531,7 @@ function unlockRoom(room) {
   hotspots[lastUnlockedRoom].isUnlocked = true;
   currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
   if (!scene.classList.contains("intro")) { 
+    unlockedSfx.play();
     showAssistantMessage(currentNarrative);
   };
   currentNarrative = hotspots[lastUnlockedRoom].narrative;
@@ -564,9 +628,11 @@ document.querySelectorAll(".hotspot").forEach(hs => {
     if (!zoomed) {
       zoomTo(hs);
       showPopUp(hs);
+      clickSfx.play();
     }
     else if (zoomed && activateableElementActivated) {
       showPopUp(hs);
+      clickSfx.play();
     }
   });
 });
@@ -578,10 +644,29 @@ assistantButton.addEventListener("click", () => {
   else closeAssistantMessage();
 });
 
+// Click (Controls)
+optionsButton.addEventListener("click", () => {
+  clickSfx.play();
+
+  if (!musicOn && !soundEffectsOn) {
+    playMusic(currentRoom); 
+    musicOn = true;
+    soundEffectsOn = true;
+  } else {
+    stopMusic(currentMusic);
+    musicOn = false;
+    soundEffectsOn = false;
+  }
+});
+
 // Click (Leave)
 
 document.addEventListener("click", (e) => {
   if (!hotspots[currentRoom].canBeLeft) return;
+
+  const target = e.target;
+  if (target.closest("#main-navigation") || target.closest(".hotspot")) return;
+  clickSfx.play();
   const threshold = window.innerHeight * 0.9;
   if (e.clientY > threshold) {
     leaveRoom();
@@ -601,4 +686,5 @@ document.addEventListener("click", e => {
   )
   return;
   resetZoom();
+  zoomOutSfx.play();
 });
