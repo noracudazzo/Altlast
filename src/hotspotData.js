@@ -59,6 +59,13 @@ export const hotspots = {
       }
     },
 
+    entrance: {
+      scale: 4,
+      originX: 2732,
+      originY: 1536, 
+      hasBeenClicked: false,
+    },
+
     controls: {
       scale: 2.75,
       originX: 5000,
@@ -71,7 +78,9 @@ export const hotspots = {
   kitchen: {
 
     isUnlocked: true,
+    startNarrative: "Als erstes solltest du dir die Küche anschauen.",
     narrative: "Durchsuche die Küche.",
+    errorNarrative: "Schaue dir vollständig die Küche an, um ins Wohnzimmer zu gelangen.",
     canBeLeft: true,
     music: "moebius-21329.mp3",
 
@@ -259,6 +268,30 @@ export const hotspots = {
     isUnlocked: false,
     startNarrative: "Du hast die Küche fertig durchsucht. Durchsuche nun das Wohnzimmer.",
     narrative: "Durchsuche das Wohnzimmer.",
+    errorNarrative: "Zuerst solltest du das Wohnzimmer genauer anschauen.",
+    smallPlants: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+  },
+
+  bedroom: {
+
+    isUnlocked: false,
+    startNarrative: "...",
+    narrative: "...",
 
     smallPlants: {
       scale: 4,
@@ -277,4 +310,10 @@ export const hotspots = {
       }
     },
   },
+
+
+
+
+
+
 };

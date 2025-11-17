@@ -405,7 +405,7 @@ function prepareButton(button, parentId) {
           clickSfx.play();
           elevatorControls.classList.remove("hotspot");
           elevatorControls.classList.add("background");
-          openElevator(); // aktiviertes Element sichtbar machen
+          openElevator(); 
           unlockRoom(nextRoom);
         } else {
           errorSfx.play();
@@ -507,6 +507,17 @@ function stopMusic(music) {
 
 
 function openElevator() {
+
+  deactivateElements();
+  resetZoom();
+
+  // alles löschen drunter
+  const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
+  elevatorDoorBackgroundPlaceholder.classList.add("hidden");
+  entrance.classList.remove("hidden");
+  elevatorDoors.classList.add("doorsOpen");
+
+    /*
   deactivateElements();
   setTimeout(() => resetZoom(), 500);
   setTimeout(() => scene.classList.add("shake"), 1000);
@@ -524,15 +535,14 @@ function openElevator() {
       if (i === 26) {
         scene.classList.remove("shake");
         const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
-        console.log(elevatorDoorBackgroundPlaceholder);
         setTimeout(() => elevatorDoorBackgroundPlaceholder.classList.add("hidden"), 2000);
-        setTimeout(() => entrance.classList.remove("hidden"), 5000);
+        setTimeout(() => entrance.classList.remove("hidden"), 3000);
         setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
         heightDisplay.classList.remove("active");
       }
     }, i * 300); 
   }
-}
+} */
 }
 
 function unlockRoom(room) { 
@@ -544,6 +554,13 @@ function unlockRoom(room) {
     showAssistantMessage(currentNarrative);
   };
   currentNarrative = hotspots[lastUnlockedRoom].narrative;
+}
+
+function getDoorTarget(door) {
+  return door.className.baseVal
+    .split(" ")
+    .find(c => c.startsWith("door-to-"))
+    ?.replace("door-to-", "");
 }
 
 
@@ -564,6 +581,7 @@ document.addEventListener("mousemove", e => {
 
   const target = e.target;
   const hotspot = target.closest(".hotspot");
+  const door = target.closest(".door");
 
   // Fall 0: Immer fixe UI-Elemente
   if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton")) {
@@ -579,9 +597,11 @@ document.addEventListener("mousemove", e => {
   // Fall 1: Nicht gezoomt
   if (!zoomed) {
     if (hotspot) setCursor("zoomIn");
+    if (door) setCursor("click");
     else setCursor("default");
     return;
   }
+
 
   // Fall 2: Gezoomt
   if (zoomed && !activateableElementActivated) {
@@ -642,6 +662,29 @@ document.querySelectorAll(".hotspot").forEach(hs => {
     else if (zoomed && activateableElementActivated) {
       showPopUp(hs);
       clickSfx.play();
+    }
+  });
+});
+
+// Click & Hover (Doors)
+
+document.querySelectorAll(".door").forEach(door => {
+  door.addEventListener("mouseenter", () => startHoverHotspot(door));
+  door.addEventListener("mouseleave", () => endHoverHotspot(door));
+
+  door.addEventListener("click", () => {
+    console.log(door);
+    const targetRoom = getDoorTarget(door);
+    console.log(targetRoom);
+    console.log(hotspots[targetRoom]);
+    console.log(hotspots[targetRoom].isUnlocked);
+
+    if (hotspots[targetRoom].isUnlocked) {
+      unlockedSfx.play();
+    }
+    else {
+      showAssistantMessage(hotspots[lastUnlockedRoom].errorNarrative);
+      errorSfx.play();
     }
   });
 });

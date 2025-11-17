@@ -30,6 +30,9 @@ footer, header, hgroup, menu, nav, section {
   filter: drop-shadow(0 0 6px white);
 }
 
+.door.hovered {
+  filter: drop-shadow(0 0 20px var(--color-white));
+}
 
 /* Font */
 
@@ -78,6 +81,7 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -93,6 +97,38 @@ strong {
 }
 
 /* General CSS */
+
+:root {
+  --color-none: none;
+  --color-black: #180e23;
+  --color-black2: #181716;
+  --color-white: #fff;
+  --color-grey: #606060;
+  --color-grey2: #686665;
+  --color-grey3: #7c7a79;
+  --color-light-brown: #c5a280;
+  --color-light-brown2: #dfc09d;
+  --color-light-brown3: #efd7b8;
+  --color-red: #f25874;
+  --color-light-red: #ef7891;
+  --color-orange: #d89650;
+  --color-yellow: #fff173;
+  --color-ice-green: #33c8b3;
+  --color-cyan: #00c3ff;
+  --color-light-blue: #5a99bf;
+  --color-dark-blue: #0a233f;
+  --color-dark-blue2: #162b3d;
+  --color-pink: #a93bd7;
+  --color-dark-pink: #5b243c;
+  --color-purple: #826acb;
+  --color-dark-purple: #552e93;
+  --color-dark-purple2: #320b47;
+  --opacity-twenty: .2;
+  --opacity-fourty: .4;
+  --opacity-thirty: .31;
+  --opacity-fifty: .5;
+  --opacity-sixtyfive: .65;
+}
 
 body {
   background-color: #180e23;
@@ -391,7 +427,7 @@ body .popup-text {
 }
 
 /* Elevator */
-.hallway .elevator-doors .door {
+.hallway .elevator-doors .elevator-door {
   z-index: -10 !important;
   transform-box: fill-box; 
 }
