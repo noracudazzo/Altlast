@@ -119,7 +119,7 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "40" },
         status: { title: "Status", data: "Aktiv, Fotopanel noch zu 47% intakt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-        content: { title: "Inhalt", data: "Ellen #56890 mit Enkelkind." },
+        content: { title: "Inhalt", data: "Ellen mit Enkelkind." },
       },
       comment: "Wie klein du damals noch warst!",
       textLocation: {

@@ -12,6 +12,7 @@ const assistantSpeechbubble = document.getElementById("speechbubble");
 const optionsButton = document.querySelector(".options-button");
 const elevatorControls = document.getElementById("controls");
 const elevatorDoors = document.querySelector(".elevator-doors");
+const entrance = document.querySelector(".entrance");
 
 let zoomed = false;
 let popupShown = false;
@@ -233,14 +234,18 @@ async function showAssistantMessage(comment = null) {
   assistantShown = true;
   assistantSfx.play();
 
-  if (comment === lastAssistantMessage && assistantShown) return; // um doppelte Generierung zu vermeiden
+  if (comment === lastAssistantMessage && assistantShown) {
+    assistantSpeechbubble.classList.remove("hidden");
+    assistant.classList.add("activeAssistant");
+    return; // um doppelte Generierung zu vermeiden 
+  }
 
   assistantSpeechbubble.innerHTML = ""; // Reset von bestehendem Inhalt
 
   const p = document.createElement("p"); // Paragraph Element erstellen
   assistantSpeechbubble.appendChild(p);
 
-  assistantSpeechbubble.style.display = "block";
+  assistantSpeechbubble.classList.remove("hidden");
   assistant.classList.add("activeAssistant");
 
 
@@ -260,8 +265,10 @@ async function showAssistantMessage(comment = null) {
 
 function closeAssistantMessage() {
   assistantShown = false;
-  assistantSpeechbubble.style.display = "none";
+  assistantSpeechbubble.classList.add("hidden");
+  speechSynthesis.cancel();
   assistant.classList.remove("activeAssistant");
+  speechSynthesis.cancel();
 };
 
 function closePopup() {
@@ -387,6 +394,8 @@ function prepareButton(button, parentId) {
       // Activation button
       if (button.classList.contains("activeButton") && button.classList.contains("activationButton")) {
         activateElement(parentId);
+        closePopup();
+        closeAssistantMessage();
         clickSfx.play();
       }
 
@@ -410,16 +419,12 @@ function prepareButton(button, parentId) {
 function activateElement(baseId) {
   const baseElement = document.getElementById(baseId);
   const activatedElement = document.getElementById(baseId + "Activated");
-
-  // alles schließen
-  closePopup();
-  closeAssistantMessage();
   
   // Zoomed Klasse adden
   activatedElement.classList.add("zoomed");
 
-  setTimeout(() => activatedElement.style.display = "block", 800); // aktiviertes Element sichtbar machen
-  setTimeout(() => baseElement.style.display = "none", 800); // parent unsichtbar machen
+  setTimeout(() => activatedElement.classList.remove("hidden"), 800); // aktiviertes Element sichtbar machen
+  setTimeout(() => baseElement.classList.add("hidden"), 800); // parent unsichtbar machen
   activatedElement.classList.add("activatedElement");
 
    // Booleans
@@ -433,8 +438,8 @@ function deactivateElement(baseId) {
   if (!baseElement || !activatedElement) return;
 
   // Sichtbar machen
-  activatedElement.style.display = "none";
-  baseElement.style.display = "block";
+  activatedElement.classList.add("hidden");
+  baseElement.classList.remove("hidden");
 
   // Booleans
   activateableElementActivated = false;
@@ -468,11 +473,11 @@ function leaveRoom() {
   scene.classList.remove("leaveHovered");
   setCursor("default"); // Cursor & Hover reset
 
-  scene.style.display = "none"; // hide room
+  scene.classList.add("hidden");
 
   currentRoom = ROOMS[2]; // change room to hallway
   scene = document.querySelector("." + currentRoom);
-  scene.style.display = "block";
+  scene.classList.remove("hidden");
   initParticles(scene);
   startParticles(100); 
 
@@ -518,6 +523,10 @@ function openElevator() {
 
       if (i === 26) {
         scene.classList.remove("shake");
+        const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
+        console.log(elevatorDoorBackgroundPlaceholder);
+        setTimeout(() => elevatorDoorBackgroundPlaceholder.classList.add("hidden"), 2000);
+        setTimeout(() => entrance.classList.remove("hidden"), 5000);
         setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
         heightDisplay.classList.remove("active");
       }

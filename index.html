@@ -11,7 +11,7 @@
       <button aria-label="assistant" id="assistantButton"> 
         <svg class="assistant-icon" viewBox="0 0 177.48 234.29"><defs><style>.diamond{fill:url(#Unbenannter_Verlauf_47);}</style><linearGradient id="Unbenannter_Verlauf_47" x1="88.74" y1="0" x2="88.74" y2="234.29" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#33c8b3"/><stop offset=".16" stop-color="#4ecfbd"/><stop offset=".51" stop-color="#94e2d7"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><g><polygon class="diamond" points="177.48 117.14 88.74 234.29 0 117.14 88.74 0 177.48 117.14"/></g></svg>
       </button>
-      <div id="speechbubble" class="speechbubble"> </div>
+      <div id="speechbubble" class="speechbubble hidden"> </div>
     </aside>
     <main> 
       <div class="viewport">
@@ -21,8 +21,9 @@
 
         <!-- Hallway -->
         <div class="scene intro hallway">
+          <img class="layer background two-back" src="src/assets/imgs/rooms/hallway/very-background.png">
           <img class="layer background" src="/src/assets/imgs/rooms/hallway/background.png"> 
-          <svg class="layer background way-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
+          <svg class="layer background one-back" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
             <defs>
               <style>.cls-5{fill:#180e23}</style>
               <linearGradient id="Unbenannter_Verlauf_298" x1="558.18" x2="558.18" y1="660.89" y2="198.3" gradientUnits="userSpaceOnUse">
@@ -38,11 +39,11 @@
               <linearGradient xlink:href="#Unbenannter_Verlauf_298" id="Unbenannter_Verlauf_298-2" x1="807.82" x2="807.82"/>
             </defs>
             <g class="elevator-doors">
-                <path id="doorBackgroundPlaceholder" d="M456.17 198.3h453.66v462.59H456.17z"/>
+                <path id="elevatorDoorBackgroundPlaceholder" d="M456.17 198.3h453.66v462.59H456.17z"/>
                 <path id="elevator-door2" class="left-door door" fill="url(#Unbenannter_Verlauf_298)" d="M435.86 198.3H680.5v462.59H435.86z"/>
                 <path id="elevator-door1" class="right-door door" fill="url(#Unbenannter_Verlauf_298-2)" d="M685.5 198.3h244.64v462.59H685.5z"/>
                 <path id="frame" d="M435.86 177.99v482.9h20.31V198.3h453.66v462.59h20.31v-482.9H435.86z" class="cls-5"/>
-              </g>
+            </g>
           </svg>
           <svg class="layer objects" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
             <defs>
@@ -60,6 +61,27 @@
                 <stop offset="1" stop-color="#33c8b3"/>
               </linearGradient>
               <linearGradient xlink:href="#Unbenannter_Verlauf_298" id="Unbenannter_Verlauf_298-2" x1="807.82" x2="807.82"/>
+              <linearGradient id="Unbenannter_Verlauf_480" x1="683" x2="683" y1="504.02" y2="338.92" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#180e23"/>
+                <stop offset=".41" stop-color="#180f24"/>
+                <stop offset=".56" stop-color="#1b152b"/>
+                <stop offset=".67" stop-color="#202037"/>
+                <stop offset=".75" stop-color="#272f48"/>
+                <stop offset=".82" stop-color="#31425e"/>
+                <stop offset=".89" stop-color="#3c5b79"/>
+                <stop offset=".95" stop-color="#497798"/>
+                <stop offset="1" stop-color="#5997bd"/>
+                <stop offset="1" stop-color="#5a99bf"/>
+              </linearGradient>
+              <linearGradient id="Unbenannter_Verlauf_607" x1="643.02" x2="643.02" y1="402.19" y2="443.75" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fff"/>
+                <stop offset=".06" stop-color="#f1f6f9"/>
+                <stop offset=".29" stop-color="#bbd5e4"/>
+                <stop offset=".51" stop-color="#91bbd4"/>
+                <stop offset=".71" stop-color="#73a8c8"/>
+                <stop offset=".88" stop-color="#609dc1"/>
+                <stop offset="1" stop-color="#5a99bf"/>
+              </linearGradient>
             </defs>
             <g class="objects">
               <g class="elevator-frame">
@@ -427,7 +449,22 @@
                 <path d="M284.56 324.46v-1.02h.96v1.02h-.96Z" class="cls-4"/>
                 <path d="M286.3 324.46v-1.02h.96v1.02h-.96Z" class="cls-4"/>
               </g>
-            </g>
+              <g class="hotspot object entrance activateableObject hidden" id="entranceActivated" style="z-index:-2">
+                <path id="door" fill="url(#Unbenannter_Verlauf_480)" d="M636.21 338.92h93.58v165.1h-93.58z"/>
+                <path id="knob" fill="url(#Unbenannter_Verlauf_607)" d="M639.21 402.19h7.62v41.56h-7.62z" opacity=".55"/>
+                <g id="frame">
+                  <path d="M633.21 335.92v168.1h6v-162.1h87.58v162.1h6v-168.1h-99.58Z" class="cls-10"/>
+                </g>
+                <g id="number">
+                  <path d="M667.83 357.67h30.33v16.41h-30.33z" class="cls-66"/>
+                  <path d="M698.54 374.45h-31.08v-17.16h31.08v17.16Zm-30.33-.75h29.58v-15.66h-29.58v15.66Z" class="cls-119"/>
+                  <path d="M676.66 364.49h1.19l-.11.85h-1.18l-.11 1.02h1.23l-.1.84h-1.23l-.2 1.75h-.93l.19-1.75h-1.03l-.2 1.75h-.93l.19-1.75h-1.21l.12-.84h1.19l.12-1.02h-1.26l.11-.85h1.25l.2-1.75h.93l-.19 1.75h1.02l.2-1.75h.93l-.2 1.75Zm-1.13 1.87.12-1.03h-1.05l-.12 1.03h1.06Z" class="cls-117"/>
+                  <path d="M681.68 368.95h-3.47v-2.11l2.17-1.97v-.95h-.86v.67h-1.24v-.99l.86-.86h2.54v2.61l-2.16 1.93v.5h2.16v1.18Z" class="cls-117"/>
+                  <path d="M684.39 364.58v-.67h-.89v1.31h2.15v2.87l-.92.86h-2.54v-5.36l.92-.85h2.54v1.85h-1.26Zm-.89 3.19h.85v-1.35h-.85v1.35Z" class="cls-117"/>
+                  <path d="m686.12 363.6 1.01-.86h2.48v5.36l-.86.86h-2.62v-1.93h1.27v.76h.9v-1.36h-2.17v-2.82Zm1.31 1.62h.86v-1.3h-.86v1.3Z" class="cls-117"/>
+                  <path d="m693.71 368.1-.92.86h-2.76v-5.36l.93-.85h2.75v5.36Zm-2.38-4.18v3.86h1.08v-3.86h-1.08Z" class="cls-117"/>
+                </g>
+              </g>
           </svg>
           <img class="layer foreground" src="/src/assets/imgs/rooms/hallway/foreground.png"> 
         </div>
@@ -1108,7 +1145,7 @@
               <path fill="none" stroke="#00c3ff" stroke-miterlimit="10" stroke-width=".75px" d="M226.73 318.96h140.54v108.57H226.73z"/>
               <path d="M357.06 197.95H337.6l8.11-8.11h-4.8l-8.11 8.11h-13.14l7.74-7.74a2 2 0 0 0 .28-.37h-4.71l-8.1 8.11h-16.33v-8.11h-3.4v8.11h-16.33l-8.1-8.11H266c.08.14.17.26.28.37l7.74 7.74h-13.14l-8.11-8.11h-4.8l8.11 8.11h-19.46c-.94 0-1.7.76-1.7 1.7s.76 1.7 1.7 1.7h19.46l-11.98 11.98c-.66.66-.66 1.73 0 2.4.33.34.76.5 1.21.5s.87-.16 1.2-.5l14.38-14.38h13.14l-7.74 7.74a1.702 1.702 0 0 0 1.2 2.9c.44 0 .87-.17 1.21-.5l10.13-10.14h14.13l-19.48 19.48h-20.49c-.94 0-1.7.76-1.7 1.7s.76 1.7 1.7 1.7h17.09l-15.53 15.53a1.702 1.702 0 0 0 1.2 2.9c.43 0 .87-.17 1.2-.5l15.38-15.38v16.79c0 .94.76 1.7 1.7 1.7s1.7-.76 1.7-1.7v-20.19l19.43-19.43v13.85l-10.14 10.14c-.66.66-.66 1.74 0 2.4.66.66 1.74.66 2.4 0l7.74-7.74v13.13l-14.38 14.38c-.66.66-.66 1.74 0 2.4.66.66 1.74.66 2.4 0l11.98-11.98v19.46c0 .94.76 1.7 1.7 1.7s1.7-.76 1.7-1.7v-19.46l11.98 11.98c.33.33.77.5 1.2.5s.87-.17 1.2-.5c.66-.66.66-1.74 0-2.4l-14.38-14.38V222.6l7.74 7.74c.33.33.77.5 1.2.5s.87-.17 1.2-.5c.66-.66.66-1.74 0-2.4l-10.14-10.14v-14.07l19.43 19.43v20.49c0 .94.76 1.7 1.7 1.7s1.7-.76 1.7-1.7v-17.09l15.53 15.53c.33.33.77.5 1.2.5s.87-.17 1.2-.5c.66-.66.66-1.74 0-2.4l-15.38-15.38h16.79c.94 0 1.7-.76 1.7-1.7s-.76-1.7-1.7-1.7h-20.19l-19.55-19.55h13.91l10.13 10.14c.33.33.77.5 1.21.5s.87-.17 1.2-.5c.66-.66.66-1.74 0-2.4l-7.74-7.74h13.14l14.38 14.38c.33.34.76.5 1.2.5s.87-.16 1.21-.5c.66-.66.66-1.73 0-2.4l-11.98-11.98h19.46c.94 0 1.7-.76 1.7-1.7s-.76-1.7-1.7-1.7Z" class="cls-119"/>
               </g>
-              <g class="object activateableObject" id="fridgeActivated">
+              <g class="object activateableObject hidden" id="fridgeActivated">
               <g class="activateableBody" id="fridgeBody">
                   <path fill="url(#Unbenannter_Verlauf_62)" d="M195.8 189.84h202.06v402.65H195.8z"/>
                   <path fill="url(#Unbenannter_Verlauf_129)" d="m368.47 568.61 29.39 13.37V189.84l-29.39 10.26v368.51z"/>
@@ -1399,10 +1436,6 @@
           </svg>
           <img class="layer foreground" src="/src/assets/imgs/rooms/kitchen/foreground.png"> 
         </div>
-
-        <!-- Hallway -->
-
-
       </div>
     </main>
     <nav class="main-navigation navigation" id="main-navigation"> 

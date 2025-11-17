@@ -101,6 +101,10 @@ body {
   font-size: 24px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .viewport {
   width: 100vw;
   height: 100vh;
@@ -146,10 +150,11 @@ body {
 }
 
 .scene .background { z-index: -1; pointer-events: none;}
-.scene .background.way-back { z-index: -99; }
+.scene .background.one-back { z-index: -2; }
+.scene .background.two-back { z-index: -3; }
 .scene .object { z-index: 0;}
 .scene .foreground { z-index: 4; pointer-events: none;}
-.scene .activateableObject { display: none; z-index: 2; }
+.scene .activateableObject { z-index: 2; }
 #assistant, #main-navigation { z-index: 99;}
 
 .visually-hidden:not(:focus):not(:active) { /* accessible hiding */
@@ -216,7 +221,6 @@ button, .assistantButton {
   align-items: center;
   position: relative;
   margin: .5rem 0 0 .5rem;
-  display: none;
   height: fit-content;
 }
 
