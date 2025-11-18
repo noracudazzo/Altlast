@@ -1,6 +1,6 @@
 export const hotspots = {
 
-  hallway: {
+  elevator: {
 
     isUnlocked: true,
     startNarrative: "Hi.",
@@ -14,11 +14,12 @@ export const hotspots = {
       originY: 500, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "AirRefresher TX02 I" },
+        year: { title: "Herstellungsjahr", data: "49" },
+        status: { title: "Status", data: "Aktiv, Motor noch zu 78% intakt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Wohnen CM" },
       },
+      comment: "Die Luftqualität hier drinnen ist ausgesprochen gut!",
       textLocation: {
           left: "center",
           bottom: 450,
@@ -31,10 +32,10 @@ export const hotspots = {
       originY: 500, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "AirRefresher TX01" },
+        year: { title: "Herstellungsjahr", data: "46" },
+        status: { title: "Status", data: "Aktiv, Motor noch zu 60% intakt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Wohnen CM" },
       },
       textLocation: {
           left: "center",
@@ -48,11 +49,13 @@ export const hotspots = {
       originY: 1450, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "InfoPanel R-90" },
+        year: { title: "Herstellungsjahr", data: "51" },
+        status: { title: "Status", data: "Aktiv, Panel noch zu 82% intakt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Statistik" },
+        content: { title: "Inhalt", data: "Die täglichen, landesweiten Statistiken." },
       },
+      comment: "Tolle Nachrichten: Der ZI ist über Nacht um 1% gestiegen.",
       textLocation: {
           left: "center",
           bottom: 450,
@@ -201,7 +204,7 @@ export const hotspots = {
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
       },
-      comment: "Abgelaufene Lebensmittel? Das solltest du besser mal überprüfen.",
+      comment: "Das solltest du besser mal überprüfen.",
       textLocation: {
         right: 300,
         top: 1300,

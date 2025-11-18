@@ -25,8 +25,8 @@ const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-sp
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
 const zoomOutSfx = new Audio(`/sounds/effects/812687__audiopapkin__sound-design-elements-whoosh-sfx-050.wav`);
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
-const unlockedSfx = new Audio(`public/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`);
-const errorSfx = new Audio(`public/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
+const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`);
+const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
 
 const typeSfxPool = [];
 const typeSfxs = [
@@ -44,9 +44,9 @@ let musicOn = false;
 let soundEffectsOn = false;
 
 // Rooms
-const ROOMS = ["elevator", "hallwayBuilding", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
-let currentRoom = ROOMS[3]; 
-let lastUnlockedRoom = ROOMS[3]; 
+const ROOMS = ["elevator", "kitchen", "livingRoom", "bedroom", "office"];
+let currentRoom = ROOMS[0]; 
+let lastUnlockedRoom = ROOMS[0]; 
 let nextRoomIndex = ROOMS.indexOf(lastUnlockedRoom) + 1;
 let nextRoom = ROOMS[nextRoomIndex];
 let scene = document.querySelector("." + currentRoom);
@@ -115,7 +115,6 @@ function zoomTo(hotspot) {
 // GSAP Timeline für smoother Blur
   const tl = gsap.timeline();
 
-  // 1️⃣ Zoom + Blur hoch
   tl.to(scene, {
     scale: config.scale,
     // filter: "blur(2px)",
@@ -123,7 +122,6 @@ function zoomTo(hotspot) {
     ease: "power2.inOut"
   });
 
-  // 2️⃣ Blur sanft zurücknehmen
   tl.to(scene, {
     // filter: "blur(0px)",
     duration: 0.5,
@@ -137,7 +135,7 @@ function zoomTo(hotspot) {
   const relatedButtons = document.querySelectorAll(`.${id}Button`);
 
   relatedButtons.forEach(button => {
-    prepareButton(button, id);
+    setTimeout(() => prepareButton(button, id), 100);
     activateableButtonsActive = true;
   });
 }
@@ -260,7 +258,7 @@ async function showAssistantMessage(comment = null) {
   }
   setTimeout(() => {
     closeAssistantMessage();
-  }, 30000);
+  }, 50000);
 }
 
 function closeAssistantMessage() {
@@ -369,6 +367,11 @@ async function showPopUp(hotspot) {
 
     strong.style.opacity = 1; // Titel einblenden
     
+    const blingSound = new Audio(typeSfxs[2]);
+    blingSound.volume = 0.1;
+    blingSound.currentTime = 0;
+    blingSound.play();
+    
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
     if (!popupShown) return; 
@@ -400,7 +403,13 @@ function prepareButton(button, parentId) {
       }
 
       // Elevator buttons
-      if (button.classList.contains("controlsButton") && currentRoom === "hallway") {
+      if (button.classList.contains("controlsButton") && currentRoom === "elevator") {
+
+        const controlButtonBackground = button.querySelector(".controls-button-background");
+        controlButtonBackground.classList.add("clicked");
+        setTimeout(() => controlButtonBackground.classList.remove("clicked"), 300);
+        setTimeout(() => controlButtonBackground.classList.add("unclicked"), 300);
+
         if (button.classList.contains("rightButton")) {
           clickSfx.play();
           elevatorControls.classList.remove("hotspot");
@@ -409,7 +418,7 @@ function prepareButton(button, parentId) {
           unlockRoom(nextRoom);
         } else {
           errorSfx.play();
-          showAssistantMessage(hotspots.hallway.controls.falseClickMessage);
+          showAssistantMessage(hotspots.elevator.controls.falseClickMessage);
         }
       }
     });
@@ -469,19 +478,18 @@ function canNextRoomBeUnlocked() {
   }
 }
 
-function leaveRoom() {
-  scene.classList.remove("leaveHovered");
-  setCursor("default"); // Cursor & Hover reset
-
+function changeRoom(room) {
+  if (scene.classList.contains("leaveHovered")) scene.classList.remove("leaveHovered"); // tbd, klappt das? Hover reset
+  setCursor("default"); // Cursor reset
   scene.classList.add("hidden");
 
-  currentRoom = ROOMS[2]; // change room to hallway
+  currentRoom = room; // change room to kitchen, tbd goal: hallway
+
   scene = document.querySelector("." + currentRoom);
   scene.classList.remove("hidden");
+
   initParticles(scene);
   startParticles(100); 
-
-  // das sollte in enterRoom!!! Musik
   playMusic(currentRoom);
 }
 
@@ -509,16 +517,6 @@ function stopMusic(music) {
 function openElevator() {
 
   deactivateElements();
-  resetZoom();
-
-  // alles löschen drunter
-  const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
-  elevatorDoorBackgroundPlaceholder.classList.add("hidden");
-  entrance.classList.remove("hidden");
-  elevatorDoors.classList.add("doorsOpen");
-
-    /*
-  deactivateElements();
   setTimeout(() => resetZoom(), 500);
   setTimeout(() => scene.classList.add("shake"), 1000);
 
@@ -542,7 +540,7 @@ function openElevator() {
       }
     }, i * 300); 
   }
-} */
+} 
 }
 
 function unlockRoom(room) { 
@@ -597,7 +595,7 @@ document.addEventListener("mousemove", e => {
   // Fall 1: Nicht gezoomt
   if (!zoomed) {
     if (hotspot) setCursor("zoomIn");
-    if (door) setCursor("click");
+    else if (door) setCursor("click");
     else setCursor("default");
     return;
   }
@@ -673,14 +671,11 @@ document.querySelectorAll(".door").forEach(door => {
   door.addEventListener("mouseleave", () => endHoverHotspot(door));
 
   door.addEventListener("click", () => {
-    console.log(door);
     const targetRoom = getDoorTarget(door);
-    console.log(targetRoom);
-    console.log(hotspots[targetRoom]);
-    console.log(hotspots[targetRoom].isUnlocked);
 
     if (hotspots[targetRoom].isUnlocked) {
       unlockedSfx.play();
+      changeRoom(targetRoom);
     }
     else {
       showAssistantMessage(hotspots[lastUnlockedRoom].errorNarrative);
@@ -721,7 +716,7 @@ document.addEventListener("click", (e) => {
   clickSfx.play();
   const threshold = window.innerHeight * 0.9;
   if (e.clientY > threshold) {
-    leaveRoom();
+    changeRoom("elevator"); // tbd hallway
   }
 });
 

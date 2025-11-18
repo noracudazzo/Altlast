@@ -189,7 +189,7 @@ body {
 .scene .background.one-back { z-index: -2; }
 .scene .background.two-back { z-index: -3; }
 .scene .object { z-index: 0;}
-.scene .foreground { z-index: 4; pointer-events: none;}
+.scene .foreground { z-index: 4; pointer-events: none;} /* tbd schrank Küche */
 .scene .activateableObject { z-index: 2; }
 #assistant, #main-navigation { z-index: 99;}
 
@@ -228,8 +228,8 @@ button, .assistantButton {
 }
 
 .assistant button {
-  height: 5.5rem;
-  width: 5.5rem;
+  height: 6.5rem;
+  width: 6.5rem;
   background: #180e23;
   border-radius: 100%;
   transition: ease .2s;
@@ -256,7 +256,7 @@ button, .assistantButton {
   padding: 1.25rem 2rem;
   align-items: center;
   position: relative;
-  margin: .5rem 0 0 .5rem;
+  margin: 1rem 0 0 1rem;
   height: fit-content;
 }
 
@@ -427,26 +427,26 @@ body .popup-text {
 }
 
 /* Elevator */
-.hallway .elevator-doors .elevator-door {
+.elevator .elevator-doors .elevator-door {
   z-index: -10 !important;
   transform-box: fill-box; 
 }
 
-.hallway .elevator-doors .left-door {
+.elevator .elevator-doors .left-door {
   transform-origin: left center;
   transition: 5s cubic-bezier(.2,.9,.3,1);
 }
 
-.hallway .elevator-doors .right-door {
+.elevator .elevator-doors .right-door {
   transform-origin: right center;
   transition: 5s cubic-bezier(.2,.9,.3,1);
 }
 
-.hallway .elevator-doors.doorsOpen .left-door {
+.elevator .elevator-doors.doorsOpen .left-door {
   transform: translateX(-100%);
 }
 
-.hallway .elevator-doors.doorsOpen .right-door {
+.elevator .elevator-doors.doorsOpen .right-door {
   transform: translateX(100%);
 }
 
@@ -454,23 +454,36 @@ body .popup-text {
   filter: drop-shadow(0 0 2px #00cbb2);
 }
 
-.hallway #floorCounter {
+.controlsButton.activeButton .clicked {
+  fill: #612445;
+  transition: .2s ease;
+}
+
+.controlsButton.activeButton .unclicked {
+  transition: .5s ease;
+}
+
+.controlsButton.activeButton.rightButton .clicked {
+  fill: #248477;
+}
+
+.elevator #floorCounter {
   font-size: 3.5rem;
   font-family: "AldotheApache";
   fill: #fff173;
 }
 
-.hallway #height-display .top-arrow {
+.elevator #height-display .top-arrow {
   opacity: 0.4;
   transition: 1s ease-in;
 }
 
-.hallway #height-display.active .top-arrow {
+.elevator #height-display.active .top-arrow {
   opacity: 1;
   filter: drop-shadow(0 0 6px #fff173);
 }
 
-.hallway #height-display .bottom-arrow {
+.elevator #height-display .bottom-arrow {
   opacity: 0.4;
 }
 
