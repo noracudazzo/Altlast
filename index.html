@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <!-- Gradient-Definitions -->
-    +
+    <!-- Gradient-Definitionen. tbd -->
     <svg
       aria-hidden="true"
       focusable="false"
@@ -22,7 +21,7 @@
               }
         </style>
 
-        <!-- tbd hier muss ich nochmal ran -->
+        <!-- Verläufe. tbd hier muss ich nochmal ran -->
         <linearGradient id="Unbenannter_Verlauf_298" x1="558.18" x2="558.18" y1="660.89" y2="198.3" gradientUnits="userSpaceOnUse">
           <stop offset="0" stop-color="#180e23"/>
           <stop offset=".13" stop-color="#181226"/>
@@ -1652,21 +1651,31 @@
           />
       </defs>
     </svg>
-    <aside id="assistant" class="assistant navigation">
-      <button aria-label="assistant" id="assistantButton">
-        <svg class="assistant-icon" viewBox="0 0 177.48 234.29">
-          <g>
-            <polygon
-              class="diamond"
-              points="177.48 117.14 88.74 234.29 0 117.14 88.74 0 177.48 117.14"
-            />
-          </g>
-        </svg>
-      </button>
-      <div id="speechbubble" class="speechbubble hidden"></div>
-    </aside>
     <main>
       <div class="viewport">
+        <div class="stage">
+          <aside id="assistant" class="assistant navigation">
+            <button aria-label="assistant" id="assistantButton">
+              <svg class="assistant-icon" viewBox="0 0 177.48 234.29">
+                <g>
+                  <polygon
+                    class="diamond"
+                    points="177.48 117.14 88.74 234.29 0 117.14 88.74 0 177.48 117.14"
+                  />
+                </g>
+              </svg>
+            </button>
+            <div id="speechbubble" class="speechbubble hidden"></div>
+          </aside>
+          <nav class="main-navigation navigation" id="main-navigation">
+            <a aria-label="home" class="home-button">
+              <img src="/src/assets/imgs/ui/home-icon.svg" />
+            </a>
+            <a aria-label="options" class="options-button">
+              <img src="/src/assets/imgs/ui/options-icon.svg" />
+            </a>
+          </nav>
+        </div>
         <div id="popup" class="popup">
           <ul id="popup-text"></ul>
         </div>
@@ -2849,7 +2858,7 @@
           />
         </div>
         <!-- Kitchen -->
-        <div class="scene kitchen">
+        <div class="scene kitchen hidden">
           <img
             class="layer background"
             src="/src/assets/imgs/rooms/kitchen/background.png"
@@ -5044,14 +5053,6 @@
         </div>
       </div>
     </main>
-    <nav class="main-navigation navigation" id="main-navigation">
-      <a aria-label="home" class="home-button">
-        <img src="/src/assets/imgs/ui/home-icon.svg" />
-      </a>
-      <a aria-label="options" class="options-button">
-        <img src="/src/assets/imgs/ui/options-icon.svg" />
-      </a>
-    </nav>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

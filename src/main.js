@@ -1,6 +1,5 @@
 import { hotspots } from "./hotspotData";
 import { gsap } from "gsap";
-import { initParticles, startParticles } from "./effects.js";
 
 
 const viewport = document.querySelector(".viewport");
@@ -25,8 +24,10 @@ const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-sp
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
 const zoomOutSfx = new Audio(`/sounds/effects/812687__audiopapkin__sound-design-elements-whoosh-sfx-050.wav`);
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
-const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`);
+const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`); 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
+
+unlockedSfx.volume = 0.5;
 
 const typeSfxPool = [];
 const typeSfxs = [
@@ -64,9 +65,6 @@ const CURSORS = {
   leave: "url(/src/assets/imgs/ui/cursor-leave.png), s-resize",
 };
 
-// Pixi Partikel initialisieren & kontinuierlich erzeugen
-initParticles(scene);
-startParticles(100); 
 
 // Functions
 
@@ -135,7 +133,7 @@ function zoomTo(hotspot) {
   const relatedButtons = document.querySelectorAll(`.${id}Button`);
 
   relatedButtons.forEach(button => {
-    setTimeout(() => prepareButton(button, id), 100);
+    setTimeout(() => prepareButton(button, id), 500);
     activateableButtonsActive = true;
   });
 }
@@ -356,7 +354,7 @@ async function showPopUp(hotspot) {
 
   // Popup einblenden
   setTimeout(() => popup.classList.add("visible"), 10);
-  await new Promise(r => setTimeout(r, 600));
+ 
 
   // Typewriter
   for (const { li, strong, el, text } of texts) {
@@ -506,7 +504,7 @@ function playMusic(room) {
   // Neue Musik starten
   currentMusic = new Audio(`/sounds/music/${musicFile}`);
   currentMusic.play();
-  currentMusic.volume = 0.3;
+  currentMusic.volume = 0.05;
 }
 
 function stopMusic(music) {
@@ -517,7 +515,7 @@ function stopMusic(music) {
 function openElevator() {
 
   deactivateElements();
-  setTimeout(() => resetZoom(), 500);
+  setTimeout(() => resetZoom(), 1000);
   setTimeout(() => scene.classList.add("shake"), 1000);
 
   const heightDisplay = document.getElementById("height-display");
@@ -566,7 +564,9 @@ function getDoorTarget(door) {
 
 document.addEventListener("mousemove", e => {
   const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
-  const threshold = window.innerHeight * 0.9;
+  const sceneRect = scene.getBoundingClientRect();
+  // Leave‑zone: 10% vom unteren Rand der Szene
+  const threshold = sceneRect.bottom - (sceneRect.height * 0.1);
 
   // Fall 0.5: Leave-Zone check
   if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation") && hotspots[currentRoom].canBeLeft) {

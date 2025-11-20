@@ -96,6 +96,10 @@ strong {
   opacity: 1 !important;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* General CSS */
 
 :root {
@@ -128,6 +132,8 @@ strong {
   --opacity-thirty: .31;
   --opacity-fifty: .5;
   --opacity-sixtyfive: .65;
+  --scene-width: 1366px;
+  --scene-offset: 2rem;
 }
 
 body {
@@ -137,17 +143,41 @@ body {
   font-size: 24px;
 }
 
-.hidden {
-  display: none !important;
-}
-
-.viewport {
+main {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.viewport {
+  width: 100vw;
+  height: calc(100vw * 768 / 1366);
   position: relative;
+  overflow: hidden;
+}
+
+.stage {
+  width: 100vw;
+  height: calc(100vw * 768 / 1366);
+  position: absolute;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.stage .assistant { 
+  position: absolute; 
+  top: var(--scene-offset); 
+  left: var(--scene-offset); 
+  pointer-events: auto;
+}
+
+.stage .main-navigation { 
+  position: absolute; 
+  right: var(--scene-offset); 
+  bottom: var(--scene-offset); 
+  pointer-events: auto;
 }
 
 .scene {
@@ -177,7 +207,6 @@ body {
   opacity: 100;
 }
 
-
 .layer {
   position: absolute;
   width: 100%;
@@ -193,18 +222,7 @@ body {
 .scene .activateableObject { z-index: 2; }
 #assistant, #main-navigation { z-index: 99;}
 
-.visually-hidden:not(:focus):not(:active) { /* accessible hiding */
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-
 /* Buttons */
-
 
 .activeButton {
   pointer-events: all;
@@ -213,11 +231,6 @@ body {
 .button:focus {
   outline: none;
 }
-
-button, .assistantButton {
-  cursor: inherit !important;
-}
-
 
 /* AI Assistant */
 
@@ -234,6 +247,11 @@ button, .assistantButton {
   border-radius: 100%;
   transition: ease .2s;
   border: solid 2px #33c8b3;
+  cursor: inherit !important;
+}
+
+.assistant button:hover {
+  filter: drop-shadow(0 0 25px #33c8b3);
 }
 
 .assistant button .assistant-icon {
@@ -243,10 +261,6 @@ button, .assistantButton {
 
 .assistant button:hover .assistant-icon {
   transform: scale(1.1);
-}
-
-.assistant button:hover {
-  filter: drop-shadow(0 0 25px #33c8b3);
 }
 
 .assistant .speechbubble {
@@ -272,8 +286,6 @@ button, .assistantButton {
   filter: unset;
 }
 
-/* Pfeil */
-
 .assistant .speechbubble:before,
 .assistant .speechbubble:after {
   content: "";
@@ -296,11 +308,6 @@ button, .assistantButton {
 }
 
 /* Navigation */
-
-.assistant, .main-navigation {
-  margin: 2rem;
-  position: absolute;
-}
 
 .main-navigation {
   bottom: 0;
@@ -358,19 +365,6 @@ body .popup {
 body .popup-text {
   list-style: square;
 }
-
-
-/*
-.popup button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 1.5rem;
-  border: none;
-  border-radius: 20rem;
-  background: #180e23;
-  padding: 0;
-} */
 
 .popup button img {
   width: 100%;
@@ -489,7 +483,7 @@ body .popup-text {
 
 /* Kitchen */
 .kitchen .activationButton.activeButton:hover .fridge-button-background {
-  fill: white;
+  opacity: var(--opacity-fifty);
   transition: ease 0.1s;
 }
 
@@ -502,6 +496,21 @@ body .popup-text {
 
   body .popup {
     width: 50%;
+  }
+}
+
+@media (min-aspect-ratio: 5464/3072) { /* tbd: wenn Rand nur minimal ist auf 100% einpassen */
+  .viewport {
+    width: calc(100vh * 1366 / 768);
+    height: 100vh;
+  }
+
+  .stage {
+    width: calc(100vh * 1366 / 768);
+    height: 100vh;
+    position: absolute;
+    margin: 0 auto;
+    pointer-events: none;
   }
 }
 
