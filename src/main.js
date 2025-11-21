@@ -16,6 +16,7 @@ const entrance = document.querySelector(".entrance");
 let zoomed = false;
 let popupShown = false;
 let assistantShown = false;
+let assistantActive = false;
 let activateableButtonsActive = false;
 let activateableElementActivated = false;
 
@@ -26,14 +27,13 @@ const zoomOutSfx = new Audio(`/sounds/effects/812687__audiopapkin__sound-design-
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
 const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`); 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
+const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`);
+const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`);
 
 unlockedSfx.volume = 0.5;
-
-const typeSfxPool = [];
-const typeSfxs = [
-  "/sounds/effects/370849__cabled_mess__clack_minimal-ui-sounds.wav", "/sounds/effects/515522__waveplaysfx__audacity-high-pitched-beep.wav",
-  "/sounds/effects/517379__newlocknew__ui_3-3-fhsandal-sinussytrusarpegiomultiprocessingrsmpl.wav", "/sounds/effects/517377__newlocknew__ui_7-1-confusion-blip-2sytrusarpegiomultiprocessingrsmpl.wav",
-]
+bleepSfx.volume = 0.4;
+typeSfx.volume = 0.3;
+zoomOutSfx.volume = 0.5;
 
 let currentMusic = undefined; 
 // tbd currentMusic.loop = true; 
@@ -185,7 +185,7 @@ function resetZoom() {
   }
 } 
 
-async function typeText(el, text, speed = 50, isSpeaking) {
+async function typeText(el, text, speed = 85, isSpeaking) {
   // el.textContent = ""; // leeren
 
   for (let i = 0; i < text.length; i++) {
@@ -193,7 +193,8 @@ async function typeText(el, text, speed = 50, isSpeaking) {
 
     if(!isSpeaking) {
       if (text[i] !== " ") {   // keine Sounds bei Leerzeichen
-        playTypeSound();
+        typeSfx.play();
+        typeSfx.currentTime = 0;
       }
     }
 
@@ -210,24 +211,8 @@ function speakTextRobot(text) {
     speechSynthesis.speak(utterance);
 }
 
-
-function playTypeSound() {
-    let audio = typeSfxPool.find(a => a.paused || a.ended);
-
-    if (!audio) {
-        audio = new Audio();
-        typeSfxPool.push(audio);
-    }
-
-    audio.src = typeSfxs[Math.floor(Math.random() * typeSfxs.length)];
-    audio.playbackRate = 0.4 + Math.random() * 0.15; // Pitch
-    audio.volume = 0.1;
-    audio.currentTime = 0;
-    audio.play();
-}
-
 async function showAssistantMessage(comment = null) { 
-  assistantShown = true;
+  assistantActive = true;
   assistantSfx.play();
 
   if (comment === lastAssistantMessage && assistantShown) {
@@ -236,6 +221,7 @@ async function showAssistantMessage(comment = null) {
     return; // um doppelte Generierung zu vermeiden 
   }
 
+  assistantShown = true;
   assistantSpeechbubble.innerHTML = ""; // Reset von bestehendem Inhalt
 
   const p = document.createElement("p"); // Paragraph Element erstellen
@@ -254,12 +240,16 @@ async function showAssistantMessage(comment = null) {
     speakTextRobot(lastAssistantMessage);
     await typeText(p, currentNarrative, 40, true); // Sonst normale Narrative
   }
+  assistantActive = false;
   setTimeout(() => {
-    closeAssistantMessage();
-  }, 50000);
+    if(!assistantActive) { // tbd
+      closeAssistantMessage();
+    }
+  }, 30000);
 }
 
 function closeAssistantMessage() {
+  assistantActive = false;
   assistantShown = false;
   assistantSpeechbubble.classList.add("hidden");
   speechSynthesis.cancel();
@@ -364,11 +354,8 @@ async function showPopUp(hotspot) {
     li.style.opacity = 1;
 
     strong.style.opacity = 1; // Titel einblenden
-    
-    const blingSound = new Audio(typeSfxs[2]);
-    blingSound.volume = 0.1;
-    blingSound.currentTime = 0;
-    blingSound.play();
+  
+    bleepSfx.play();
     
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
@@ -410,10 +397,13 @@ function prepareButton(button, parentId) {
 
         if (button.classList.contains("rightButton")) {
           clickSfx.play();
-          elevatorControls.classList.remove("hotspot");
-          elevatorControls.classList.add("background");
-          openElevator(); 
-          unlockRoom(nextRoom);
+          setTimeout(() => {
+            elevatorControls.classList.remove("hotspot");
+            elevatorControls.classList.add("background");
+            resetZoom();
+            openElevator(); 
+            unlockRoom(nextRoom);
+          }, 300);
         } else {
           errorSfx.play();
           showAssistantMessage(hotspots.elevator.controls.falseClickMessage);
@@ -485,9 +475,6 @@ function changeRoom(room) {
 
   scene = document.querySelector("." + currentRoom);
   scene.classList.remove("hidden");
-
-  initParticles(scene);
-  startParticles(100); 
   playMusic(currentRoom);
 }
 
@@ -515,7 +502,7 @@ function stopMusic(music) {
 function openElevator() {
 
   deactivateElements();
-  setTimeout(() => resetZoom(), 1000);
+  resetZoom();
   setTimeout(() => scene.classList.add("shake"), 1000);
 
   const heightDisplay = document.getElementById("height-display");
