@@ -5,6 +5,7 @@ export const hotspots = {
     isUnlocked: true,
     startNarrative: "Hi.",
     narrative: "Fahre in den 16. Stock.",
+    hasBeenEntered: true,
     canBeLeft: false,
     music: "mesa-10550.mp3",
 
@@ -78,12 +79,22 @@ export const hotspots = {
     },
   },
 
+  hallway: {
+    isUnlocked: false,
+    startNarrative: "Wie du weißt, gelangst du von hier aus in jeden Raum. Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen. Als erstes solltest du dir allerdings die Küche ansehen.",
+    narrative: "Durchsuche die Küche.",
+    errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "moebius-21329.mp3",
+  },
+
   kitchen: {
 
-    isUnlocked: true,
-    startNarrative: "Als erstes solltest du dir die Küche anschauen.",
+    isUnlocked: false,
     narrative: "Durchsuche die Küche.",
-    errorNarrative: "Schaue dir vollständig die Küche an, um ins Wohnzimmer zu gelangen.",
+    errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
+    hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
 
@@ -268,9 +279,13 @@ export const hotspots = {
   livingRoom: {
 
     isUnlocked: false,
-    startNarrative: "Du hast die Küche fertig durchsucht. Durchsuche nun das Wohnzimmer.",
+    startNarrative: "Du hast die Küche fertig durchsucht. Jetzt kannst du dir das Wohnzimmer anschauen.",
     narrative: "Durchsuche das Wohnzimmer.",
-    errorNarrative: "Zuerst solltest du das Wohnzimmer genauer anschauen.",
+    errorNarrative: "Schaue dir erst vollständig das Wohnzimmer an, um in andere Räume zu gelangen.",
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "moebius-21329.mp3",
+
     smallPlants: {
       scale: 4,
       originX: 3250,
@@ -292,8 +307,12 @@ export const hotspots = {
   bedroom: {
 
     isUnlocked: false,
-    startNarrative: "...",
-    narrative: "...",
+    startNarrative: "Du bist fertig mit dem Wohnzimmer. Jetzt darfst du dir Oma Ellens Schlafzimmer anschauen.",
+    narrative: "Durchsuche das Schlafzimmer.",
+    errorNarrative: "Schaue dir erst vollständig das Schlafzimmer an, um in andere Räume zu gelangen.",
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "moebius-21329.mp3",
 
     smallPlants: {
       scale: 4,
@@ -313,9 +332,61 @@ export const hotspots = {
     },
   },
 
+  office: {
 
+    isUnlocked: false,
+    startNarrative: "Du hast dir alles wichtige im Schlafzimmer angeschaut. Nimm nun das Büro unter die Lupe.",
+    narrative: "Durchsuche das Büro.",
+    errorNarrative: "Schaue dir erst vollständig das Büro an, um in andere Räume zu gelangen.",
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "moebius-21329.mp3",
 
+    smallPlants: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+  },
 
+  garbageRoom: {
+
+    isUnlocked: false,
+    startNarrative: "Du hast alles im Büro fertig durchsucht. Gehe nun bitte sofort in den Entsorgungsraum.",
+    narrative: "Gehe in den Entsorgungsraum.",
+    errorNarrative: "...",
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "moebius-21329.mp3",
+
+    smallPlants: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+  },
 
 
 };

@@ -194,7 +194,7 @@ main {
 .scene:after {
   opacity: 0;
   content: "";
-  background: #00cbb2;
+  background: var(--color-ice-green);
   height: 5vh;
   left: -6rem;
   bottom: 0;

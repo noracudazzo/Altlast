@@ -45,10 +45,10 @@ let musicOn = false;
 let soundEffectsOn = false;
 
 // Rooms
-const ROOMS = ["elevator", "kitchen", "livingRoom", "bedroom", "office"];
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
 let currentRoom = ROOMS[0]; 
 let lastUnlockedRoom = ROOMS[0]; 
-let nextRoomIndex = ROOMS.indexOf(lastUnlockedRoom) + 1;
+let nextRoomIndex = 1;
 let nextRoom = ROOMS[nextRoomIndex];
 let scene = document.querySelector("." + currentRoom);
 
@@ -403,6 +403,7 @@ function prepareButton(button, parentId) {
             resetZoom();
             openElevator(); 
             unlockRoom(nextRoom);
+            unlockRoom(nextRoom);
           }, 300);
         } else {
           errorSfx.play();
@@ -460,6 +461,7 @@ function canNextRoomBeUnlocked() {
     // Wenn es einen nächsten Raum gibt: freischalten
     if (nextRoom && hotspots[nextRoom]) { 
       unlockRoom(nextRoom);
+      showAssistantMessage(hotspots[lastUnlockedRoom].startNarrative);
     } else {
       currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
     }
@@ -471,11 +473,22 @@ function changeRoom(room) {
   setCursor("default"); // Cursor reset
   scene.classList.add("hidden");
 
-  currentRoom = room; // change room to kitchen, tbd goal: hallway
+  currentRoom = room; 
 
   scene = document.querySelector("." + currentRoom);
   scene.classList.remove("hidden");
   playMusic(currentRoom);
+
+  const config = hotspots[currentRoom];
+  const currentStartNarrative = config.startNarrative;
+  
+  // Start-Narrative nur einmal abspielen
+
+  if (!config.hasBeenEntered) { 
+    unlockedSfx.play();
+    if (currentStartNarrative) showAssistantMessage(currentStartNarrative);
+    config.hasBeenEntered = true;
+  };
 }
 
 function playMusic(room) {
@@ -530,12 +543,10 @@ function openElevator() {
 
 function unlockRoom(room) { 
   lastUnlockedRoom = ROOMS[nextRoomIndex];
+  console.log(nextRoomIndex);
+  console.log(`Raum freigeschaltet: ${lastUnlockedRoom}`);
   hotspots[lastUnlockedRoom].isUnlocked = true;
-  currentNarrative = hotspots[lastUnlockedRoom].startNarrative;
-  if (!scene.classList.contains("intro")) { 
-    unlockedSfx.play();
-    showAssistantMessage(currentNarrative);
-  };
+  nextRoomIndex++;
   currentNarrative = hotspots[lastUnlockedRoom].narrative;
 }
 
@@ -663,6 +674,7 @@ document.querySelectorAll(".door").forEach(door => {
     if (hotspots[targetRoom].isUnlocked) {
       unlockedSfx.play();
       changeRoom(targetRoom);
+      console.log(`Wechsel zu Raum: ${targetRoom}`);
     }
     else {
       showAssistantMessage(hotspots[lastUnlockedRoom].errorNarrative);
@@ -703,7 +715,7 @@ document.addEventListener("click", (e) => {
   clickSfx.play();
   const threshold = window.innerHeight * 0.9;
   if (e.clientY > threshold) {
-    changeRoom("elevator"); // tbd hallway
+    changeRoom("hallway"); 
   }
 });
 
