@@ -85,7 +85,7 @@ export const hotspots = {
     narrative: "Durchsuche die Küche.",
     errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
-    canBeLeft: true,
+    canBeLeft: false,
     music: "moebius-21329.mp3",
   },
 
