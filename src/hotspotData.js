@@ -224,7 +224,6 @@ export const hotspots = {
         year: { title: "Herstellungsjahr", data: "55" },
         location: { title: "Herstellungsort", data: "Hydroponikfarm Süd C" },
         status: { title: "Status", data: "Verdorben" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         nutritionalValues: { title: "Nährstoffwerte", data: "Außergewöhnlich hoher Vitamingehalt"},
       },
       textLocation: {
