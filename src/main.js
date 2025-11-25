@@ -218,34 +218,54 @@ async function showAssistantMessage(comment = null) {
   if (comment === lastAssistantMessage && assistantShown) {
     assistantSpeechbubble.classList.remove("hidden");
     assistant.classList.add("activeAssistant");
-    return; // um doppelte Generierung zu vermeiden 
+    return;
   }
 
   assistantShown = true;
-  assistantSpeechbubble.innerHTML = ""; // Reset von bestehendem Inhalt
+  assistantSpeechbubble.innerHTML = "";
 
-  const p = document.createElement("p"); // Paragraph Element erstellen
-  assistantSpeechbubble.appendChild(p);
+  const source = comment ?? currentNarrative;
+  const texts = Array.isArray(source) ? source : [source];
+
+  lastAssistantMessage = source;
 
   assistantSpeechbubble.classList.remove("hidden");
   assistant.classList.add("activeAssistant");
 
+  async function showIndex(i) {
 
-  if (comment) { 
-    lastAssistantMessage = comment;
-    speakTextRobot(lastAssistantMessage);
-    await typeText(p, comment, 40, true); // Falls Kommentar vorhanden
-  } else {
-    lastAssistantMessage = currentNarrative;
-    speakTextRobot(lastAssistantMessage);
-    await typeText(p, currentNarrative, 40, true); // Sonst normale Narrative
-  }
-  assistantActive = false;
-  setTimeout(() => {
-    if(!assistantActive) { // tbd
-      closeAssistantMessage();
+    // Bubble leeren und neues <p> erzeugen
+    assistantSpeechbubble.innerHTML = "";
+    const p = document.createElement("p");
+    assistantSpeechbubble.appendChild(p);
+
+    const text = texts[i];
+    speakTextRobot(text); // Sprachausgabe
+    await typeText(p, text, 40, true);
+
+    // Wenn weitere Texte folgen: Klick aktivieren
+    if (i < texts.length - 1) {
+      p.classList.add("clickNextMessage");
+      p.onclick = () => {
+        p.onclick = null;
+        showIndex(i + 1);
+      };
     }
-  }, 30000);
+    // Wenn letzter Text — Auto-Close nach 30 Sek starten
+    if (i === texts.length - 1) {
+      assistantActive = false;
+
+      setTimeout(() => {
+        if (!assistantActive) {
+          closeAssistantMessage();
+        }
+      }, 30000);
+    }
+  }
+
+  await showIndex(0);
+
+  assistantActive = false;
 }
 
 function closeAssistantMessage() {
@@ -581,6 +601,11 @@ document.addEventListener("mousemove", e => {
 
   // Fall 0: Immer fixe UI-Elemente
   if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton")) {
+    setCursor("click");
+    return;
+  }
+
+  if (target.closest(".speechbubble .clickNextMessage")) {
     setCursor("click");
     return;
   }

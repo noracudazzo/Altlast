@@ -81,7 +81,11 @@ export const hotspots = {
 
   hallway: {
     isUnlocked: false,
-    startNarrative: "Wie du weißt, gelangst du von hier aus in jeden Raum. Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen. Als erstes solltest du dir allerdings die Küche ansehen.",
+    startNarrative: [
+      "Wie du weißt, gelangst du von hier aus in jeden Raum.",
+      "Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen.",
+      "Als erstes solltest du dir allerdings die Küche ansehen.",
+    ],
     narrative: "Durchsuche die Küche.",
     errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,

@@ -33,7 +33,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 .door.hovered {
-  filter: drop-shadow(0 0 20px var(--color-white));
+  filter: drop-shadow(0 0 20px var(--color-yellow));
 }
 
 /* Font */
@@ -182,6 +182,16 @@ main {
   pointer-events: auto;
 }
 
+.stage .room-name {
+  background: #180e23;
+  font-size: 1.25rem;
+  padding: 1rem;
+  position: absolute; 
+  left: var(--scene-offset);
+  bottom: var(--scene-offset);
+  color: white;
+}
+
 .scene {
   width: 100%;
   height: 100%;
@@ -195,11 +205,11 @@ main {
   opacity: 0;
   content: "";
   background: var(--color-ice-green);
-  height: 5vh;
+  height: 8vh;
   left: -6rem;
-  bottom: 0;
+  bottom: -1vh;
   width: calc(100% + 12rem);
-  filter: blur(4rem);
+  filter: blur(3rem);
   position: absolute;
   z-index: 10;
   transition: ease .2s;
@@ -222,7 +232,7 @@ main {
 .scene .object { z-index: 0;}
 .scene .foreground { z-index: 4; pointer-events: none;} /* tbd schrank Küche */
 .scene .activateableObject { z-index: 2; }
-#assistant, #main-navigation { z-index: 99;}
+#assistant, #main-navigation, .room-name { z-index: 99;}
 
 /* Buttons */
 
@@ -284,6 +294,19 @@ main {
   word-break: break-word;
   box-sizing: border-box;
   display: inline-block;
+}
+
+.assistant .speechbubble.multipleStrings p.clickNextMessage {
+  padding-right: 1.5rem;
+}
+
+.assistant .speechbubble.multipleStrings p.clickNextMessage:after {
+  content: url(/src/assets/imgs/ui/down-icon.svg);
+  position: absolute;
+  width: .75rem;
+  height: .75rem;
+  margin-left: 1rem;
+  bottom: 2.25rem;
 }
 
 .assistant.activeAssistant button .assistant-icon {

@@ -2702,21 +2702,31 @@
                 </g>
               </svg>
             </button>
-            <div id="speechbubble" class="speechbubble hidden"></div>
+            <div id="speechbubble" class="speechbubble hidden multipleStrings"></div>
           </aside>
           <nav class="main-navigation navigation" id="main-navigation">
-            <a aria-label="home" class="home-button">
+            <a aria-label="home" class="home-button button">
               <img src="/src/assets/imgs/ui/home-icon.svg" />
             </a>
-            <a aria-label="options" class="options-button">
+            <a aria-label="options" class="options-button button">
               <img src="/src/assets/imgs/ui/options-icon.svg" />
             </a>
           </nav>
+          <aside class="room-name">
+            <p> Küche</p> 
+          </aside>
         </div>
         <div id="popup" class="popup">
           <ul id="popup-text"></ul>
         </div>
-
+        <!-- Start Screen -->
+        <div class="scene intro start-screen hidden"> 
+          <h1> Altlast </h1>
+          <a class="button start-screen-button"> Weiterspielen </a>
+          <a class="button start-screen-button"> Neues Spiel </a>
+          <a class="button start-screen-button"> Einstellungen </a>
+          <a class="button start-screen-button"> Credits </a>
+        </div>
         <!-- Elevator -->
         <div class="scene intro elevator">
           <img
