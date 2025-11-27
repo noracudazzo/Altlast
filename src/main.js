@@ -63,6 +63,7 @@ let scene = document.querySelector("." + currentRoom);
 let lastUnlockedRoomData = data[currentRoom];
 let currentNarrative = lastUnlockedRoomData.narrative;
 let lastAssistantMessage = currentNarrative;
+let typingController = { skip: false };
 
 // Cursor Manager
 const CURSORS = {
@@ -195,8 +196,16 @@ function resetZoom() {
 
 async function typeText(el, text, speed = 85, isSpeaking) {
   // el.textContent = ""; // leeren
+  typingController.skip = false;
 
   for (let i = 0; i < text.length; i++) {
+
+    // Bei Skip sofort ganzen Satz anzeigen
+    if (typingController.skip) {
+      el.textContent = text;
+      return;
+    }
+
     el.textContent += text[i];
 
     if(!isSpeaking) {
@@ -248,6 +257,24 @@ async function showAssistantMessage(comment = null) {
     assistantSpeechbubble.appendChild(p);
 
     const text = texts[i];
+
+    let fullyShown = false;
+
+    // Skip Steuerung
+    p.onclick = () => {
+      if (!fullyShown) {
+        // Wenn noch tippt: sofort fertig anzeigen
+        typingController.skip = true;
+      } else {
+        // Wenn fertig → weiter
+        p.onclick = null;
+        showIndex(i + 1);
+      }
+
+      assistantActive = true; // Timer zurücksetzen
+    };
+
+
     speakTextRobot(text); // Sprachausgabe
     await typeText(p, text, 40, true);
 
@@ -261,19 +288,18 @@ async function showAssistantMessage(comment = null) {
     }
     // Wenn letzter Text — Auto-Close nach 30 Sek starten
     if (i === texts.length - 1) {
+      p.classList.add("lastMessage");
       assistantActive = false;
 
-      setTimeout(() => {
-        if (!assistantActive) {
-          closeAssistantMessage();
-        }
-      }, 30000);
+//      setTimeout(() => { zu verbuggt, tbd
+//        if (!assistantActive) {
+//          closeAssistantMessage();
+//        }
+//      }, 30000);
     }
   }
 
   await showIndex(0);
-
-  assistantActive = false;
 }
 
 function closeAssistantMessage() {
@@ -646,18 +672,13 @@ document.addEventListener("mousemove", e => {
   const door = target.closest(".door");
 
   // Fall 0: Immer fixe UI-Elemente
-  if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton") || target.closest(".start-button")) {
-    setCursor("click");
-    return;
-  }
-
-  if (target.closest(".speechbubble:has(.clickNextMessage)")) {
+  if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton") && !assistantActive || target.closest(".start-button")) {
     setCursor("click");
     return;
   }
 
   if (target.closest(".speechbubble")) {
-    setCursor("default");
+    setCursor("click");
     return;
   } 
 
@@ -784,7 +805,15 @@ document.querySelectorAll(".start").forEach(button => {
 // Click (Assistant)
 assistantButton.addEventListener("click", () => {
   if (!assistantShown) showAssistantMessage();
-  else closeAssistantMessage();
+  if (assistantShown && !assistantActive) closeAssistantMessage();
+});
+
+assistantSpeechbubble.addEventListener("click", () => {
+  const isLastMessage = assistantSpeechbubble.querySelector(".lastMessage");
+  if (isLastMessage) {
+    closeAssistantMessage();
+    clickSfx.play();
+  }
 });
 
 // Click (Controls)
@@ -816,7 +845,9 @@ document.addEventListener("click", (e) => {
   const target = e.target;
   if (target.closest("#main-navigation") || target.closest(".hotspot")) return;
   clickSfx.play();
-  const threshold = window.innerHeight * 0.9;
+  const sceneRect = scene.getBoundingClientRect();
+  const threshold = sceneRect.bottom - (sceneRect.height * 0.1);
+  
   if (e.clientY > threshold) {
     changeRoom("hallway"); 
   }

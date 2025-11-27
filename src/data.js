@@ -233,7 +233,6 @@ export const data = {
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
       },
-      comment: "Das solltest du besser mal überprüfen.",
       textLocation: {
         right: 300,
         top: 1300,
