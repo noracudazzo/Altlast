@@ -1,14 +1,21 @@
-import { hotspots } from "./hotspotData";
+import { data } from "./data";
 import { gsap } from "gsap";
 
 
 const viewport = document.querySelector(".viewport");
+const start = document.querySelector(".start");
+const continueButton = document.querySelector(".continue-button");
+const newGameButton = document.querySelector(".new-game-button");
+const optionsButtonStart = document.querySelector(".start-options-button");
+const creditsButton = document.querySelector(".credits-button");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
 const assistant = document.getElementById("assistant");
 const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
+const homeButton = document.querySelector(".home-button");
 const optionsButton = document.querySelector(".options-button");
+const roomName = document.querySelector(".room-name p");
 const elevatorControls = document.getElementById("controls");
 const elevatorDoors = document.querySelector(".elevator-doors");
 const entrance = document.querySelector(".entrance");
@@ -19,6 +26,7 @@ let assistantShown = false;
 let assistantActive = false;
 let activateableButtonsActive = false;
 let activateableElementActivated = false;
+let gameStarted = false;
 
 // Audio
 const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
@@ -52,7 +60,7 @@ let nextRoomIndex = 1;
 let nextRoom = ROOMS[nextRoomIndex];
 let scene = document.querySelector("." + currentRoom);
 
-let lastUnlockedRoomData = hotspots[currentRoom];
+let lastUnlockedRoomData = data[currentRoom];
 let currentNarrative = lastUnlockedRoomData.narrative;
 let lastAssistantMessage = currentNarrative;
 
@@ -87,7 +95,7 @@ function zoomTo(hotspot) {
   endHoverHotspot(hotspot);
   zoomed = true;
   const id = hotspot.id;
-  const roomData = hotspots[currentRoom];
+  const roomData = data[currentRoom];
   if (!roomData) return;
 
   const config = roomData[id];
@@ -285,7 +293,7 @@ function closePopup() {
 async function showPopUp(hotspot) {
 
   const id = hotspot.id;
-  const config = hotspots[currentRoom][id];
+  const config = data[currentRoom][id];
 
   if (!config) return;
   // Element direkt als geklickt vermerken
@@ -427,7 +435,7 @@ function prepareButton(button, parentId) {
           }, 300);
         } else {
           errorSfx.play();
-          showAssistantMessage(hotspots.elevator.controls.falseClickMessage);
+          showAssistantMessage(data.elevator.controls.falseClickMessage);
         }
       }
     });
@@ -465,7 +473,7 @@ function deactivateElement(baseId) {
 }
 
 function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht ist
-  const room = hotspots[roomId];
+  const room = data[roomId];
   if (!room) return false;
 
   // Alle Hotspots durchgehen und prüfen, ob alle angeklickt wurden
@@ -479,9 +487,9 @@ function canNextRoomBeUnlocked() {
   if (areAllHotspotsClicked(lastUnlockedRoom)) {
 
     // Wenn es einen nächsten Raum gibt: freischalten
-    if (nextRoom && hotspots[nextRoom]) { 
+    if (nextRoom && data[nextRoom]) { 
       unlockRoom(nextRoom);
-      showAssistantMessage(hotspots[lastUnlockedRoom].startNarrative);
+      showAssistantMessage(data[lastUnlockedRoom].startNarrative);
     } else {
       currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
     }
@@ -492,14 +500,16 @@ function changeRoom(room) {
   if (scene.classList.contains("leaveHovered")) scene.classList.remove("leaveHovered"); // tbd, klappt das? Hover reset
   setCursor("default"); // Cursor reset
   scene.classList.add("hidden");
+  // fade(); tbd 
 
   currentRoom = room; 
+  roomName.textContent = data[currentRoom].displayName;
 
   scene = document.querySelector("." + currentRoom);
   scene.classList.remove("hidden");
   playMusic(currentRoom);
 
-  const config = hotspots[currentRoom];
+  const config = data[currentRoom];
   const currentStartNarrative = config.startNarrative;
   
   // Start-Narrative nur einmal abspielen
@@ -512,7 +522,7 @@ function changeRoom(room) {
 }
 
 function playMusic(room) {
-  const musicFile = hotspots[room]?.music;
+  const musicFile = data[room]?.music;
   if (!musicFile) return; // Abbruch falls keine Datei existiert
 
   // Aktuelle Musik stoppen, falls nötig
@@ -529,6 +539,42 @@ function playMusic(room) {
 
 function stopMusic(music) {
     music.pause();
+}
+
+function fade(element = scene, direction = "inout") {
+
+  if (direction === "in") {
+    element.classList.add("slow-fading");
+    element.classList.remove("invisible");
+    setTimeout(() => {
+      element.classList.remove("slow-fading");
+    }, 4000); 
+
+  } else if (direction === "out") {
+    element.classList.add("slow-fading");
+    setTimeout(() => {
+      element.classList.add("invisible");
+      element.classList.remove("slow-fading");
+    }, 4000); 
+
+  } else if (direction === "inout") {
+    element.classList.add("fast-fading");
+    element.classList.add("invisible");
+    setTimeout(() => {
+      element.classList.remove("invisible");
+      element.classList.remove("fast-fading");
+    }, 2000);
+  }
+}
+
+function startGame() {
+  viewport.classList.add("invisible");
+  continueButton.classList.remove("hidden");
+  gameStarted = true;
+
+  setTimeout(() => { fade(viewport, "in") }, 100); 
+  setTimeout(() => { showAssistantMessage(data.elevator.startNarrative) }, 5000); 
+  
 }
 
 
@@ -565,9 +611,9 @@ function unlockRoom(room) {
   lastUnlockedRoom = ROOMS[nextRoomIndex];
   console.log(nextRoomIndex);
   console.log(`Raum freigeschaltet: ${lastUnlockedRoom}`);
-  hotspots[lastUnlockedRoom].isUnlocked = true;
+  data[lastUnlockedRoom].isUnlocked = true;
   nextRoomIndex++;
-  currentNarrative = hotspots[lastUnlockedRoom].narrative;
+  currentNarrative = data[lastUnlockedRoom].narrative;
 }
 
 function getDoorTarget(door) {
@@ -587,7 +633,7 @@ document.addEventListener("mousemove", e => {
   const threshold = sceneRect.bottom - (sceneRect.height * 0.1);
 
   // Fall 0.5: Leave-Zone check
-  if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation") && hotspots[currentRoom].canBeLeft) {
+  if (e.clientY > threshold && hoveredElement && !hoveredElement.closest("#main-navigation") && data[currentRoom].canBeLeft) {
     scene.classList.add("leaveHovered");
     setCursor("leave");
     return; 
@@ -600,12 +646,12 @@ document.addEventListener("mousemove", e => {
   const door = target.closest(".door");
 
   // Fall 0: Immer fixe UI-Elemente
-  if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton")) {
+  if (target.closest("#main-navigation") || target.closest(".assistant #assistantButton") || target.closest(".start-button")) {
     setCursor("click");
     return;
   }
 
-  if (target.closest(".speechbubble .clickNextMessage")) {
+  if (target.closest(".speechbubble:has(.clickNextMessage)")) {
     setCursor("click");
     return;
   }
@@ -696,15 +742,41 @@ document.querySelectorAll(".door").forEach(door => {
   door.addEventListener("click", () => {
     const targetRoom = getDoorTarget(door);
 
-    if (hotspots[targetRoom].isUnlocked) {
+    if (data[targetRoom].isUnlocked) {
       unlockedSfx.play();
       changeRoom(targetRoom);
       console.log(`Wechsel zu Raum: ${targetRoom}`);
     }
     else {
-      showAssistantMessage(hotspots[lastUnlockedRoom].errorNarrative);
+      showAssistantMessage(data[lastUnlockedRoom].errorNarrative);
       errorSfx.play();
     }
+  });
+});
+
+// Click Start Screen
+document.querySelectorAll(".start").forEach(button => {
+  button.addEventListener("mouseenter", () => startHoverHotspot(button));
+  button.addEventListener("mouseleave", () => endHoverHotspot(button));
+
+  button.addEventListener("click", () => {
+    clickSfx.play();
+    start.classList.add("hidden");
+  });
+
+  continueButton.addEventListener("click", () => {
+    start.classList.add("hidden");
+  });
+  newGameButton.addEventListener("click", () => {
+    startGame();
+  });
+
+  optionsButtonStart.addEventListener("click", () => {
+    // Open settings screen
+  });
+
+  creditsButton.addEventListener("click", () => {
+    // Open credits screen
   });
 });
 
@@ -713,6 +785,12 @@ document.querySelectorAll(".door").forEach(door => {
 assistantButton.addEventListener("click", () => {
   if (!assistantShown) showAssistantMessage();
   else closeAssistantMessage();
+});
+
+// Click (Controls)
+homeButton.addEventListener("click", () => {
+  clickSfx.play();
+  start.classList.remove("hidden");
 });
 
 // Click (Controls)
@@ -733,7 +811,7 @@ optionsButton.addEventListener("click", () => {
 // Click (Leave)
 
 document.addEventListener("click", (e) => {
-  if (!hotspots[currentRoom].canBeLeft) return;
+  if (!data[currentRoom].canBeLeft) return;
 
   const target = e.target;
   if (target.closest("#main-navigation") || target.closest(".hotspot")) return;

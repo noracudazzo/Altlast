@@ -1,9 +1,20 @@
-export const hotspots = {
+export const data = {
 
   elevator: {
 
+    displayName: "Aufzug",
     isUnlocked: true,
-    startNarrative: "Hi.",
+    startNarrative: [
+      "Wie lange ist es her, dass du das letzte Mal in diesem Aufzug warst...", 
+      "Ich wünschte, deine Rückkehr hätte nicht einen so traurigen Grund.", 
+      "Aber es ist schön, dass du noch einmal durch die Wohnung gehen kannst, bevor das Wohnmodul neu vermittelt wird.", 
+      "Vielleicht findest du dort das ein oder andere Erinnerungsstück an deine Oma.",
+      "Und wie immer helfe ich dir gerne dabei, Gegenstände zu identifizieren und mehr über sie zu erfahren.",
+      "In diesem Aufzug gibt es zum Beispiel auch ein paar interessante Objekte zu entdecken.",
+      "Lass dir Zeit und schau dich um. Du bist schließlich am Trauern.",
+      "Und sobald du dich bereit fühlst, fahre in den 16. Stock um zu Oma Ellens Wohnung zu gelangen.",
+      "Du schaffst das. Ich glaube an dich.",
+    ],
     narrative: "Fahre in den 16. Stock.",
     hasBeenEntered: true,
     canBeLeft: false,
@@ -80,6 +91,8 @@ export const hotspots = {
   },
 
   hallway: {
+
+    displayName: "Flur",
     isUnlocked: false,
     startNarrative: [
       "Wie du weißt, gelangst du von hier aus in jeden Raum.",
@@ -95,6 +108,7 @@ export const hotspots = {
 
   kitchen: {
 
+    displayName: "Küche",
     isUnlocked: false,
     narrative: "Durchsuche die Küche.",
     errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
@@ -282,6 +296,7 @@ export const hotspots = {
 
   livingRoom: {
 
+    displayName: "Wohnzimmer",
     isUnlocked: false,
     startNarrative: "Du hast die Küche fertig durchsucht. Jetzt kannst du dir das Wohnzimmer anschauen.",
     narrative: "Durchsuche das Wohnzimmer.",
@@ -310,6 +325,7 @@ export const hotspots = {
 
   bedroom: {
 
+    displayName: "Schlafzimmer",
     isUnlocked: false,
     startNarrative: "Du bist fertig mit dem Wohnzimmer. Jetzt darfst du dir Oma Ellens Schlafzimmer anschauen.",
     narrative: "Durchsuche das Schlafzimmer.",
@@ -338,6 +354,7 @@ export const hotspots = {
 
   office: {
 
+    displayName: "Büro",
     isUnlocked: false,
     startNarrative: "Du hast dir alles wichtige im Schlafzimmer angeschaut. Nimm nun das Büro unter die Lupe.",
     narrative: "Durchsuche das Büro.",
@@ -366,6 +383,7 @@ export const hotspots = {
 
   garbageRoom: {
 
+    displayName: "Entsorgungsraum",
     isUnlocked: false,
     startNarrative: "Du hast alles im Büro fertig durchsucht. Gehe nun bitte sofort in den Entsorgungsraum.",
     narrative: "Gehe in den Entsorgungsraum.",
