@@ -243,6 +243,7 @@ async function showAssistantMessage(comment = null) {
 
   const source = comment ?? currentNarrative;
   const texts = Array.isArray(source) ? source : [source];
+  if (texts.length > 1 && !viewport.classList.contains("noclick")) viewport.classList.add("noclick");
 
   lastAssistantMessage = source;
 
@@ -281,7 +282,6 @@ async function showAssistantMessage(comment = null) {
     // Wenn weitere Texte folgen
     if (i < texts.length - 1) {
       p.classList.add("clickNextMessage");
-      if (!scene.classList.contains("noclick")) scene.classList.add("noclick");
       p.onclick = () => {
         p.onclick = null;
         showIndex(i + 1);
@@ -300,7 +300,7 @@ async function showAssistantMessage(comment = null) {
     // Wenn letzter Text — Auto-Close nach 30 Sek starten
     if (i === texts.length - 1) {
       p.classList.add("lastMessage");
-      if (scene.classList.contains("noclick")) scene.classList.remove("noclick");
+      if (viewport.classList.contains("noclick")) viewport.classList.remove("noclick");
       assistantActive = false;
 
 //      setTimeout(() => { zu verbuggt, tbd

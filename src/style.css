@@ -361,11 +361,11 @@ main {
 }
 
 /* Assistant talking */
-.scene.noclick {
+.viewport.noclick {
   pointer-events: none;
 }
 
-.scene.noclick .assistant {
+.viewport.noclick .assistant {
   pointer-events: all;
 }
 
