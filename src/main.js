@@ -266,7 +266,7 @@ async function showAssistantMessage(comment = null) {
         // Wenn noch tippt: sofort fertig anzeigen
         typingController.skip = true;
       } else {
-        // Wenn fertig → weiter
+        // Wenn fertig: weiter
         p.onclick = null;
         showIndex(i + 1);
       }
@@ -278,17 +278,29 @@ async function showAssistantMessage(comment = null) {
     speakTextRobot(text); // Sprachausgabe
     await typeText(p, text, 40, true);
 
-    // Wenn weitere Texte folgen: Klick aktivieren
+    // Wenn weitere Texte folgen
     if (i < texts.length - 1) {
       p.classList.add("clickNextMessage");
+      if (!scene.classList.contains("noclick")) scene.classList.add("noclick");
       p.onclick = () => {
         p.onclick = null;
         showIndex(i + 1);
       };
     }
+
+    if (currentRoom === "elevator" && i === 4) {
+      const elevatorHotspots = document.querySelectorAll(".elevator .hotspot");
+      elevatorHotspots.forEach(hs => {
+        hs.style
+        hs.classList.add("glow");
+        setTimeout(() => { hs.classList.remove("glow"); }, 8000);
+      });
+    }
+
     // Wenn letzter Text — Auto-Close nach 30 Sek starten
     if (i === texts.length - 1) {
       p.classList.add("lastMessage");
+      if (scene.classList.contains("noclick")) scene.classList.remove("noclick");
       assistantActive = false;
 
 //      setTimeout(() => { zu verbuggt, tbd

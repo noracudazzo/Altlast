@@ -262,7 +262,7 @@ main {
   outline: none;
 }
 
-/* AI Assistant */
+/* Assistant */
 
 .assistant {
   display: flex;
@@ -315,7 +315,7 @@ main {
 }
 
 
-.assistant .speechbubble.multipleStrings p.clickNextMessage:after {
+.assistant .speechbubble p.clickNextMessage:after {
   content: url(/src/assets/imgs/ui/down-icon.svg);
   animation: jumpInfinite 1.5s infinite;
   position: absolute;
@@ -358,6 +358,15 @@ main {
 .assistant .speechbubble:after {
   left: calc(-.95rem + 2px);
   border-right: 1rem solid #180e23; 
+}
+
+/* Assistant talking */
+.scene.noclick {
+  pointer-events: none;
+}
+
+.scene.noclick .assistant {
+  pointer-events: all;
 }
 
 /* Navigation */
@@ -479,6 +488,12 @@ body .popup-text {
 0% { filter: drop-shadow(0 0 10px #33c8b3);}
 50% { filter: drop-shadow(0 0 25px #33c8b3);}
 100% { filter: drop-shadow(0 0 10px #33c8b3);}
+}
+
+@keyframes pulseGlowWhite {
+0% { filter: drop-shadow(0 0 0px white);}
+50% { filter: drop-shadow(0 0 6px white);}
+100% { filter: drop-shadow(0 0 0px white);}
 }
 
 @keyframes jumpInfinite {
@@ -629,6 +644,10 @@ body .popup-text {
 
 .elevator #height-display .bottom-arrow {
   opacity: 0.4;
+}
+
+.elevator .hotspot.glow {
+  animation: pulseGlowWhite 2s infinite;
 }
 
 /* Kitchen */

@@ -67,7 +67,7 @@ export const data = {
         belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Statistik" },
         content: { title: "Inhalt", data: "Die täglichen, landesweiten Statistiken." },
       },
-      comment: "Tolle Nachrichten: Der ZI ist über Nacht um 1% gestiegen.",
+      comment: "Tolle Nachrichten: Der Zufriedenheitsindex ist über Nacht um 1% gestiegen.",
       textLocation: {
           left: "center",
           bottom: 450,
