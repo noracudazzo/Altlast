@@ -243,7 +243,7 @@ async function showAssistantMessage(comment = null) {
 
   const source = comment ?? currentNarrative;
   const texts = Array.isArray(source) ? source : [source];
-  if (texts.length > 1 && !viewport.classList.contains("noclick")) viewport.classList.add("noclick");
+  if (texts.length > 1) deactivateClick();
 
   lastAssistantMessage = source;
 
@@ -300,7 +300,7 @@ async function showAssistantMessage(comment = null) {
     // Wenn letzter Text — Auto-Close nach 30 Sek starten
     if (i === texts.length - 1) {
       p.classList.add("lastMessage");
-      if (viewport.classList.contains("noclick")) viewport.classList.remove("noclick");
+      activateClick();
       assistantActive = false;
 
 //      setTimeout(() => { zu verbuggt, tbd
@@ -618,6 +618,7 @@ function startGame() {
 
 function openElevator() {
 
+  deactivateClick();
   deactivateElements();
   resetZoom();
   setTimeout(() => scene.classList.add("shake"), 1000);
@@ -639,6 +640,7 @@ function openElevator() {
         setTimeout(() => entrance.classList.remove("hidden"), 3000);
         setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
         heightDisplay.classList.remove("active");
+        activateClick();
       }
     }, i * 300); 
   }
@@ -661,6 +663,13 @@ function getDoorTarget(door) {
     ?.replace("door-to-", "");
 }
 
+function activateClick() {
+  if (viewport.classList.contains("noclick")) viewport.classList.remove("noclick");
+}
+
+function deactivateClick() {
+  if (!viewport.classList.contains("noclick")) viewport.classList.add("noclick");
+}
 
 // Haupt Cursor Logik!
 

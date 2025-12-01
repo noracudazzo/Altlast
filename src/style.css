@@ -21,6 +21,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+  user-select: none;
 }
 
 article, aside, details, figcaption, figure, 
@@ -226,7 +227,7 @@ main {
   left: -6rem;
   bottom: -1vh;
   width: calc(100% + 12rem);
-  filter: blur(3rem);
+  filter: blur(4rem);
   position: absolute;
   z-index: 10;
   transition: ease .2s;
