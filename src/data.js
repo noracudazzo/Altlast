@@ -8,11 +8,9 @@ export const data = {
       "Wie lange ist es her, dass du das letzte Mal in diesem Aufzug warst...", 
       "Ich wünschte, deine Rückkehr hätte nicht einen so traurigen Grund.", 
       "Aber es ist schön, dass du noch einmal durch die Wohnung gehen kannst, bevor das Wohnmodul neu vermittelt wird.", 
-      "Vielleicht findest du dort das ein oder andere Erinnerungsstück an deine Oma.",
       "Und wie immer helfe ich dir gerne dabei, Gegenstände zu identifizieren und mehr über sie zu erfahren.",
       "In diesem Aufzug gibt es zum Beispiel auch ein paar interessante Objekte zu entdecken.",
-      "Lass dir Zeit und schau dich um. Du bist schließlich am Trauern.",
-      "Und sobald du dich bereit fühlst, fahre in den 16. Stock um zu Oma Ellens Wohnung zu gelangen.",
+      "Lass dir Zeit und schau dich um. Und sobald du dich bereit fühlst, fahre in den 16. Stock um zu Oma Ellens Wohnung zu gelangen.",
       "Du schaffst das. Ich glaube an dich.",
     ],
     narrative: "Fahre in den 16. Stock.",
@@ -95,23 +93,22 @@ export const data = {
     displayName: "Flur",
     isUnlocked: false,
     startNarrative: [
-      "Wie du weißt, gelangst du von hier aus in jeden Raum.",
+      "Vom Flur aus gelangst du in jeden Raum.",
       "Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen.",
-      "Als erstes solltest du dir allerdings die Küche ansehen.",
+      "Als erstes könntest du dir Ellens Küche ansehen.",
     ],
     narrative: "Durchsuche die Küche.",
-    errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
     canBeLeft: false,
     music: "moebius-21329.mp3",
   },
 
   kitchen: {
-
     displayName: "Küche",
+    akkusativ: "die",
+    dativ: "in die",
     isUnlocked: false,
     narrative: "Durchsuche die Küche.",
-    errorNarrative: "Schaue dir vollständig die Küche an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
@@ -213,7 +210,7 @@ export const data = {
         name: { title: "Sichtbarer Bereich", data: "Wohnkomplex 5D-F Mitte" },
         year: { title: "Baujahr", data: "19" },
         belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
-        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet. "},
+        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet."},
       },
       textLocation: {
         left: 500,
@@ -252,7 +249,6 @@ export const data = {
         year: { title: "Herstellungsjahr", data: "55" },
         location: { title: "Herstellungsort", data: "Hydroponikfarm Süd C" },
         status: { title: "Status", data: "Verdorben" },
-        nutritionalValues: { title: "Nährstoffwerte", data: "Außergewöhnlich hoher Vitamingehalt"},
       },
       textLocation: {
         right: 300,
@@ -267,7 +263,6 @@ export const data = {
         year: { title: "Herstellungsjahr", data: "55" },
         location: { title: "Herstellungsort", data: "VerticalFarm Nord D-LCZF" },
         status: { title: "Status", data: "Genießbar" },
-        nutritionalValues: { title: "Nährstoffwerte", data: "Alle Nährstoffbedürfnisse abgedeckt"},
       },
       textLocation: {
         right: 300,
@@ -280,9 +275,8 @@ export const data = {
       text: {
         name: { title: "Objektname", data: "InVitro ProteinBase" },
         year: { title: "Herstellungsjahr", data: "55" },
-        location: { title: "Herstellungsort", data: "CrueltyFree Basis Cluster E" },
+        location: { title: "Herstellungsort", data: "CrueltyFree Basis West B-1" },
         status: { title: "Status", data: "Genießbar" },
-        nutritionalValues: { title: "Nährstoffwerte", data: "Hoher Proteingehalt"},
       },
       textLocation: {
         right: 300,
@@ -296,39 +290,65 @@ export const data = {
   livingRoom: {
 
     displayName: "Wohnzimmer",
+    akkusativ: "das",
+    dativ: "ins",
     isUnlocked: false,
     startNarrative: "Du hast die Küche fertig durchsucht. Jetzt kannst du dir das Wohnzimmer anschauen.",
     narrative: "Durchsuche das Wohnzimmer.",
-    errorNarrative: "Schaue dir erst vollständig das Wohnzimmer an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
 
-    smallPlants: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+    view3: {
+      scale: 2.5,
+      originX: 5464,
+      originY: 1525, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Sichtbarer Bereich", data: "Komplex Ministerium für Harmonie" },
+        year: { title: "Baujahr", data: "04" },
+        belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
+        description: { title: "Beschreibung", data: "Ministerium für dein Wohlbefinden."},
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        left: 500,
+        top: "center",
       }
+    },
+
+    shelf: {
+      scale: 2.3,
+      originX: 1000,
+      originY: 1500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartFridge 6.0" },
+        year: { title: "Herstellungsjahr", data: "48" },
+        status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
+      },
+      textLocation: {
+        right: 300,
+        top: 1300,
+      }
+    },
+
+    shelfActivated: {
+      scale: 2.3,
+      originX: 1000,
+      originY: 1500, 
     },
   },
 
   bedroom: {
 
     displayName: "Schlafzimmer",
+    akkusativ: "das",
+    dativ: "ins",
     isUnlocked: false,
-    startNarrative: "Du bist fertig mit dem Wohnzimmer. Jetzt darfst du dir Oma Ellens Schlafzimmer anschauen.",
+    startNarrative: "Du bist fertig mit dem Wohnzimmer. Jetzt könntest du dir Oma Ellens Schlafzimmer anschauen.",
     narrative: "Durchsuche das Schlafzimmer.",
-    errorNarrative: "Schaue dir erst vollständig das Schlafzimmer an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
@@ -354,10 +374,11 @@ export const data = {
   office: {
 
     displayName: "Büro",
+    akkusativ: "das",
+    dativ: "ins",
     isUnlocked: false,
     startNarrative: "Du hast dir alles wichtige im Schlafzimmer angeschaut. Nimm nun das Büro unter die Lupe.",
     narrative: "Durchsuche das Büro.",
-    errorNarrative: "Schaue dir erst vollständig das Büro an, um in andere Räume zu gelangen.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
@@ -383,10 +404,11 @@ export const data = {
   garbageRoom: {
 
     displayName: "Entsorgungsraum",
+    akkusativ: "den",
+    dativ: "in den", 
     isUnlocked: false,
     startNarrative: "Du hast alles im Büro fertig durchsucht. Gehe nun bitte sofort in den Entsorgungsraum.",
     narrative: "Gehe in den Entsorgungsraum.",
-    errorNarrative: "...",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",

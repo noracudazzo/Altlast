@@ -787,10 +787,12 @@ document.querySelectorAll(".door").forEach(door => {
     if (data[targetRoom].isUnlocked) {
       unlockedSfx.play();
       changeRoom(targetRoom);
-      console.log(`Wechsel zu Raum: ${targetRoom}`);
     }
     else {
-      showAssistantMessage(data[lastUnlockedRoom].errorNarrative);
+      const lastRoomWording = `${data[lastUnlockedRoom].akkusativ} ${data[lastUnlockedRoom].displayName}`;
+      const targetRoomWording = `${data[targetRoom].dativ} ${data[targetRoom].displayName}`;
+      const assistantErrorMessage = `Schaue dir erst vollständig ${lastRoomWording} an, um ${targetRoomWording} zu gelangen.`;
+      showAssistantMessage(assistantErrorMessage);
       errorSfx.play();
     }
   });
@@ -889,3 +891,5 @@ document.addEventListener("click", e => {
   resetZoom();
   zoomOutSfx.play();
 });
+
+changeRoom("livingRoom");

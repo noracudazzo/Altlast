@@ -657,6 +657,12 @@ body .popup-text {
   transition: ease 0.1s;
 }
 
+/* Living room 
+.livingRoom #map-current-location {
+  animation: pulseScale 2s infinite; 
+  position: absolute;
+} tbd */
+
 /* Media queries */
 
 @media (max-width: 1500px) {
