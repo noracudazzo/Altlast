@@ -892,4 +892,4 @@ document.addEventListener("click", e => {
   zoomOutSfx.play();
 });
 
-changeRoom("livingRoom");
+// changeRoom("livingRoom");

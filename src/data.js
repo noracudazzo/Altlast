@@ -10,10 +10,10 @@ export const data = {
       "Aber es ist schön, dass du noch einmal durch die Wohnung gehen kannst, bevor das Wohnmodul neu vermittelt wird.", 
       "Und wie immer helfe ich dir gerne dabei, Gegenstände zu identifizieren und mehr über sie zu erfahren.",
       "In diesem Aufzug gibt es zum Beispiel auch ein paar interessante Objekte zu entdecken.",
-      "Lass dir Zeit und schau dich um. Und sobald du dich bereit fühlst, fahre in den 16. Stock um zu Oma Ellens Wohnung zu gelangen.",
+      "Lass dir Zeit und schau dich um. Und sobald du dich bereit fühlst, fahre in den 26. Stock um zu Oma Ellens Wohnung zu gelangen.",
       "Du schaffst das. Ich glaube an dich.",
     ],
-    narrative: "Fahre in den 16. Stock.",
+    narrative: "Fahre in den 26. Stock.",
     hasBeenEntered: true,
     canBeLeft: false,
     music: "mesa-10550.mp3",
@@ -62,7 +62,7 @@ export const data = {
         name: { title: "Objektname", data: "InfoPanel R-90" },
         year: { title: "Herstellungsjahr", data: "51" },
         status: { title: "Status", data: "Aktiv, Panel noch zu 82% intakt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Statistik" },
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Statistik CN-B" },
         content: { title: "Inhalt", data: "Die täglichen, landesweiten Statistiken." },
       },
       comment: "Tolle Nachrichten: Der Zufriedenheitsindex ist über Nacht um 1% gestiegen.",
@@ -122,7 +122,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
       },
       textLocation: {
           left: "center",
@@ -139,7 +139,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Gamma C" },
         year: { title: "Herstellungsjahr", data: "53" },
         status: { title: "Status", data: "Gesund, automatische Bewässerung aktiv" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690"},
       },
       textLocation: {
         left: "center",
@@ -175,7 +175,7 @@ export const data = {
         name: { title: "Objektname", data: "FoodSynth Sixteen 1" },
         year: { title: "Herstellungsjahr", data: "48" },
         status: { title: "Status", data: "Inaktiv" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
         description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine."},
       },
       textLocation: {
@@ -227,7 +227,7 @@ export const data = {
         name: { title: "Objektname", data: "SmartFridge 6.0" },
         year: { title: "Herstellungsjahr", data: "48" },
         status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Wohnen CM" },
         description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
       },
       textLocation: {
@@ -316,28 +316,250 @@ export const data = {
       }
     },
 
+    map: {
+      scale: 3,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "Karte von Zentralstadt"},
+        year: { title: "Herstellungsjahr", data: "46" },
+        status: { title: "Status", data: "Aktiv"},
+        belongsTo: { title: "Zugehörigkeit", data: "Wohnkomplex 3AC CM"},
+      },
+      comment: "Spannend, man sieht sogar, wo wir uns befinden!",
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    tv: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "Television Reciever NM-X"},
+        year: { title: "Herstellungsjahr", data: "43" },
+        status: { title: "Status", data: "Inaktiv, Leistung eingeschränkt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    heater: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "HeatUp TN I" },
+        year: { title: "Herstellungsjahr", data: "49" },
+        status: { title: "Status", data: "Aktiv, Radiator noch zu 54% intakt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Wohnkomplex 3AC CM" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
     shelf: {
       scale: 2.3,
       originX: 1000,
       originY: 1500, 
       hasBeenClicked: false,
-      text: {
-        name: { title: "Objektname", data: "SmartFridge 6.0" },
-        year: { title: "Herstellungsjahr", data: "48" },
-        status: { title: "Status", data: "Aktiv, Kühlsystem stabil" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        description: { title: "Beschreibung", data: "Hochmodernes, robustes Kühlsystem."},
-      },
-      textLocation: {
-        right: 300,
-        top: 1300,
-      }
     },
 
     shelfActivated: {
       scale: 2.3,
       originX: 1000,
       originY: 1500, 
+    },
+
+    book1: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Die Lichtblicke des Lebens"},
+        year: { title: "Veröffentlichungsjahr", data: "32" },
+        genre: { title: "Genre", data: "Selbstoptimierung"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        // description: { title: "Beschreibung", data: "Lerne, auch die kleinen Dinge im Leben zu schätzen." },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book3: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Urbane Ernährung"},
+        year: { title: "Veröffentlichungsjahr", data: "51" },
+        genre: { title: "Genre", data: "Ernährung"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        // description: { title: "Beschreibung", data: "Effiziente Nutrition von Anbau bis Verdauung." },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book2: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 1.0" },
+        bookTitle: { title: "Titel", data: "Die Arbeit von morgen"},
+        year: { title: "Veröffentlichungsjahr", data: "15" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        // description: { title: "Beschreibung", data: "Wie wir Arbeit verringern und reformieren können." },
+      },
+      comment: [ 
+        "Wow! Toller Fund!",
+        "Dieses Buch diente noch weit vor deiner Geburt als Grundlage für die Arbeitsreduktionsreform.",
+      ],
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book4: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Zukunftsethik"},
+        year: { title: "Veröffentlichungsjahr", data: "55" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Bildung CW-D" },
+        // description: { title: "Beschreibung", data: "Die bereits 20. Ausgabe des Kult-Klassikers." },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book5: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 1.0" },
+        bookTitle: { title: "Titel", data: "Alltag meistern mit neuer Technologie"},
+        year: { title: "Veröffentlichungsjahr", data: "9" },
+        genre: { title: "Genre", data: "Wissenschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        // description: { title: "Beschreibung", data: "Wie künstliche Intelligenz unser Leben umkrempeln kann." },
+      },
+      comment: "Spoiler Alert: in diesem verstaubten Werk geht es auch um mich!",
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book6: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Unser Gemeinwohl"},
+        year: { title: "Veröffentlichungsjahr", data: "50" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Harmonie CM" },
+        // description: { title: "Beschreibung", data: "Leitlinie für ein glückliches Zusammenleben." },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book7: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Kollektive Verantwortung"},
+        year: { title: "Veröffentlichungsjahr", data: "46" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Bildung CW-D" },
+        // description: { title: "Beschreibung", data: "Ein Buch über faire Machtverteilung und deine Rolle" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+    
+    book8: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "Buch" },
+        bookTitle: { title: "Titel", data: "Der Neuanfang"},
+        year: { title: "Veröffentlichungsjahr", data: "2" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Verwaltung Zentralstadt" },
+      },
+      comment: "Davon gibt es noch Ausgaben? Ich bin begeistert.",
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book9: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "Buch" },
+        bookTitle: { title: "Titel", data: "Animal Farm"},
+        year: { title: "Veröffentlichungsjahr", data: "1945" },
+        genre: { title: "Genre", data: "Unregistriert"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+      },
+      comment: [ 
+        "Huch? Da muss es sich wohl um ein Versehen handeln.",
+        "Vermutlich hat deine Oma das Fach lange nicht mehr geöffnet und vergessen, die Altlast zu entfernen.",
+        "Aber keine Sorge, du kannst das Objekt einfach für sie entsorgen sobald du die Wohnung fertig angeschaut hast.",
+      ],
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
     },
   },
 
@@ -362,7 +584,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
       },
       textLocation: {
           left: "center",
@@ -392,7 +614,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
       },
       textLocation: {
           left: "center",
@@ -422,7 +644,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
       },
       textLocation: {
           left: "center",
