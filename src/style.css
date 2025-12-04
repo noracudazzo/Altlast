@@ -37,6 +37,10 @@ footer, header, hgroup, menu, nav, section {
   filter: drop-shadow(0 0 20px var(--color-yellow));
 }
 
+#shelf.hovered {
+  filter: drop-shadow(0 0 8px var(--color-dark-purple2)); 
+}
+
 /* Font */
 
 @font-face {
@@ -101,11 +105,12 @@ strong {
 
 .invisible {
   opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .hidden {
   display: none !important;
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 /* General CSS */
@@ -313,6 +318,7 @@ main {
   word-break: break-word;
   box-sizing: border-box;
   display: inline-block;
+  pointer-events: auto;
 }
 
 
@@ -440,6 +446,13 @@ body .popup-text {
   transition: opacity 0.7s ease;
 }
 
+.popup.altlastIdentified {
+  background: #37192f;
+  border: solid 1.5px var(--color-red);
+  outline: solid 1.5px var(--color-red);
+  animation: outlineThickness ease-in 1s infinite;
+}
+
 /* Animations */
 
 .popup::before,
@@ -520,6 +533,20 @@ body .popup-text {
 		background-position: 0% 0%;
 	}
 }
+
+@keyframes outlineThickness {
+	0% {
+		outline: solid 1px var(--color-red);
+	}
+	50% {
+		outline: solid 6px var(--color-red);
+	}
+	100% {
+		outline: solid 1.5px var(--color-red);
+	}
+}
+
+
 
 
 /* Start Screen */
@@ -657,10 +684,15 @@ body .popup-text {
   transition: ease 0.1s;
 }
 
-/* Living room 
+/* Living room */
+
+.livingRoom .activationButton.activeButton:hover {
+  filter: drop-shadow(0 0 6px white);
+}
+
+/*
 .livingRoom #map-current-location {
   animation: pulseScale 2s infinite; 
-  position: absolute;
 } tbd */
 
 /* Media queries */

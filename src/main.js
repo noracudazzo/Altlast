@@ -258,7 +258,7 @@ function resetZoom() {
   }
 } 
 
-async function typeText(el, text, speed = 85, isSpeaking) {
+async function typeText(el, text, speed = 85, isSpeaking, textIsAltlast) {
   // el.textContent = ""; // leeren
   typingController.skip = false;
 
@@ -279,6 +279,7 @@ async function typeText(el, text, speed = 85, isSpeaking) {
       }
     }
 
+    if(textIsAltlast) console.log(text);
     await new Promise(r => setTimeout(r, speed));
   }
 }
@@ -322,7 +323,6 @@ async function showAssistantMessage(comment = null) {
     assistantSpeechbubble.appendChild(p);
 
     const text = texts[i];
-
     let fullyShown = false;
 
     // Skip Steuerung
@@ -341,7 +341,7 @@ async function showAssistantMessage(comment = null) {
 
 
     speakTextRobot(text); // Sprachausgabe
-    await typeText(p, text, 40, true);
+    await typeText(p, text, 40, true, false);
 
     // Wenn weitere Texte folgen
     if (i < texts.length - 1) {
@@ -457,8 +457,14 @@ async function showPopUp(hotspot) {
     const li = document.createElement("li");
     li.style.opacity = 0;  
 
-    // Titel (zunächst unsichtbar)
     const strong = document.createElement("strong");
+
+    // auf Altlast prüfen
+    if (config.isAltlast && key === "year") {
+      strong.classList.add("altlastIdentified");
+    }
+
+    // Titel (zunächst unsichtbar)
     strong.textContent = field.title + ": ";
     strong.style.opacity = 0;   
     li.appendChild(strong);
@@ -484,13 +490,24 @@ async function showPopUp(hotspot) {
     li.style.opacity = 1;
 
     strong.style.opacity = 1; // Titel einblenden
+
+    // falls Altlast
+    if(strong.classList.contains("altlastIdentified")) {
+      popup.classList.add("altlastIdentified"); 
+    }
   
     bleepSfx.play();
     
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
     if (!popupShown) return; 
-    await typeText(el, text, 50, false); // Text tippen
+    if(strong.classList.contains("altlastIdentified")) {
+      await typeText(el, text, 50, false, true); // Text tippen
+    } else {
+      await typeText(el, text, 50, false, false); // Text tippen
+    }
+
+    //tbd hier weitermachen
 
     if (!popupShown) return; 
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
@@ -820,7 +837,7 @@ document.addEventListener("mousemove", e => {
     return;
   }
 
-  if (target.closest(".speechbubble")) {
+  if (target.closest("#speechbubble")) {
     setCursor("click");
     return;
   } 
@@ -838,7 +855,7 @@ document.addEventListener("mousemove", e => {
   if (zoomed && !activateableElementActivated) {
 
     // Wenn Activation Button vorhanden
-    if (target.closest(".activeButton") && activateableButtonsActive) {
+    if (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown ) {
       setCursor("click");
       return;
     }
@@ -1010,14 +1027,19 @@ document.addEventListener("click", (e) => {
 // Click (Zoom Out)
 document.addEventListener("click", e => {
   if (!zoomed) return;
+  console.log(document.getElementById("speechbubble"));
   if (
     e.target.closest(".main-navigation") || 
     e.target.closest("#popup.popup") ||
-    e.target.closest("#assistant #assistantButton") ||
-    e.target.closest("#assistant .speechbubble") ||
+    e.target.closest(".assistantButton") ||
+    e.target.closest(".speechbubble") ||
+    e.target.closest(".clickNextMessage") ||
     e.target.closest(".zoomed") 
   )
   return;
+  console.log(document.getElementById("speechbubble"));
+  console.log(document.getElementById("speechbubble").contains(e.target));
+  console.log(e.target);
   resetZoom();
   zoomOutSfx.play();
 });

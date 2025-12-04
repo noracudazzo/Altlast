@@ -317,9 +317,9 @@ export const data = {
     },
 
     map: {
-      scale: 3,
-      originX: 0,
-      originY: 500, 
+      scale: 1.5,
+      originX: 2732,
+      originY: 2000, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "Karte von Zentralstadt"},
@@ -330,14 +330,21 @@ export const data = {
       comment: "Spannend, man sieht sogar, wo wir uns befinden!",
       textLocation: {
           left: "center",
-          bottom: 450,
+          bottom: 200,
       }
     },
 
+        /*
+
+    x = 5464
+    x/2 = 2732
+    y 3072
+    y/2 = 1536 */
+
     tv: {
-      scale: 4,
+      scale: 2.25,
       originX: 0,
-      originY: 500, 
+      originY: 1200, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "Television Reciever NM-X"},
@@ -346,44 +353,21 @@ export const data = {
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
-      }
-    },
-
-    heater: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
-      hasBeenClicked: false,
-      text: {
-        name: { title: "Objektname", data: "HeatUp TN I" },
-        year: { title: "Herstellungsjahr", data: "49" },
-        status: { title: "Status", data: "Aktiv, Radiator noch zu 54% intakt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Wohnkomplex 3AC CM" },
-      },
-      textLocation: {
-          left: "center",
-          bottom: 450,
+          right: 1000,
+          bottom: 1100,
       }
     },
 
     shelf: {
-      scale: 2.3,
-      originX: 1000,
-      originY: 1500, 
+      scale: 4,
+      originX: 1200,
+      originY: 1200, 
       hasBeenClicked: false,
     },
 
-    shelfActivated: {
-      scale: 2.3,
-      originX: 1000,
-      originY: 1500, 
-    },
-
     book1: {
-      scale: 4,
-      originX: 0,
+      scale: 5.5,
+      originX: 1000,
       originY: 500, 
       hasBeenClicked: false,
       text: {
@@ -401,9 +385,9 @@ export const data = {
     },
 
     book3: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 6,
+      originX: 1500,
+      originY: 1750, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "SmartBook 2.0" },
@@ -414,16 +398,17 @@ export const data = {
         // description: { title: "Beschreibung", data: "Effiziente Nutrition von Anbau bis Verdauung." },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     book2: {
       scale: 4,
-      originX: 0,
-      originY: 500, 
+      originX: 700,
+      originY: 2475,  
       hasBeenClicked: false,
+      isAltlast: true,
       text: {
         name: { title: "Objektname", data: "SmartBook 1.0" },
         bookTitle: { title: "Titel", data: "Die Arbeit von morgen"},
@@ -443,9 +428,9 @@ export const data = {
     },
 
     book4: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 5,
+      originX: 4500,
+      originY: 900, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "SmartBook 2.0" },
@@ -457,14 +442,14 @@ export const data = {
       },
       textLocation: {
           left: "center",
-          bottom: 450,
+          bottom: 300,
       }
     },
 
     book5: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 6,
+      originX: 4500,
+      originY: 1300, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "SmartBook 1.0" },
@@ -476,15 +461,15 @@ export const data = {
       },
       comment: "Spoiler Alert: in diesem verstaubten Werk geht es auch um mich!",
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     book6: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 5.5,
+      originX: 4300,
+      originY: 1750, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "SmartBook 2.0" },
@@ -495,15 +480,15 @@ export const data = {
         // description: { title: "Beschreibung", data: "Leitlinie für ein glückliches Zusammenleben." },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        left: 500,
+        top: 1250,
       }
     },
 
     book7: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 5,
+      originX: 4500,
+      originY: 2450, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "SmartBook 2.0" },
@@ -533,8 +518,8 @@ export const data = {
       },
       comment: "Davon gibt es noch Ausgaben? Ich bin begeistert.",
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
@@ -557,8 +542,8 @@ export const data = {
         "Aber keine Sorge, du kannst das Objekt einfach für sie entsorgen sobald du die Wohnung fertig angeschaut hast.",
       ],
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
   },
