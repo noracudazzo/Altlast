@@ -28,6 +28,21 @@ let activateableButtonsActive = false;
 let activateableElementActivated = false;
 let gameStarted = false;
 
+// Rooms
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
+let currentRoom = ROOMS[0]; 
+let lastUnlockedRoom = ROOMS[0]; 
+let nextRoomIndex = 1;
+let nextRoom = ROOMS[nextRoomIndex];
+let scene = document.querySelector("." + currentRoom);
+
+let worldState = extractStateFromData(data);
+
+let lastUnlockedRoomData = data[currentRoom];
+let currentNarrative = lastUnlockedRoomData.narrative;
+let lastAssistantMessage = currentNarrative;
+let typingController = { skip: false };
+
 // Audio
 const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
@@ -52,19 +67,6 @@ let currentCursor = "default";
 let musicOn = false;
 let soundEffectsOn = false;
 
-// Rooms
-const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
-let currentRoom = ROOMS[0]; 
-let lastUnlockedRoom = ROOMS[0]; 
-let nextRoomIndex = 1;
-let nextRoom = ROOMS[nextRoomIndex];
-let scene = document.querySelector("." + currentRoom);
-
-let lastUnlockedRoomData = data[currentRoom];
-let currentNarrative = lastUnlockedRoomData.narrative;
-let lastAssistantMessage = currentNarrative;
-let typingController = { skip: false };
-
 // Cursor Manager
 const CURSORS = {
   default: "url(/src/assets/imgs/ui/cursor.png), auto",
@@ -73,6 +75,68 @@ const CURSORS = {
   click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
   leave: "url(/src/assets/imgs/ui/cursor-leave.png), s-resize",
 };
+
+// Save game
+
+function saveGame() {
+  const state = {
+    gameStarted,
+    currentRoom,
+    lastUnlockedRoom,
+    nextRoomIndex,
+    worldState
+  };
+
+  localStorage.setItem("gameState", JSON.stringify(state));
+  console.log("Game saved!");
+}
+
+function loadGame() {
+  const saved = localStorage.getItem("gameState");
+  return saved ? JSON.parse(saved) : null;
+}
+
+function extractStateFromData(data) {
+  const state = {};
+
+  for (const [room, roomData] of Object.entries(data)) {
+    state[room] = {
+      isUnlocked: roomData.isUnlocked,
+      hasBeenEntered: roomData.hasBeenEntered,
+    };
+
+    for (const [key, value] of Object.entries(roomData)) {
+      if (value && typeof value === "object" && "hasBeenClicked" in value) {
+        state[room][key] = { hasBeenClicked: value.hasBeenClicked };
+      }
+    }
+  }
+  return state;
+}
+
+function applyWorldStateToData(worldState) {
+  for (const [room, roomState] of Object.entries(worldState)) {
+    data[room].isUnlocked = roomState.isUnlocked;
+    data[room].hasBeenEntered = roomState.hasBeenEntered;
+
+    for (const [key, value] of Object.entries(roomState)) {
+      if (key !== "isUnlocked" && key !== "hasBeenEntered") {
+        if (data[room][key] && typeof data[room][key] === "object") {
+          Object.assign(data[room][key], value);
+        }
+      }
+    }
+  }
+}
+
+function initGame() {
+  if (gameStarted) {
+    changeRoom(currentRoom);
+  } else {
+    changeRoom("elevator");
+    continueButton.classList.add("hidden");
+  }
+}
 
 
 // Functions
@@ -487,9 +551,13 @@ function activateElement(baseId) {
   // Zoomed Klasse adden
   activatedElement.classList.add("zoomed");
 
-  setTimeout(() => activatedElement.classList.remove("hidden"), 800); // aktiviertes Element sichtbar machen
-  setTimeout(() => baseElement.classList.add("hidden"), 800); // parent unsichtbar machen
-  activatedElement.classList.add("activatedElement");
+  fadeOutFast()
+  setTimeout(() => {
+    fadeInFast();
+    activatedElement.classList.remove("hidden"); // aktiviertes Element sichtbar machen 
+    activatedElement.classList.add("activatedElement");
+    baseElement.classList.add("hidden");
+  }, 400); 
 
    // Booleans
   setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
@@ -538,7 +606,7 @@ function changeRoom(room) {
   if (scene.classList.contains("leaveHovered")) scene.classList.remove("leaveHovered"); // tbd, klappt das? Hover reset
   setCursor("default"); // Cursor reset
   scene.classList.add("hidden");
-  // fade(); tbd 
+  console.log("room changed");
 
   currentRoom = room; 
   roomName.textContent = data[currentRoom].displayName;
@@ -557,6 +625,17 @@ function changeRoom(room) {
     if (currentStartNarrative) showAssistantMessage(currentStartNarrative);
     config.hasBeenEntered = true;
   };
+
+  // speichern
+  worldState = extractStateFromData(data);
+
+  saveGame({
+    gameStarted,
+    currentRoom,
+    lastUnlockedRoom,
+    nextRoomIndex,
+    worldState
+  });
 }
 
 function playMusic(room) {
@@ -579,40 +658,58 @@ function stopMusic(music) {
     music.pause();
 }
 
-function fade(element = scene, direction = "inout") {
+function fadeInSlow() {
+  viewport.classList.add("slow-fading");
+  viewport.classList.remove("invisible");
+  setTimeout(() => {
+    viewport.classList.remove("slow-fading");
+  }, 2000); 
+}
 
-  if (direction === "in") {
-    element.classList.add("slow-fading");
-    element.classList.remove("invisible");
-    setTimeout(() => {
-      element.classList.remove("slow-fading");
-    }, 4000); 
+function fadeOutFast() {
+  viewport.classList.add("fast-fading");
+  viewport.classList.add("invisible");
+}
 
-  } else if (direction === "out") {
-    element.classList.add("slow-fading");
+function fadeInFast() {
+  viewport.classList.remove("invisible");
     setTimeout(() => {
-      element.classList.add("invisible");
-      element.classList.remove("slow-fading");
-    }, 4000); 
-
-  } else if (direction === "inout") {
-    element.classList.add("fast-fading");
-    element.classList.add("invisible");
-    setTimeout(() => {
-      element.classList.remove("invisible");
-      element.classList.remove("fast-fading");
-    }, 2000);
-  }
+    viewport.classList.remove("slow-fading");
+  }, 500);  
 }
 
 function startGame() {
-  viewport.classList.add("invisible");
-  continueButton.classList.remove("hidden");
-  gameStarted = true;
 
-  setTimeout(() => { fade(viewport, "in") }, 100); 
-  setTimeout(() => { showAssistantMessage(data.elevator.startNarrative) }, 5000); 
-  
+  if (localStorage.getItem("gameState")) {
+    // Save löschen
+    localStorage.removeItem("gameState");
+    // Variablen zurücksetzen
+    console.log("hatte save");
+    
+    gameStarted = false;
+    currentRoom = ROOMS[0];
+    lastUnlockedRoom = ROOMS[0];
+    nextRoomIndex = 1;
+    nextRoom = ROOMS[nextRoomIndex];
+    lastUnlockedRoomData = data[currentRoom];
+    currentNarrative = lastUnlockedRoomData.narrative;
+    lastAssistantMessage = currentNarrative;
+
+    worldState = extractStateFromData(data);
+
+    changeRoom("elevator");
+  }
+
+  viewport.classList.add("invisible");
+  gameStarted = true;
+  continueButton.classList.remove("hidden");
+
+  setTimeout(() => { fadeInSlow() }, 100); 
+  setTimeout(() => { showAssistantMessage(data.elevator.startNarrative) }, 4000); 
+}
+
+function continueGame() {
+  showAssistantMessage(currentNarrative); 
 }
 
 
@@ -670,6 +767,31 @@ function activateClick() {
 function deactivateClick() {
   if (!viewport.classList.contains("noclick")) viewport.classList.add("noclick");
 }
+
+// Initalize game
+
+const saved = loadGame();
+
+if (saved) {
+  console.log("Loaded save:", saved);
+
+  // Einzelne Variablen zurückschreiben
+  gameStarted = saved.gameStarted;
+  currentRoom = saved.currentRoom;
+  lastUnlockedRoom = saved.lastUnlockedRoom;
+  nextRoomIndex = saved.nextRoomIndex;
+
+  // worldState wieder in data.js pushen
+  applyWorldStateToData(saved.worldState);
+
+  // Für interne Abläufe aktualisieren
+  nextRoom = ROOMS[nextRoomIndex];
+  lastUnlockedRoomData = data[currentRoom];
+  currentNarrative = lastUnlockedRoomData.narrative;
+  lastAssistantMessage = currentNarrative;
+}
+
+initGame();
 
 // Haupt Cursor Logik!
 
@@ -757,7 +879,7 @@ document.addEventListener("mousemove", e => {
 document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseenter", () => {
     // Nur erlaubt, wenn nicht gezoomt ODER aktivierbares Objekt sichtbar
-    if (!zoomed || (zoomed && activateableElementActivated)) startHoverHotspot(hs);
+    if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) startHoverHotspot(hs);
   });
 
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
@@ -768,7 +890,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       showPopUp(hs);
       clickSfx.play();
     }
-    else if (zoomed && activateableElementActivated) {
+    else if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) {
       showPopUp(hs);
       clickSfx.play();
     }
@@ -786,7 +908,11 @@ document.querySelectorAll(".door").forEach(door => {
 
     if (data[targetRoom].isUnlocked) {
       unlockedSfx.play();
-      changeRoom(targetRoom);
+      fadeOutFast();
+      setTimeout(() => {
+        changeRoom(targetRoom)
+        fadeInFast()
+    }, 500);   
     }
     else {
       const lastRoomWording = `${data[lastUnlockedRoom].akkusativ} ${data[lastUnlockedRoom].displayName}`;
@@ -809,7 +935,7 @@ document.querySelectorAll(".start").forEach(button => {
   });
 
   continueButton.addEventListener("click", () => {
-    start.classList.add("hidden");
+    continueGame();
   });
   newGameButton.addEventListener("click", () => {
     startGame();
@@ -872,7 +998,11 @@ document.addEventListener("click", (e) => {
   const threshold = sceneRect.bottom - (sceneRect.height * 0.1);
   
   if (e.clientY > threshold) {
-    changeRoom("hallway"); 
+    fadeOutFast(); 
+    setTimeout(() => {
+      changeRoom("hallway");
+      fadeInFast(); 
+    }, 500);
   }
 });
 

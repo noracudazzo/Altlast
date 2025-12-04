@@ -2885,7 +2885,7 @@
       </defs>
     </svg>
     <main>
-      <div class="viewport noclick">
+      <div class="viewport">
         <div class="stage">
           <aside id="assistant" class="assistant navigation">
             <button aria-label="assistant" id="assistantButton">
@@ -2921,7 +2921,7 @@
           <div class="start-content"> 
             <h1> Altlast </h1>
             <div class="start-buttons">
-              <a class="button continue-button start-button hidden"> Weiterspielen </a>
+              <a class="button continue-button start-button"> Weiterspielen </a>
               <a class="button new-game-button start-button"> Neues Spiel </a>
               <a class="button start-options-button start-button"> Einstellungen </a>
               <a class="button credits-button start-button"> Credits </a>
@@ -6608,6 +6608,16 @@
                   fill="#f25874"
                 />
               </g>
+              <g class="object hotspot" id="shelf">
+                <path
+                  d="M263.76 275.98h131.49v89.18H263.76z"
+                  style="fill: url(#Unbenannter_Verlauf_31)"
+                />
+                <path class="svgButton button activationButton shelfButton"
+                  d="M364.69 365.16h-70.37v-5.77c0-3.66 2.97-6.63 6.63-6.63h57.11c3.66 0 6.63 2.97 6.63 6.63v5.77Z"
+                  fill="var(--color-black)"
+                />
+              </g>
               <g class="object activateableObject hidden" id="shelfActivated">
                 <g class="activateableBody" id="shelfBody">
                   <path
@@ -6644,16 +6654,6 @@
                     />
                   </g>
                 </g>
-              </g>
-              <g class="object hotspot activationButton shelfButton" id="shelf">
-                <path
-                  d="M263.76 275.98h131.49v89.18H263.76z"
-                  style="fill: url(#Unbenannter_Verlauf_31)"
-                />
-                <path
-                  d="M364.69 365.16h-70.37v-5.77c0-3.66 2.97-6.63 6.63-6.63h57.11c3.66 0 6.63 2.97 6.63 6.63v5.77Z"
-                  fill="var(--color-black)"
-                />
               </g>
               <g class="object hotspot" id="book7">
                 <path d="M992.33 547.2h6.2v3.75l-6.2-3.75z" style="fill: #56233a" />
