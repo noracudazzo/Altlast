@@ -10,6 +10,7 @@ const optionsButtonStart = document.querySelector(".start-options-button");
 const creditsButton = document.querySelector(".credits-button");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
+const warning = document.getElementById("warning")
 const assistant = document.getElementById("assistant");
 const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
@@ -43,20 +44,22 @@ let currentNarrative = lastUnlockedRoomData.narrative;
 let lastAssistantMessage = currentNarrative;
 let typingController = { skip: false };
 
+let altlastIdentified = false;
+
 // Audio
 const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
-const zoomOutSfx = new Audio(`/sounds/effects/812687__audiopapkin__sound-design-elements-whoosh-sfx-050.wav`);
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
 const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`); 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
 const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`);
 const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`);
+// needed: music hallway, livingRoom
+// sfx needed: enter Room, openDoor bling, openfridge, open cupboard, opendoors elevator, elevatormove
 
 unlockedSfx.volume = 0.5;
 bleepSfx.volume = 0.4;
 typeSfx.volume = 0.3;
-zoomOutSfx.volume = 0.5;
 
 let currentMusic = undefined; 
 // tbd currentMusic.loop = true; 
@@ -252,6 +255,10 @@ function resetZoom() {
     closeAssistantMessage();
   }
 
+  if (altlastIdentified) {
+    removeAltlastEffect();
+  }
+
   // Raum Fortschritt prüfen
   if (!scene.classList.contains("intro")) { // nur relevant wenn keine Intro Szene
     canNextRoomBeUnlocked();
@@ -261,6 +268,7 @@ function resetZoom() {
 async function typeText(el, text, speed = 85, isSpeaking, textIsAltlast) {
   // el.textContent = ""; // leeren
   typingController.skip = false;
+  if(altlastIdentified) el.classList.add("altlastIdentified");
 
   for (let i = 0; i < text.length; i++) {
 
@@ -279,9 +287,11 @@ async function typeText(el, text, speed = 85, isSpeaking, textIsAltlast) {
       }
     }
 
-    if(textIsAltlast) console.log(text);
     await new Promise(r => setTimeout(r, speed));
   }
+
+  // Effekt triggern
+  if (textIsAltlast) await playAltlastEffect(el, speed);
 }
 
 function speakTextRobot(text) {
@@ -291,6 +301,43 @@ function speakTextRobot(text) {
     utterance.rate = 1.1;   // langsamer → mechanisch
 
     speechSynthesis.speak(utterance);
+}
+
+async function playAltlastEffect(el, speed) {
+
+  // Text langsam löschen
+  for (let i = el.textContent.length; i >= 0; i--) {
+    el.textContent = el.textContent.slice(0, i);
+    await new Promise(r => setTimeout(r, speed * 1.5));
+  }
+
+  // 3x "..." Animation
+  for (let c = 0; c < 2; c++) {
+    for (let dots = 1; dots <= 3; dots++) {
+      el.textContent = ".".repeat(dots);
+      await new Promise(r => setTimeout(r, speed * 3));
+    }
+
+    el.textContent = "";
+    await new Promise(r => setTimeout(r, speed * 1.2));
+  }
+  altlastIdentified = true;
+  popup.classList.add("altlastIdentified");
+  await typeText(el, "vor Beginn der Zeitrechnung", speed, false, false);
+}
+
+function endAltlastPopup() {
+  warning.classList.add("visible");
+  warning.classList.remove("invisible");
+  popupText.classList.add("blurred");
+}
+
+function removeAltlastEffect() {
+  if(popup.classList.contains("altlastIdentified")) popup.classList.remove("altlastIdentified");
+  altlastIdentified = false;
+  warning.classList.remove("visible");
+  warning.classList.add("invisible");
+  popupText.classList.remove("blurred");
 }
 
 async function showAssistantMessage(comment = null) { 
@@ -308,7 +355,7 @@ async function showAssistantMessage(comment = null) {
 
   const source = comment ?? currentNarrative;
   const texts = Array.isArray(source) ? source : [source];
-  if (texts.length > 1) deactivateClick();
+  if (texts.length > 1 && !zoomed) deactivateClick();
 
   lastAssistantMessage = source;
 
@@ -374,7 +421,6 @@ async function showAssistantMessage(comment = null) {
 //      }, 30000);
     }
   }
-
   await showIndex(0);
 }
 
@@ -390,6 +436,7 @@ function closeAssistantMessage() {
 function closePopup() {
   popupShown = false;
   popup.classList.remove("visible"); 
+  if(altlastIdentified) removeAltlastEffect();
 }
 
 async function showPopUp(hotspot) {
@@ -458,11 +505,8 @@ async function showPopUp(hotspot) {
     li.style.opacity = 0;  
 
     const strong = document.createElement("strong");
-
-    // auf Altlast prüfen
-    if (config.isAltlast && key === "year") {
-      strong.classList.add("altlastIdentified");
-    }
+    const isAltlast = config.isAltlast && key === "year";
+    if(altlastIdentified) strong.classList.add("altlastIdentified");
 
     // Titel (zunächst unsichtbar)
     strong.textContent = field.title + ": ";
@@ -475,7 +519,7 @@ async function showPopUp(hotspot) {
 
     popupText.appendChild(li); 
 
-    texts.push({ li, strong, el: span, text: field.data });
+    texts.push({ li, strong, el: span, text: field.data, isAltlast });
   }
 
   // Popup einblenden
@@ -483,31 +527,20 @@ async function showPopUp(hotspot) {
  
 
   // Typewriter
-  for (const { li, strong, el, text } of texts) {
+  for (const { li, strong, el, text, isAltlast } of texts) {
     if (!popupShown) return; 
 
     li.style.transition = "opacity 0.3s ease";
     li.style.opacity = 1;
 
     strong.style.opacity = 1; // Titel einblenden
-
-    // falls Altlast
-    if(strong.classList.contains("altlastIdentified")) {
-      popup.classList.add("altlastIdentified"); 
-    }
   
     bleepSfx.play();
     
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
     if (!popupShown) return; 
-    if(strong.classList.contains("altlastIdentified")) {
-      await typeText(el, text, 50, false, true); // Text tippen
-    } else {
-      await typeText(el, text, 50, false, false); // Text tippen
-    }
-
-    //tbd hier weitermachen
+    await typeText(el, text, 50, false, isAltlast);
 
     if (!popupShown) return; 
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
@@ -516,6 +549,8 @@ async function showPopUp(hotspot) {
   if (popupShown && config.comment) {
     showAssistantMessage(config.comment);
   };
+
+  if(altlastIdentified) endAltlastPopup(); 
 }
 
 function prepareButton(button, parentId) {
@@ -691,7 +726,7 @@ function fadeOutFast() {
 function fadeInFast() {
   viewport.classList.remove("invisible");
     setTimeout(() => {
-    viewport.classList.remove("slow-fading");
+    viewport.classList.remove("fast-fading");
   }, 500);  
 }
 
@@ -1031,8 +1066,8 @@ document.addEventListener("click", e => {
   if (
     e.target.closest(".main-navigation") || 
     e.target.closest("#popup.popup") ||
-    e.target.closest(".assistantButton") ||
-    e.target.closest(".speechbubble") ||
+    e.target.closest(".assistant #assistantButton") ||
+    e.target.closest("#speechbubble.speechbubble") ||
     e.target.closest(".clickNextMessage") ||
     e.target.closest(".zoomed") 
   )
@@ -1041,7 +1076,6 @@ document.addEventListener("click", e => {
   console.log(document.getElementById("speechbubble").contains(e.target));
   console.log(e.target);
   resetZoom();
-  zoomOutSfx.play();
 });
 
 // changeRoom("livingRoom");

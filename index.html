@@ -2909,25 +2909,56 @@
             </a>
           </nav>
           <aside class="room-name">
-            <p> Aufzug</p> 
+            <p>Aufzug</p>
           </aside>
         </div>
         <div id="popup" class="popup">
           <ul id="popup-text"></ul>
+          <div class="warning invisible" id="warning">
+            <div class="warning-elements">
+              <svg viewBox="0 0 287.75 252.37">
+                <g style="opacity: 0.5">
+                  <path
+                    d="M268.82 241.37H18.93L143.88 22.21l124.94 219.16z"
+                    fill="var(--color-dark-red)"
+                  />
+                  <path
+                    d="M143.88 0 0 252.37h287.75L143.88 0Zm0 22.21 124.94 219.16H18.93L143.88 22.21Z"
+                    fill="var(--color-red)"
+                  />
+                </g>
+                <path class="exclamation"
+                  d="M157.52 84.53v19.21l-5.98 74.13h-15.31l-5.98-74.13V84.53h27.28Zm-26.01 131.03V190.1h24.74v25.46h-24.74Z"
+                  fill="var(--color-red)"
+                />
+              </svg>
+              <p class="warning-message"> 
+                <strong> Altlast </strong> <br> identified 
+              </p>
+            </div>
+          </div>
         </div>
         <!-- Start Screen -->
         <div class="scene intro start">
-          <img class="start-building-left start-building" src="/src/assets/imgs/ui/houses1.png"> 
-          <div class="start-content"> 
-            <h1> Altlast </h1>
+          <img
+            class="start-building-left start-building"
+            src="/src/assets/imgs/ui/houses1.png"
+          />
+          <div class="start-content">
+            <h1>Altlast</h1>
             <div class="start-buttons">
               <a class="button continue-button start-button"> Weiterspielen </a>
               <a class="button new-game-button start-button"> Neues Spiel </a>
-              <a class="button start-options-button start-button"> Einstellungen </a>
+              <a class="button start-options-button start-button">
+                Einstellungen
+              </a>
               <a class="button credits-button start-button"> Credits </a>
             </div>
           </div>
-          <img class="start-building-right start-building" src="/src/assets/imgs/ui/houses2.png">
+          <img
+            class="start-building-right start-building"
+            src="/src/assets/imgs/ui/houses2.png"
+          />
         </div>
         <!-- Elevator -->
         <div class="scene intro elevator">
@@ -4209,8 +4240,8 @@
             </g>
             <!-- Hier stimmt der Gradient noch nicht mit dem PNG überein, tbd -->
             <g
-              class="object entrance activateableObject hidden door door-to-hallway" 
-              style="z-index: -2" 
+              class="object entrance activateableObject hidden door door-to-hallway"
+              style="z-index: -2"
             >
               <path
                 id="entrance-door"
@@ -5156,11 +5187,13 @@
                 />
                 <path
                   d="M668.13 509.09h46.08v11.13h-46.08z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M714.35 520.34h-46.36v-11.37h46.36v11.37Zm-46.08-.24h45.8v-10.9h-45.8v10.9Z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M684.28 514.36v2.79h-1.06v-1.84h-1.06v1.84h-1.06v-5.04h1.06v2.25h.07l.99-2.25h1.05l-.97 2.25h.97Z"
@@ -5188,11 +5221,13 @@
                 />
                 <path
                   d="M719.07 509.09h46.08v11.13h-46.08z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M765.29 520.34h-46.36v-11.37h46.36v11.37Zm-46.08-.24h45.8v-10.9h-45.8v10.9Z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M730.41 512.11h2.17l.81.8v3.54l-.71.7h-2.27v-5.04Zm1.92 4.09v-3.13h-.86v3.13h.86Z"
@@ -5224,11 +5259,13 @@
                 />
                 <path
                   d="M770.02 509.09h46.08v11.13h-46.08z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M816.24 520.34h-46.36v-11.37h46.36v11.37Zm-46.08-.24h45.8v-10.9h-45.8v10.9Z"
-                  fill="var(--color-cyan)" opacity="var(--opacity-fourty)"
+                  fill="var(--color-cyan)"
+                  opacity="var(--opacity-fourty)"
                 />
                 <path
                   d="M776.88 517.15h-1.06v-4.24l.81-.8h2.2v5.04h-1.06v-1.66h-.9v1.66Zm.9-2.61v-1.47h-.9v1.47h.9Z"
@@ -6597,7 +6634,7 @@
                     id="map-current-location-shape"
                     d="m694.72 337.1-2.7-3.58-.06-.07-.19-.25-.06-.07-.06-.09-1.43-1.89-.06-.08-.23-.3-.05-.08-2.67-3.52 7.49-9.94.37.49.28.36 2.33 3.08.24.32 4.31 5.67-7.51 9.95z"
                     fill="var(--color-white)"
-                />
+                  />
                 </g>
               </g>
               <g class="object hotspot" id="tv">
@@ -6615,7 +6652,8 @@
                   d="M263.76 275.98h131.49v89.18H263.76z"
                   style="fill: url(#Unbenannter_Verlauf_31)"
                 />
-                <path class="svgButton button activationButton shelfButton"
+                <path
+                  class="svgButton button activationButton shelfButton"
                   d="M364.69 365.16h-70.37v-5.77c0-3.66 2.97-6.63 6.63-6.63h57.11c3.66 0 6.63 2.97 6.63 6.63v5.77Z"
                   fill="var(--color-black)"
                 />
@@ -6639,7 +6677,10 @@
                 </g>
                 <g id="shelfObjects">
                   <g class="object hotspot" id="book9">
-                    <path d="M316.73 304h19.86v61.16h-19.86z" fill="var(--color-ice-green)" />
+                    <path
+                      d="M316.73 304h19.86v61.16h-19.86z"
+                      fill="var(--color-ice-green)"
+                    />
                     <path
                       d="m338.35 365.16-1.76.04V304l1.76.42v60.74z"
                       fill="#2b938a"
@@ -6649,8 +6690,14 @@
                     />
                   </g>
                   <g class="object hotspot" id="book8">
-                    <path d="M293.17 304h17.8v61.16h-17.8z" fill="var(--color-red)" />
-                    <path d="m313.87 365.2-2.91.02V304l2.91.3v60.9z" fill="#d34d68" />
+                    <path
+                      d="M293.17 304h17.8v61.16h-17.8z"
+                      fill="var(--color-red)"
+                    />
+                    <path
+                      d="m313.87 365.2-2.91.02V304l2.91.3v60.9z"
+                      fill="#d34d68"
+                    />
                     <path
                       d="M299.24 357.56v-2.43l.89-.91h3.97l.78.79v2.55h-5.65Zm4.58-2.16h-3.5v.97h3.5v-.97ZM299.24 353.74V351h1.07v1.57h1.09v-1.49h1.05v1.48h1.36v-1.59h1.07v2.78h-5.65ZM304.89 348.33l-2.04.7v.31h2.04v1.18h-4.85l-.8-.86v-2.42h3.59v.64l2.06-.75v1.19Zm-3.1.1h-1.47v.91h1.47v-.91ZM302.48 342.56h-3.24v-1.12h5.65v1.17l-3.24 1.16h3.24v1.11h-5.65v-1.17l3.24-1.15ZM299.24 340.89v-2.74h1.07v1.57h1.09v-1.49h1.05v1.48h1.36v-1.59h1.07v2.78h-5.65ZM304.89 334.33v3.34h-5.65v-1.18h4.58v-.97h-4.58v-1.19h5.65ZM304.89 332.62v1.19h-4.75l-.89-.91v-2.47h5.65v1.18h-1.86v1.01h1.86Zm-2.93-1.01h-1.64v1.01h1.64v-1.01ZM302.48 327.66h-3.24v-1.12h5.65v1.17l-3.24 1.16h3.24v1.11h-5.65v-1.17l3.24-1.15ZM302.46 324.81h2.43v1.18h-4.87l-.78-.78v-1.92h1.07v1.52h1.09v-1.4h1.05v1.4ZM304.89 321.61v1.19h-4.75l-.89-.91v-2.47h5.65v1.18h-1.86v1.01h1.86Zm-2.93-1.01h-1.64v1.01h1.64v-1.01ZM302.48 316.65h-3.24v-1.12h5.65v1.17l-3.24 1.16h3.24v1.11h-5.65v-1.17l3.24-1.15ZM303.82 312.78h-.87v.48h-1v-1.65h2.95v3.38h-5.65v-3.18h1.07v1.99h3.5v-1.02Z"
                     />
@@ -6658,7 +6705,10 @@
                 </g>
               </g>
               <g class="object hotspot" id="book7">
-                <path d="M992.33 547.2h6.2v3.75l-6.2-3.75z" style="fill: #56233a" />
+                <path
+                  d="M992.33 547.2h6.2v3.75l-6.2-3.75z"
+                  style="fill: #56233a"
+                />
                 <path d="M1061.81 532.98v19.72H999.7v-19.72z" fill="#f25874" />
                 <path
                   d="M1053.29 528.95h-60.96l7.37 4.03h62.11l-8.52-4.03z"
@@ -6699,7 +6749,10 @@
                 />
               </g>
               <g class="object hotspot" id="book5">
-                <path d="M992.1 304.01h14.19v61.15H992.1z" fill="var(--color-pink)" />
+                <path
+                  d="M992.1 304.01h14.19v61.15H992.1z"
+                  fill="var(--color-pink)"
+                />
                 <path
                   d="M998.7 358.38v.89h-3.57l-.67-.68v-1.85h4.24v.89h-1.39v.76h1.39Zm-2.2-.76h-1.23v.76h1.23v-.76ZM998.7 356.34h-4.24v-.89h3.43v-1.24h.8v2.13ZM998.7 353.83h-4.24v-.89h3.43v-1.24h.8v2.13ZM995.27 348.79v.8h3.43v.89h-3.43v.83h-.81v-2.52h.81ZM998.7 347.54v.89h-3.57l-.67-.68v-1.85h4.24v.89h-1.39v.76h1.39Zm-2.2-.75h-1.23v.76h1.23v-.76ZM997.9 343.91h-.65v.36h-.75v-1.24h2.21v2.53h-4.24v-2.38h.81v1.49h2.63v-.76ZM994.46 339.06v-1.03h4.24v.82h-2.64l2.64.66v.26l-2.64.66h2.64v.82h-4.24v-1.03l2.11-.59-2.11-.59ZM994.46 337.6v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24ZM994.46 334.3h1.04v.89h-1.04v-.89Zm1.3 0h2.94v.89h-2.94v-.89ZM998.7 331.64v2.33h-1.32v-.89h.52v-.55h-.67l-1.06 1.41h-1.7v-2.27h1.26v.81h-.45v.58h.55l1.06-1.41h1.81ZM995.27 328.74v.8h3.43v.89h-3.43v.83h-.81v-2.52h.81ZM994.46 328.38v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24ZM998.7 324.31l-1.53.53v.23h1.53v.89h-3.64l-.6-.64v-1.81h2.69v.48l1.54-.56v.89Zm-2.33.08h-1.1v.68h1.1v-.68ZM996.89 321.36h-2.43v-.84h4.24v.88l-2.43.87h2.43v.83h-4.24v-.88l2.43-.86ZM994.46 316.54v-1.03h4.24v.82h-2.64l2.64.66v.26l-2.64.66h2.64v.82h-4.24v-1.03l2.11-.59-2.11-.59ZM994.46 314.19h1.04v.89h-1.04v-.89Zm1.3 0h2.94v.89h-2.94v-.89ZM995.27 311.34v.8h3.43v.89h-3.43v.83h-.81v-2.52h.81ZM1002.09 354.68h-2.43v-.84h4.24v.88l-2.43.87h2.43v.83h-4.24v-.88l2.43-.86ZM999.66 353.43v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24ZM1003.9 348.51v2.5h-4.24v-.89h3.43v-.73h-3.43v-.89h4.24ZM999.66 348.12v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24ZM1003.9 344.06l-1.53.53v.23h1.53v.89h-3.64l-.6-.64v-1.81h2.69v.48l1.54-.56v.89Zm-2.33.08h-1.1v.68h1.1v-.68ZM1000.47 338.95v.8h3.43v.89h-3.43v.83h-.81v-2.52h.81ZM999.66 338.59v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24ZM1003.1 334.57h-.52v-.89h.73l.59.59v1.91h-3.65l-.58-.63v-1.86h1.6v.89h-.79v.71h2.63v-.71ZM1001.4 332.44v-.76h-1.74v-.89h4.24v.89h-1.69v.76h1.69v.89h-4.24v-.89h1.74ZM1002.09 328.67h-2.43v-.84h4.24v.88l-2.43.87h2.43v.83h-4.24v-.88l2.43-.86ZM999.66 327.42v-2.56h4.24v2.56h-4.24Zm3.44-.89v-.78h-2.63v.78h2.63ZM1003.9 324.47h-4.24v-.89h3.43v-1.24h.8v2.13ZM999.66 321.96v-2.56h4.24v2.56h-4.24Zm3.44-.89v-.78h-2.63v.78h2.63ZM1003.1 317.36h-.65v.36h-.75v-1.24h2.21v2.53h-4.24v-2.38h.81v1.49h2.63v-.76ZM999.66 315.19h1.04v.89h-1.04v-.89Zm1.3 0h2.94v.89h-2.94v-.89ZM999.66 314.86v-2.06h.81v1.18h.82v-1.12h.79v1.11h1.02v-1.2h.8v2.09h-4.24Z"
                 />
@@ -6709,7 +6762,10 @@
                 />
               </g>
               <g class="object hotspot" id="book4">
-                <path d="M1040.97 207.8v61.18h-19.51v-52.85l19.51-8.33z" fill="#d34d68" />
+                <path
+                  d="M1040.97 207.8v61.18h-19.51v-52.85l19.51-8.33z"
+                  fill="#d34d68"
+                />
                 <path d="M1040.97 207.8h19.86v61.16h-19.86z" fill="#f25874" />
                 <g id="title">
                   <path
@@ -6744,7 +6800,10 @@
                 />
               </g>
               <g class="object hotspot" id="book2">
-                <path d="M294.78 489.02v2.78h-8.44l8.44-2.78z" style="fill: #362853" />
+                <path
+                  d="M294.78 489.02v2.78h-8.44l8.44-2.78z"
+                  style="fill: #362853"
+                />
                 <path
                   d="M304.05 492.32h-17.19l8.44-2.77h16.83l-8.08 2.77z"
                   style="fill: url(#Unbenannter_Verlauf_13-4)"
@@ -6767,7 +6826,10 @@
                 />
               </g>
               <g class="object hotspot" id="book1">
-                <path d="M364.54 152.95v19.85h-62.11v-19.85z" fill="var(--color-pink)" />
+                <path
+                  d="M364.54 152.95v19.85h-62.11v-19.85z"
+                  fill="var(--color-pink)"
+                />
                 <path
                   d="M309.4 156.83h2.38l.89.88v3.9l-.78.77h-2.5v-5.54Zm2.11 4.49v-3.44h-.95v3.44h.95ZM315.06 161.32v1.05h-1.93v-1.05h.38v-3.44h-.38v-1.05h1.93v1.05h-.38v3.44h.38ZM315.56 156.83h2.69v1.05h-1.54v1.07h1.46v1.03h-1.45v1.33h1.56v1.05h-2.73v-5.54ZM320.5 162.37v-5.54h1.16v4.49h1.62v1.05h-2.79ZM325.71 161.32v1.05h-1.93v-1.05h.38v-3.44h-.38v-1.05h1.93v1.05h-.38v3.44h.38ZM328.31 161.32v-.67h1.16v.96l-.77.77h-2.5v-4.78l.83-.76h2.44v2.09h-1.16v-1.04h-.93v3.44h.93ZM331.1 159.11h1v-2.28h1.16v5.54h-1.16v-2.21h-1v2.21h-1.16v-5.54h1.16v2.28ZM337.05 157.89H336v4.49h-1.17v-4.49h-1.08v-1.05h3.3v1.05ZM340.89 160.07v2.31h-2.6l-.77-.77v-4.77h2.38l.79.73v1.52l-.54.44.75.54Zm-1.36-1.04v-1.15h-.85v1.15h.85Zm.19 2.29v-1.26h-1.04v1.26h1.04ZM341.38 162.37v-5.54h1.16v4.49h1.62v1.05h-2.79ZM346.59 161.32v1.05h-1.93v-1.05h.38v-3.44h-.38v-1.05h1.93v1.05h-.38v3.44h.38ZM349.18 161.32v-.67h1.16v.96l-.77.77h-2.5v-4.78l.83-.76h2.44v2.09h-1.16v-1.04h-.93v3.44h.93ZM354.3 159.31v3.07h-1.16v-2.02h-1.17v2.02h-1.16v-5.54h1.16v2.47h.08l1.09-2.47h1.16l-1.06 2.47h1.07ZM354.85 156.83h2.69v1.05H356v1.07h1.46v1.03h-1.45v1.33h1.56v1.05h-2.73v-5.54ZM317.13 163.39h2.38l.89.88v3.9l-.78.77h-2.5v-5.54Zm2.11 4.49v-3.44h-.95v3.44h.95ZM320.87 163.39h2.69v1.05h-1.54v1.07h1.46v1.03h-1.45v1.33h1.56v1.05h-2.73v-5.54ZM327.07 168.93h-3.05v-1.72h1.16v.67h.72V167l-1.84-1.39v-2.22h2.97v1.65h-1.05v-.59h-.76v.72l1.85 1.39v2.37ZM329.36 168.93v-5.54h1.16v4.49h1.62v1.05h-2.79ZM332.64 163.39h2.69v1.05h-1.54v1.07h1.46v1.03h-1.45v1.33h1.56v1.05h-2.73v-5.54ZM339.16 166.62v2.31h-2.6l-.77-.77v-4.77h2.38l.79.73v1.52l-.54.44.75.54Zm-1.35-1.03v-1.15h-.85v1.15h.85Zm.18 2.29v-1.26h-1.04v1.26h1.04ZM339.65 163.39h2.69v1.05h-1.54v1.07h1.46v1.03h-1.45v1.33h1.56v1.05h-2.73v-5.54ZM345.08 166.57v-3.18h1.1v5.54h-1.15l-1.13-3.18v3.18h-1.09v-5.54h1.15l1.13 3.18ZM349.76 168.93h-3.05v-1.72h1.16v.67h.72V167l-1.84-1.39v-2.22h2.97v1.65h-1.05v-.59h-.76v.72l1.85 1.39v2.37Z"
                 />
