@@ -50,7 +50,7 @@ let altlastIdentified = false;
 const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
-const unlockedSfx = new Audio(`/sounds/effects/524202__department64__d64-samplepack-fx-powerup-37.wav`); 
+const unlockedSfx = new Audio(`/sounds/effects/515828__newlocknew__ui_2-2-ntfo-trianglesytrusarpegiomultiprocessingrsmpl.wav`); 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
 const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`);
 const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`);
@@ -440,6 +440,7 @@ function closePopup() {
 }
 
 async function showPopUp(hotspot) {
+  if(altlastIdentified) removeAltlastEffect();
 
   const id = hotspot.id;
   const config = data[currentRoom][id];
@@ -958,8 +959,9 @@ document.querySelectorAll(".door").forEach(door => {
   door.addEventListener("click", () => {
     const targetRoom = getDoorTarget(door);
 
+    console.log(targetRoom);
     if (data[targetRoom].isUnlocked) {
-      unlockedSfx.play();
+      if(!data[targetRoom].hasBeenEntered) unlockedSfx.play();
       fadeOutFast();
       setTimeout(() => {
         changeRoom(targetRoom)

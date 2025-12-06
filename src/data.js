@@ -408,7 +408,6 @@ export const data = {
       originX: 700,
       originY: 2475,  
       hasBeenClicked: false,
-      isAltlast: true,
       text: {
         name: { title: "Objektname", data: "SmartBook 1.0" },
         bookTitle: { title: "Titel", data: "Die Arbeit von morgen"},
