@@ -12,6 +12,7 @@
     "vite": "^7.2.2"
   },
   "dependencies": {
+    "@fontsource/space-mono": "^5.2.9",
     "@pixi/filter-glitch": "^5.1.1",
     "gsap": "^3.13.0",
     "pixi.js": "^7.4.3"
