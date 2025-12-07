@@ -52,16 +52,24 @@ let altlastIdentified = false;
 const clickSfx = new Audio(`/sounds/effects/220166__gameaudio__button-confirm-spacey.wav`);
 const zoomInSfx = new Audio(`/sounds/effects/220171__gameaudio__flourish-spacey-1.wav`);
 const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casual_shortened.wav`);
-const unlockedSfx = new Audio(`/sounds/effects/515828__newlocknew__ui_2-2-ntfo-trianglesytrusarpegiomultiprocessingrsmpl.wav`); 
+const unlockedSfx = new Audio(`/sounds/effects/515828__newlocknew__ui_2-2-ntfo-trianglesytrusarpegiomultiprocessingrsmpl.wav`); unlockedSfx.volume = 0.5; 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
-const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`);
-const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`);
-// needed: music hallway, livingRoom
-// sfx needed: enter Room, openDoor bling, openfridge, open cupboard, opendoors elevator, elevatormove
+const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`); bleepSfx.volume = 0.4;
+const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`); typeSfxfgdgtsdgd.volume = 0.3;
+const openDoorSfx = new Audio(`/sounds/effects/400329__n-razm__door_open.wav`); openDoorSfx.volume = 0.3;
+const closeDoorSfx = new Audio(`/sounds/effects/400330__n-razm__door_close.wav`); closeDoorSfx.volume = 0.1;
+const openFridgeSfx = new Audio(`/sounds/effects/8865__harri__1_fridge_open.mp3`); openFridgeSfx.volume = 0.5;
+const closeFridgeSfx = new Audio(`/sounds/effects/8876__harri__2_fridge_close.mp3`); closeFridgeSfx.volume = 0.5;
+const openShelfSfx = new Audio(`/sounds/effects/131888__vtownpunks__cupboard-4.wav`); openFridgeSfx.volume = 0.2;
+const closeShelfSfx = new Audio(`/sounds/effects/131889__vtownpunks__cupboard-3.wav`); closeFridgeSfx.volume = 0.2;
+const altlastIdentifiedSfx = new Audio(`/sounds/effects/448745__lilmati__futuristic-city-terminal.wav`); altlastIdentifiedSfx.volume = 0.1; 
+const altlastWarningSfx = new Audio(`/sounds/effects/657938__lilmati__scifi-popup-warning-notice-or-note.wav`); altlastWarningSfx.volume = 0.1; 
+const altlastAlertSfx = new Audio(`/sounds/effects/547250__eminyildirim__warning-ui.wav`); altlastAlertSfx.volume = 1; altlastAlertSfx.loop = true;
 
-unlockedSfx.volume = 0.5;
-bleepSfx.volume = 0.4;
-typeSfx.volume = 0.3;
+// needed: music hallway, livingRoom
+// sfx needed: enter Room, openDoor bling, openfridge DONE, closefridge DONE, open cupboard, opendoors elevator, elevatormove, alerts DONE
+
+
 
 let currentMusic = undefined; 
 // tbd currentMusic.loop = true; 
@@ -324,17 +332,22 @@ async function playAltlastEffect(el, speed) {
     await new Promise(r => setTimeout(r, speed * 1.2));
   }
   altlastIdentified = true;
+  altlastIdentifiedSfx.play();
+  altlastAlertSfx.play();
   popup.classList.add("altlastIdentified");
   await typeText(el, "vor Beginn der Zeitrechnung", speed, false, false);
 }
 
 function endAltlastPopup() {
+  altlastWarningSfx.play();
   warning.classList.add("visible");
   warning.classList.remove("invisible");
   popupText.classList.add("blurred");
 }
 
 function removeAltlastEffect() {
+  altlastAlertSfx.pause();
+  altlastAlertSfx.currentTime = 0;
   if(popup.classList.contains("altlastIdentified")) popup.classList.remove("altlastIdentified");
   altlastIdentified = false;
   warning.classList.remove("visible");
@@ -606,6 +619,9 @@ function activateElement(baseId) {
   // Zoomed Klasse adden
   activatedElement.classList.add("zoomed");
 
+  if(baseId === "fridge") openFridgeSfx.play();
+  if(baseId === "shelf") openShelfSfx.play();
+
   fadeOutFast()
   setTimeout(() => {
     fadeInFast();
@@ -623,6 +639,9 @@ function deactivateElement(baseId) {
   const activatedElement = document.getElementById(baseId + "Activated");
 
   if (!baseElement || !activatedElement) return;
+
+  if(baseId === "fridge") closeFridgeSfx.play();
+  if(baseId === "shelf") closeShelfSfx.play();
 
   // Sichtbar machen
   activatedElement.classList.add("hidden");
@@ -959,9 +978,9 @@ document.querySelectorAll(".door").forEach(door => {
   door.addEventListener("click", () => {
     const targetRoom = getDoorTarget(door);
 
-    console.log(targetRoom);
     if (data[targetRoom].isUnlocked) {
       if(!data[targetRoom].hasBeenEntered) unlockedSfx.play();
+      openDoorSfx.play();
       fadeOutFast();
       setTimeout(() => {
         changeRoom(targetRoom)
@@ -1047,12 +1066,12 @@ document.addEventListener("click", (e) => {
 
   const target = e.target;
   if (target.closest("#main-navigation") || target.closest(".hotspot")) return;
-  clickSfx.play();
   const sceneRect = scene.getBoundingClientRect();
   const threshold = sceneRect.bottom - (sceneRect.height * 0.1);
   
   if (e.clientY > threshold) {
     fadeOutFast(); 
+    closeDoorSfx.play();
     setTimeout(() => {
       changeRoom("hallway");
       fadeInFast(); 
