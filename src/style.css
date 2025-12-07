@@ -99,6 +99,10 @@ strong {
   opacity: 0 !important;
 }
 
+.no-transition {
+  transition: none !important;
+}
+
 /* General CSS */
 
 :root {
@@ -361,6 +365,11 @@ main {
 
 .viewport.noclick #assistant #assistant-button, .viewport.noclick #assistant #speechbubble  {
   pointer-events: all !important;
+}
+
+.entrance.clickable {
+  pointer-events: all !important;
+  z-index: 2 !important;
 }
 
 /* Navigation */

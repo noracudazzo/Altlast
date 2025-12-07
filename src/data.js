@@ -92,6 +92,7 @@ export const data = {
 
     displayName: "Flur",
     isUnlocked: false,
+    music: "interstellar-adventure-space-theme-soundtrack-4494.mp3",
     startNarrative: [
       "Vom Flur aus gelangst du in jeden Raum.",
       "Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen.",
@@ -100,7 +101,6 @@ export const data = {
     narrative: "Durchsuche die Küche.",
     hasBeenEntered: false,
     canBeLeft: false,
-    music: "moebius-21329.mp3",
   },
 
   kitchen: {
@@ -297,7 +297,7 @@ export const data = {
     narrative: "Durchsuche das Wohnzimmer.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "moebius-21329.mp3",
+    music: "magical-technology-sci-fi-science-futuristic-game-music-300607.mp3",
 
     view3: {
       scale: 2.5,
@@ -587,7 +587,7 @@ export const data = {
     narrative: "Durchsuche das Büro.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "moebius-21329.mp3",
+    music: "scifi-intro-outro-352086.mp3",
 
     smallPlants: {
       scale: 4,
