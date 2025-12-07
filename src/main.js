@@ -1,4 +1,4 @@
-import "@fontsource/space-mono/latin";
+// import "@fontsource/space-mono/latin";
 import { data as origData } from "./data";
 import { gsap } from "gsap";
 
@@ -19,8 +19,10 @@ const assistantSpeechbubble = document.getElementById("speechbubble");
 const homeButton = document.querySelector(".home-button");
 const optionsButton = document.querySelector(".options-button");
 const roomName = document.querySelector(".room-name p");
+const heightDisplay = document.getElementById("height-display");
 const elevatorControls = document.getElementById("controls");
 const elevatorDoors = document.querySelector(".elevator-doors");
+const elevatorHotspots = document.querySelectorAll(".elevator .hotspot");
 const entrance = document.querySelector(".entrance");
 
 let zoomed = false;
@@ -55,7 +57,7 @@ const assistantSfx = new Audio(`/sounds/effects/220202__gameaudio__teleport-casu
 const unlockedSfx = new Audio(`/sounds/effects/515828__newlocknew__ui_2-2-ntfo-trianglesytrusarpegiomultiprocessingrsmpl.wav`); unlockedSfx.volume = 0.5; 
 const errorSfx = new Audio(`/sounds/effects/176238__melissapons__sci-fi_short_error.wav`);
 const bleepSfx = new Audio(`/sounds/effects/263133__mossy4__tone-beep.wav`); bleepSfx.volume = 0.4;
-const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`); typeSfxfgdgtsdgd.volume = 0.3;
+const typeSfx = new Audio(`/sounds/effects/738440__chris112233__key-clack1.wav`); typeSfx.volume = 0.3;
 const openDoorSfx = new Audio(`/sounds/effects/400329__n-razm__door_open.wav`); openDoorSfx.volume = 0.3;
 const closeDoorSfx = new Audio(`/sounds/effects/400330__n-razm__door_close.wav`); closeDoorSfx.volume = 0.1;
 const openFridgeSfx = new Audio(`/sounds/effects/8865__harri__1_fridge_open.mp3`); openFridgeSfx.volume = 0.5;
@@ -89,7 +91,36 @@ const CURSORS = {
   leave: "url(/src/assets/imgs/ui/cursor-leave.png), s-resize",
 };
 
-// Save game
+function resetClasses() {
+  // Elevator Hotspots
+  elevatorHotspots.forEach(hs => {
+    hs.classList.remove("glow");
+  });
+
+  // Background Buttons
+  const controlButtonBackgrounds = document.querySelectorAll(".controls-button-background");
+  controlButtonBackgrounds.forEach(bg => {
+    bg.classList.remove("clicked", "unclicked");
+  });
+
+  // Elevator Controls
+  elevatorControls.classList.remove("background");
+
+  // Viewport
+  viewport.classList.remove("slow-fading", "fast-fading", "invisible", "noclick");
+
+  // Scenes
+  const scenes = document.querySelectorAll(".scene");
+  scenes.forEach(scene => {
+    scene.classList.remove("shake", "leaveHovered");
+  });
+
+  // Misc
+  heightDisplay.classList.remove("active");
+  elevatorDoors.classList.remove("doorsOpen");
+  entrance.classList.remove("clickable"); 
+}
+
 
 function saveGame() {
   const state = {
@@ -236,6 +267,18 @@ function deactivateElements() {
 }
 
 function zoomOut() {
+
+  // speichern
+  worldState = extractStateFromData(data);
+
+  saveGame({
+    gameStarted,
+    currentRoom,
+    lastUnlockedRoom,
+    nextRoomIndex,
+    worldState
+  });
+  
   zoomed = false;
 
   scene.style.transition = "transform 0.9s cubic-bezier(0.33, 1, 0.68, 1)";
@@ -348,7 +391,7 @@ function endAltlastPopup() {
 function removeAltlastEffect() {
   altlastAlertSfx.pause();
   altlastAlertSfx.currentTime = 0;
-  if(popup.classList.contains("altlastIdentified")) popup.classList.remove("altlastIdentified");
+  popup.classList.remove("altlastIdentified");
   altlastIdentified = false;
   warning.classList.remove("visible");
   warning.classList.add("invisible");
@@ -415,9 +458,8 @@ async function showAssistantMessage(comment = null) {
     }
 
     if (currentRoom === "elevator" && i === 4) {
-      const elevatorHotspots = document.querySelectorAll(".elevator .hotspot");
       elevatorHotspots.forEach(hs => {
-        hs.style
+        // hs.style
         hs.classList.add("glow");
         setTimeout(() => { hs.classList.remove("glow"); }, 8000);
       });
@@ -566,7 +608,7 @@ async function showPopUp(hotspot) {
     showAssistantMessage(config.comment);
   };
 
-  if(altlastIdentified) endAltlastPopup(); 
+  if(altlastIdentified && popupShown) endAltlastPopup(); 
 }
 
 function prepareButton(button, parentId) {
@@ -699,17 +741,6 @@ function changeRoom(room) {
     if (currentStartNarrative) showAssistantMessage(currentStartNarrative);
     config.hasBeenEntered = true;
   };
-
-  // speichern
-  worldState = extractStateFromData(data);
-
-  saveGame({
-    gameStarted,
-    currentRoom,
-    lastUnlockedRoom,
-    nextRoomIndex,
-    worldState
-  });
 }
 
 function playMusic(room) {
@@ -769,6 +800,7 @@ function startGame() {
   lastAssistantMessage = currentNarrative;
 
   worldState = extractStateFromData(data);
+  resetClasses();
 
   changeRoom("elevator");
 
@@ -791,8 +823,6 @@ function openElevator() {
   deactivateElements();
   resetZoom();
   setTimeout(() => scene.classList.add("shake"), 1000);
-
-  const heightDisplay = document.getElementById("height-display");
   setTimeout(() => heightDisplay.classList.add("active"), 500);
 
   setTimeout(() => animateFloorCount(), 1000);
@@ -806,7 +836,7 @@ function openElevator() {
         scene.classList.remove("shake");
         const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
         setTimeout(() => elevatorDoorBackgroundPlaceholder.classList.add("hidden"), 2000);
-        setTimeout(() => entrance.classList.remove("hidden"), 3000);
+        setTimeout(() => entrance.classList.add("clickable"), 3000); 
         setTimeout(() => elevatorDoors.classList.add("doorsOpen"), 2000);
         heightDisplay.classList.remove("active");
         activateClick();
@@ -1042,6 +1072,7 @@ assistantSpeechbubble.addEventListener("click", () => {
 homeButton.addEventListener("click", () => {
   clickSfx.play();
   start.classList.remove("hidden");
+  resetZoom();
 });
 
 // Click (Controls)

@@ -2977,6 +2977,58 @@
             viewBox="0 0 1366 768"
           >
             <g class="elevator-doors">
+              <g
+                class="object entrance activateableObject door door-to-hallway"
+                style="z-index: -2"
+              >
+                <path
+                  id="entrance-door"
+                  fill="url(#Unbenannter_Verlauf_480)"
+                  d="M636.21 338.92h93.58v165.1h-93.58z"
+                />
+                <path
+                  id="knob"
+                  fill="url(#Unbenannter_Verlauf_607)"
+                  d="M639.21 402.19h7.62v41.56h-7.62z"
+                  opacity=".55"
+                />
+                <g id="frame">
+                  <path
+                    d="M633.21 335.92v168.1h6v-162.1h87.58v162.1h6v-168.1h-99.58Z"
+                    fill="var(--color-black)"
+                  />
+                </g>
+                <g id="number">
+                  <path
+                    d="M667.83 357.67h30.33v16.41h-30.33z"
+                    fill="var(--color-black)"
+                  />
+                  <path
+                    d="M698.54 374.45h-31.08v-17.16h31.08v17.16Zm-30.33-.75h29.58v-15.66h-29.58v15.66Z"
+                    fill="var(--color-yellow)"
+                  />
+                  <path
+                    d="M676.66 364.49h1.19l-.11.85h-1.18l-.11 1.02h1.23l-.1.84h-1.23l-.2 1.75h-.93l.19-1.75h-1.03l-.2 1.75h-.93l.19-1.75h-1.21l.12-.84h1.19l.12-1.02h-1.26l.11-.85h1.25l.2-1.75h.93l-.19 1.75h1.02l.2-1.75h.93l-.2 1.75Zm-1.13 1.87.12-1.03h-1.05l-.12 1.03h1.06Z"
+                    fill="var(--color-white)"
+                  />
+                  <path
+                    d="M681.68 368.95h-3.47v-2.11l2.17-1.97v-.95h-.86v.67h-1.24v-.99l.86-.86h2.54v2.61l-2.16 1.93v.5h2.16v1.18Z"
+                    fill="var(--color-white)"
+                  />
+                  <path
+                    d="M684.39 364.58v-.67h-.89v1.31h2.15v2.87l-.92.86h-2.54v-5.36l.92-.85h2.54v1.85h-1.26Zm-.89 3.19h.85v-1.35h-.85v1.35Z"
+                    fill="var(--color-white)"
+                  />
+                  <path
+                    d="m686.12 363.6 1.01-.86h2.48v5.36l-.86.86h-2.62v-1.93h1.27v.76h.9v-1.36h-2.17v-2.82Zm1.31 1.62h.86v-1.3h-.86v1.3Z"
+                    fill="var(--color-white)"
+                  />
+                  <path
+                    d="m693.71 368.1-.92.86h-2.76v-5.36l.93-.85h2.75v5.36Zm-2.38-4.18v3.86h1.08v-3.86h-1.08Z"
+                    fill="var(--color-white)"
+                  />
+                </g>
+              </g>
               <path
                 id="elevatorDoorBackgroundPlaceholder"
                 d="M456.17 198.3h453.66v462.59H456.17z"
@@ -4237,59 +4289,6 @@
                 d="M286.3 324.46v-1.02h.96v1.02h-.96Z"
                 fill="var(--color-white)"
               />
-            </g>
-            <!-- Hier stimmt der Gradient noch nicht mit dem PNG überein, tbd -->
-            <g
-              class="object entrance activateableObject hidden door door-to-hallway"
-              style="z-index: -2"
-            >
-              <path
-                id="entrance-door"
-                fill="url(#Unbenannter_Verlauf_480)"
-                d="M636.21 338.92h93.58v165.1h-93.58z"
-              />
-              <path
-                id="knob"
-                fill="url(#Unbenannter_Verlauf_607)"
-                d="M639.21 402.19h7.62v41.56h-7.62z"
-                opacity=".55"
-              />
-              <g id="frame">
-                <path
-                  d="M633.21 335.92v168.1h6v-162.1h87.58v162.1h6v-168.1h-99.58Z"
-                  fill="var(--color-black)"
-                />
-              </g>
-              <g id="number">
-                <path
-                  d="M667.83 357.67h30.33v16.41h-30.33z"
-                  fill="var(--color-black)"
-                />
-                <path
-                  d="M698.54 374.45h-31.08v-17.16h31.08v17.16Zm-30.33-.75h29.58v-15.66h-29.58v15.66Z"
-                  fill="var(--color-yellow)"
-                />
-                <path
-                  d="M676.66 364.49h1.19l-.11.85h-1.18l-.11 1.02h1.23l-.1.84h-1.23l-.2 1.75h-.93l.19-1.75h-1.03l-.2 1.75h-.93l.19-1.75h-1.21l.12-.84h1.19l.12-1.02h-1.26l.11-.85h1.25l.2-1.75h.93l-.19 1.75h1.02l.2-1.75h.93l-.2 1.75Zm-1.13 1.87.12-1.03h-1.05l-.12 1.03h1.06Z"
-                  fill="var(--color-white)"
-                />
-                <path
-                  d="M681.68 368.95h-3.47v-2.11l2.17-1.97v-.95h-.86v.67h-1.24v-.99l.86-.86h2.54v2.61l-2.16 1.93v.5h2.16v1.18Z"
-                  fill="var(--color-white)"
-                />
-                <path
-                  d="M684.39 364.58v-.67h-.89v1.31h2.15v2.87l-.92.86h-2.54v-5.36l.92-.85h2.54v1.85h-1.26Zm-.89 3.19h.85v-1.35h-.85v1.35Z"
-                  fill="var(--color-white)"
-                />
-                <path
-                  d="m686.12 363.6 1.01-.86h2.48v5.36l-.86.86h-2.62v-1.93h1.27v.76h.9v-1.36h-2.17v-2.82Zm1.31 1.62h.86v-1.3h-.86v1.3Z"
-                  fill="var(--color-white)"
-                />
-                <path
-                  d="m693.71 368.1-.92.86h-2.76v-5.36l.93-.85h2.75v5.36Zm-2.38-4.18v3.86h1.08v-3.86h-1.08Z"
-                  fill="var(--color-white)"
-                />
-              </g>
             </g>
           </svg>
         </div>
