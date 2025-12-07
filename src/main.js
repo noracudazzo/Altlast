@@ -1,7 +1,8 @@
 import "@fontsource/space-mono/latin";
-import { data } from "./data";
+import { data as origData } from "./data";
 import { gsap } from "gsap";
 
+let data = structuredClone(origData);
 
 const viewport = document.querySelector(".viewport");
 const start = document.querySelector(".start");
@@ -734,25 +735,23 @@ function fadeInFast() {
 
 function startGame() {
 
-  if (localStorage.getItem("gameState")) {
-    // Save löschen
-    localStorage.removeItem("gameState");
-    // Variablen zurücksetzen
-    console.log("hatte save");
-    
-    gameStarted = false;
-    currentRoom = ROOMS[0];
-    lastUnlockedRoom = ROOMS[0];
-    nextRoomIndex = 1;
-    nextRoom = ROOMS[nextRoomIndex];
-    lastUnlockedRoomData = data[currentRoom];
-    currentNarrative = lastUnlockedRoomData.narrative;
-    lastAssistantMessage = currentNarrative;
+  // Save löschen
+  localStorage.removeItem("gameState");
+  data = structuredClone(origData);
+  // Variablen zurücksetzen
+  
+  gameStarted = false;
+  currentRoom = ROOMS[0];
+  lastUnlockedRoom = ROOMS[0];
+  nextRoomIndex = 1;
+  nextRoom = ROOMS[nextRoomIndex];
+  lastUnlockedRoomData = data[currentRoom];
+  currentNarrative = lastUnlockedRoomData.narrative;
+  lastAssistantMessage = currentNarrative;
 
-    worldState = extractStateFromData(data);
+  worldState = extractStateFromData(data);
 
-    changeRoom("elevator");
-  }
+  changeRoom("elevator");
 
   viewport.classList.add("invisible");
   gameStarted = true;
