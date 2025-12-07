@@ -1,3 +1,4 @@
+import "@fontsource/space-mono/latin";
 import { data } from "./data";
 import { gsap } from "gsap";
 
