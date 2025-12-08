@@ -779,14 +779,11 @@ function changeRoom(room) {
 }
 
 function playMusic(room) {
+  if(currentMusic) stopMusic();
+
   const musicFile = data[room]?.music;
   if (!musicFile) return; // Abbruch falls keine Datei existiert
   const musicVolume = data[room]?.musicVolume;
-
-  if(currentMusic) {
-    currentMusic.pause();
-    currentMusic.currentTime = 0;
-  }
 
   // Neue Musik starten
   currentMusic = new Audio(`/sounds/music/${musicFile}`);
@@ -797,11 +794,12 @@ function playMusic(room) {
     currentMusic.volume = 0.05;
   }
 
-  if(soundOn) currentMusic.play();
+  currentMusic.play();
 }
 
 function stopMusic() {
   currentMusic.pause();
+  currentMusic.currentTime = 0;
 }
 
 function sfx(src, volume = 0.5, loop = false) {
@@ -883,11 +881,8 @@ function startGame() {
 }
 
 function continueGame() {
+  soundOn = true;
   showAssistantMessage(currentNarrative); 
-
-  // Sound
-  activateSound();
-
   changeRoom(currentRoom);
 }
 
