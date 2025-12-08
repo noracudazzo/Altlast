@@ -2901,11 +2901,12 @@
             <div id="speechbubble" class="speechbubble hidden"></div>
           </aside>
           <nav class="main-navigation navigation" id="main-navigation">
-            <a aria-label="home" class="home-button button">
+            <a class="home-button button">
               <img src="/src/assets/imgs/ui/home-icon.svg" />
             </a>
-            <a aria-label="options" class="options-button button">
-              <img src="/src/assets/imgs/ui/options-icon.svg" />
+            <a class="sound-button button deactivate-sound">
+              <img class="sound-on-icon" src="/src/assets/imgs/ui/sound-on-icon.svg"/>
+              <img class="sound-off-icon hidden" src="/src/assets/imgs/ui/sound-off-icon.svg"/>
             </a>
           </nav>
           <aside class="room-name">
@@ -2927,13 +2928,15 @@
                     fill="var(--color-red)"
                   />
                 </g>
-                <path class="exclamation"
+                <path
+                  class="exclamation"
                   d="M157.52 84.53v19.21l-5.98 74.13h-15.31l-5.98-74.13V84.53h27.28Zm-26.01 131.03V190.1h24.74v25.46h-24.74Z"
                   fill="var(--color-red)"
                 />
               </svg>
-              <p class="warning-message"> 
-                <strong> Altlast </strong> <br> identified 
+              <p class="warning-message">
+                <strong> Altlast </strong> <br />
+                identified
               </p>
             </div>
           </div>
@@ -2949,9 +2952,6 @@
             <div class="start-buttons">
               <a class="button continue-button start-button"> Weiterspielen </a>
               <a class="button new-game-button start-button"> Neues Spiel </a>
-              <a class="button start-options-button start-button">
-                Einstellungen
-              </a>
               <a class="button credits-button start-button"> Credits </a>
             </div>
           </div>
@@ -2977,10 +2977,7 @@
             viewBox="0 0 1366 768"
           >
             <g class="elevator-doors">
-              <g
-                class="unclickableEntrance"
-                style="z-index: -2"
-              >
+              <g class="unclickableEntrance" style="z-index: -2">
                 <path
                   fill="url(#Unbenannter_Verlauf_480)"
                   d="M636.21 338.92h93.58v165.1h-93.58z"
@@ -4406,7 +4403,7 @@
                     class="frame"
                     d="M974.81 251.27v497.9l11 14.63V259.05l84.5-27.51V768h16V213.58l-111.5 37.69Z"
                     fill="var(--color-black)"
-                  />-
+                  />
                 </g>
                 <g class="door door-to-garbageRoom">
                   <path

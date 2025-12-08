@@ -8,7 +8,6 @@ const viewport = document.querySelector(".viewport");
 const start = document.querySelector(".start");
 const continueButton = document.querySelector(".continue-button");
 const newGameButton = document.querySelector(".new-game-button");
-const optionsButtonStart = document.querySelector(".start-options-button");
 const creditsButton = document.querySelector(".credits-button");
 const popup = document.getElementById("popup");
 const popupText = document.getElementById("popup-text");
@@ -17,7 +16,9 @@ const assistant = document.getElementById("assistant");
 const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
 const homeButton = document.querySelector(".home-button");
-const optionsButton = document.querySelector(".options-button");
+const soundButton = document.querySelector(".sound-button");
+const soundOnIcon = document.querySelector(".sound-on-icon");
+const soundOffIcon = document.querySelector(".sound-off-icon");
 const roomName = document.querySelector(".room-name p");
 const heightDisplay = document.getElementById("height-display");
 const elevatorControls = document.getElementById("controls");
@@ -28,7 +29,7 @@ const entrance = document.querySelector(".entrance");
 
 let zoomed = false;
 let popupShown = false;
-let newPopupClicked = false;
+let activePopupRunId = 0;
 let assistantShown = false;
 let assistantActive = false;
 let activateableButtonsActive = false;
@@ -66,12 +67,12 @@ const bleepSfx = sfx(`/sounds/effects/263133__mossy4__tone-beep.wav`, 0.4);
 const typeSfx = sfx(`/sounds/effects/738440__chris112233__key-clack1.wav`, 0.3); 
 const retypeSfx = sfx(`/sounds/effects/786190__danymo__sci-fi_computing_tr1.mp3`);
 const elevatorMovementSfx = sfx(`/sounds/effects/341190__yoyodaman234__elevator-travel-6a.wav`);
-const elevatorDoorSfx = sfx(`public/sounds/effects/581369__audiotorp__hydraulic_door_scifi_withdecompression.wav`);
-const elevatorIsOpenSfx = sfx(`public/sounds/effects/529559__drmrsir__ping.wav`);
-const openDoorSfx = sfx(`/sounds/effects/400329__n-razm__door_open.wav`, 0.3); 
-const closeDoorSfx = sfx(`/sounds/effects/426734__samuelgremaud__door-closing.wav`); 
-const openFridgeSfx = sfx(`/sounds/effects/8865__harri__1_fridge_open.mp3`, 0.5); 
-const closeFridgeSfx = sfx(`/sounds/effects/8876__harri__2_fridge_close.mp3`, 0.5); 
+const elevatorDoorSfx = sfx(`/sounds/effects/581369__audiotorp__hydraulic_door_scifi_withdecompression.wav`);
+const elevatorIsThereSfx = sfx(`/sounds/effects/529559__drmrsir__ping.wav`);
+const openDoorSfx = sfx(`/sounds/effects/400329__n-razm__door_open.wav`, 0.1); 
+const closeDoorSfx = sfx(`/sounds/effects/426734__samuelgremaud__door-closing.wav`, 0.2); 
+const openFridgeSfx = sfx(`/sounds/effects/8865__harri__1_fridge_open.mp3`, 0.3); 
+const closeFridgeSfx = sfx(`/sounds/effects/8876__harri__2_fridge_close.mp3`, 0.3); 
 const openShelfSfx = sfx(`/sounds/effects/131888__vtownpunks__cupboard-4.wav`); 
 const closeShelfSfx = sfx(`/sounds/effects/131889__vtownpunks__cupboard-3.wav`); 
 const altlastIdentifiedSfx = sfx(`/sounds/effects/448745__lilmati__futuristic-city-terminal.wav`, 0.1); 
@@ -136,7 +137,7 @@ function saveGame() {
     currentRoom,
     lastUnlockedRoom,
     nextRoomIndex,
-    worldState
+    worldState,
   };
 
   localStorage.setItem("gameState", JSON.stringify(state));
@@ -506,15 +507,15 @@ function closeAssistantMessage() {
 
 function closePopup() {
   popupShown = false;
-  newPopupClicked = false;
+  activePopupRunId++;
   popup.classList.remove("visible"); 
   if(altlastIdentified) removeAltlastEffect();
 }
 
 async function showPopUp(hotspot) {
   if(altlastIdentified) removeAltlastEffect();
-  newPopupClicked = true;
-  setTimeout(() => newPopupClicked = false, 100);
+
+  const runId = ++activePopupRunId; // eindeutige ID
 
   const id = hotspot.id;
   const config = data[currentRoom][id];
@@ -535,6 +536,7 @@ async function showPopUp(hotspot) {
 
   // Position setzen
 
+  if(aborted(runId)) return;
   // X-Achse
   if (config.textLocation.left === "center" || config.textLocation.right === "center") { 
     const popupWidth = popup.getBoundingClientRect().width;
@@ -553,6 +555,7 @@ async function showPopUp(hotspot) {
     popup.style.left = "unset"; 
   }
 
+  if(aborted(runId)) return;
   // Y-Achse
   if (config.textLocation.top === "center" || config.textLocation.bottom === "center") { 
     const popupHeight = popup.getBoundingClientRect().height;
@@ -571,6 +574,7 @@ async function showPopUp(hotspot) {
     popup.style.top = "unset"; 
   }
 
+  if(aborted(runId)) return;
   popupText.innerHTML = ""; // Text reset
 
   const texts = [];
@@ -603,7 +607,7 @@ async function showPopUp(hotspot) {
 
   // Typewriter
   for (const { li, strong, el, text, isAltlast } of texts) {
-    if (!popupShown && !newPopupClicked) return; 
+    if(aborted(runId)) return;
 
     li.style.transition = "opacity 0.3s ease";
     li.style.opacity = 1;
@@ -614,18 +618,18 @@ async function showPopUp(hotspot) {
     
     await new Promise(r => setTimeout(r, 400 + Math.random() * 200));
 
-    if (!popupShown && !newPopupClicked) return; 
+    if(aborted(runId)) return;
     await typeText(el, text, 50, false, isAltlast);
 
-    if (!popupShown && !newPopupClicked) return; 
+    if(aborted(runId)) return;
     await new Promise(r => setTimeout(r, 200)); // Pause zwischen den Zeilen
   }
 
-  if (popupShown && !newPopupClicked && config.comment) {
+  if(!aborted(runId) && config.comment) {
     showAssistantMessage(config.comment);
   };
 
-  if(altlastIdentified && popupShown && !newPopupClicked) endAltlastPopup(); 
+  if(altlastIdentified && popupShown && !aborted(runId)) endAltlastPopup(); 
 }
 
 function prepareButton(button, parentId) {
@@ -700,8 +704,8 @@ function deactivateElement(baseId) {
 
   if (!baseElement || !activatedElement) return;
 
-  if(baseId === "fridge") closeFridgeSfx.play();
-  if(baseId === "shelf") closeShelfSfx.play();
+  if(baseId === "fridge" && activateableElementActivated) closeFridgeSfx.play();
+  if(baseId === "shelf" && activateableElementActivated) closeShelfSfx.play();
 
   // Sichtbar machen
   activatedElement.classList.add("hidden");
@@ -737,17 +741,19 @@ function canNextRoomBeUnlocked() {
 }
 
 function changeRoom(room) {
-  if (scene.classList.contains("leaveHovered")) scene.classList.remove("leaveHovered"); // tbd, klappt das? Hover reset
+  if (scene.classList.contains("leaveHovered")) scene.classList.remove("leaveHovered"); // Hover reset
   setCursor("default"); // Cursor reset
+  
   scene.classList.add("hidden");
-  console.log("room changed");
 
   currentRoom = room; 
   roomName.textContent = data[currentRoom].displayName;
 
   scene = document.querySelector("." + currentRoom);
   scene.classList.remove("hidden");
-  playMusic(currentRoom);
+  if(soundOn) activateSound();
+
+  if(assistantActive) closeAssistantMessage();
 
   const config = data[currentRoom];
   const currentStartNarrative = config.startNarrative;
@@ -768,7 +774,7 @@ function changeRoom(room) {
     currentRoom,
     lastUnlockedRoom,
     nextRoomIndex,
-    worldState
+    worldState,
   });
 }
 
@@ -807,6 +813,25 @@ function sfx(src, volume = 0.5, loop = false) {
   return audio;
 }
 
+function activateSound() {
+  soundOn = true;
+  SFX.forEach(s => s.muted = false);
+  playMusic(currentRoom);
+
+  soundOnIcon.classList.remove("hidden");
+  soundOffIcon.classList.add("hidden");
+}
+
+function deactivateSound() {
+  soundOn = false;
+  stopMusic();
+  SFX.forEach(s => s.muted = true);
+  speechSynthesis.cancel();
+
+  soundOnIcon.classList.add("hidden");
+  soundOffIcon.classList.remove("hidden");
+}
+
 function fadeInSlow() {
   viewport.classList.add("slow-fading");
   viewport.classList.remove("invisible");
@@ -842,6 +867,7 @@ function startGame() {
   lastUnlockedRoomData = data[currentRoom];
   currentNarrative = lastUnlockedRoomData.narrative;
   lastAssistantMessage = currentNarrative;
+  soundOn = true;
 
   worldState = extractStateFromData(data);
   resetClasses();
@@ -858,6 +884,11 @@ function startGame() {
 
 function continueGame() {
   showAssistantMessage(currentNarrative); 
+
+  // Sound
+  activateSound();
+
+  changeRoom(currentRoom);
 }
 
 
@@ -882,8 +913,8 @@ function openElevator() {
         scene.classList.remove("shake");
         elevatorDoorSfx.play();
         setTimeout(() => {
-          elevatorIsOpenSfx.play();
-        }, 1000
+          elevatorIsThereSfx.play();
+        }, 500
       );
         setTimeout(() => {
           elevatorDoorBackgroundPlaceholder.classList.add("hidden");
@@ -920,6 +951,11 @@ function activateClick() {
 function deactivateClick() {
   if (!viewport.classList.contains("noclick")) viewport.classList.add("noclick");
 }
+
+function aborted(runId) {
+  return runId !== activePopupRunId || !popupShown;
+}
+
 
 // Initalize game
 
@@ -1095,10 +1131,6 @@ document.querySelectorAll(".start").forEach(button => {
     startGame();
   });
 
-  optionsButtonStart.addEventListener("click", () => {
-    // Open settings screen
-  });
-
   creditsButton.addEventListener("click", () => {
     // Open credits screen
   });
@@ -1127,18 +1159,13 @@ homeButton.addEventListener("click", () => {
 });
 
 // Click (Controls)
-optionsButton.addEventListener("click", () => {
+soundButton.addEventListener("click", () => {
   clickSfx.play();
 
   if (!soundOn) {
-    playMusic(currentRoom); 
-    soundOn = true;
-    SFX.forEach(s => s.muted = false);
+    activateSound();
   } else {
-    stopMusic(currentMusic);
-    SFX.forEach(s => s.muted = true);
-    speechSynthesis.cancel();
-    soundOn = false;
+    deactivateSound();
   }
 });
 

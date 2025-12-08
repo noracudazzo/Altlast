@@ -396,9 +396,9 @@ main {
   box-shadow: 0 0 15px #ffffff9e;
 }
 
-.main-navigation a img {
+.main-navigation .sound-button img {
   object-fit: cover;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .main-navigation .home-button img {

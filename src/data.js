@@ -17,6 +17,7 @@ export const data = {
     hasBeenEntered: true,
     canBeLeft: false,
     music: "mesa-10550.mp3",
+    musicVolume: 0.025,
 
     ventilation1: {
       scale: 4,
@@ -93,6 +94,7 @@ export const data = {
     displayName: "Flur",
     isUnlocked: false,
     music: "interstellar-adventure-space-theme-soundtrack-4494.mp3",
+    musicVolume: 0.2,
     startNarrative: [
       "Vom Flur aus gelangst du in jeden Raum.",
       "Du kannst jederzeit zurückkommen, um zu den restlichen Räumen zu gelangen.",
@@ -112,6 +114,7 @@ export const data = {
     hasBeenEntered: false,
     canBeLeft: true,
     music: "moebius-21329.mp3",
+    musicVolume: 0.015,
 
     smallPlants: {
       scale: 4,
