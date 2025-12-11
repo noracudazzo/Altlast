@@ -564,6 +564,23 @@ span.altlastIdentified, strong.altlastIdentified {
   100% { transform: translateY(1rem); }
 }
 
+@keyframes glowNflicker {
+  0% { filter: blur(10px); }
+  10% { filter: blur(2px); }
+  20% { filter: blur(10px); }
+  30% { filter: blur(2px); }
+  40% { filter: blur(10px); }
+  50% { filter: blur(2px); }
+  60% { filter: blur(10px); }
+  70% { filter: blur(2px); }
+  80% { filter: blur(10px); }
+  90% { filter: blur(2px); }
+  91% { filter: blur(0px); }
+  92% { filter: blur(10px); }
+  93% { filter: blur(0px); }
+  100% { filter: blur(10px); }
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 0%;
@@ -738,6 +755,13 @@ span.altlastIdentified, strong.altlastIdentified {
   filter: drop-shadow(0 0 6px white);
 } 
 
+/* Bedroom */
+
+ #neon-text .neon-blur {
+  filter: blur(10px);
+  animation: glowNflicker 10s infinite;
+  transition: 0.5s ease;
+}
 /* Media queries */
 
 @media (max-width: 1500px) {

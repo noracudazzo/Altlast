@@ -461,7 +461,7 @@ async function showAssistantMessage(comment = null) {
     };
 
 
-    speakTextRobot(text); // Sprachausgabe
+    // speakTextRobot(text); // Sprachausgabe
     await typeText(p, text, 40, true, false);
 
     // Wenn weitere Texte folgen

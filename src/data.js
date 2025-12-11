@@ -300,7 +300,7 @@ export const data = {
     narrative: "Durchsuche das Wohnzimmer.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "magical-technology-sci-fi-science-futuristic-game-music-300607.mp3",
+    music: "deep-vibes-synthwave-beat-259777.mp3",
 
     view3: {
       scale: 2.5,
@@ -560,9 +560,9 @@ export const data = {
     narrative: "Durchsuche das Schlafzimmer.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "moebius-21329.mp3",
+    music: "magical-technology-sci-fi-science-futuristic-game-music-300607.mp3",
 
-    smallPlants: {
+    plant3: {
       scale: 4,
       originX: 3250,
       originY: 1200, 
@@ -578,6 +578,126 @@ export const data = {
           bottom: 450,
       }
     },
+
+    view4: {
+      scale: 2.5,
+      originX: 0,
+      originY: 1525, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Sichtbarer Bereich", data: "Wohnkomplex 5D-F Mitte" },
+        year: { title: "Baujahr", data: "19" },
+        belongsTo: { title: "Zugehörigkeit", data: "Cluster Mitte" },
+        description: { title: "Beschreibung", data: "Beliebtes Wohngebiet."},
+      },
+      textLocation: {
+        right: 500,
+        top: "center",
+      }
+    },
+
+    drawers: {
+      scale: 4,
+      originX: 1200,
+      originY: 2500, 
+      hasBeenClicked: false,
+    },
+
+    plushie: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "StuffyMate 600" },
+        year: { title: "Herstellungsjahr", data: "13" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        belongsTo: { title: "Beschreibung", data: "Dekorationselement" },
+      },
+      comment: "Mit dem Fuchs hast du früher sehr oft gespielt, wenn du bei Oma Ellen zu Gast warst. Schöne Zeiten.",
+      textLocation: {
+        right: 300,
+        top: 1250,
+      }
+    },
+
+    shirt: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        year: { title: "Herstellungsjahr", data: "2044"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+      },
+      comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
+      textLocation: {
+        right: 300,
+        top: 1250,
+      }
+    },
+
+    suit: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        year: { title: "Herstellungsjahr", data: "2044"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+      },
+      textLocation: {
+        right: 300,
+        top: 1250,
+      }
+    },
+
+    shoes: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        year: { title: "Herstellungsjahr", data: "2044"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+      },
+      comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
+      textLocation: {
+        right: 300,
+        top: 1250,
+      }
+    },
+
+    flashlight: {
+      scale: 4,
+      originX: 0,
+      originY: 500, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        year: { title: "Herstellungsjahr", data: "2044"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
+        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+      },
+      comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
+      textLocation: {
+        right: 300,
+        top: 1250,
+      }
+    },
+
+
+
   },
 
   office: {
