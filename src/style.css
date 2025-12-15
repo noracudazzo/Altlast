@@ -33,6 +33,10 @@ footer, header, hgroup, menu, nav, section {
   filter: drop-shadow(0 0 6px white);
 }
 
+.activationButton.activeButton:hover {
+  filter: drop-shadow(0 0 6px white);
+}
+
 .door.hovered {
   filter: drop-shadow(0 0 20px var(--color-yellow));
 }
@@ -743,11 +747,11 @@ span.altlastIdentified, strong.altlastIdentified {
   transition: ease 0.1s;
 }
 
-/* Living room */
-
-.livingRoom .activationButton.activeButton:hover {
-  filter: drop-shadow(0 0 6px white);
+.kitchen .activationButton.activeButton:hover {
+  filter: none;
 }
+
+/* Living room */
 
 .livingRoom #map-current-location {
   transform-origin: 51% 43%;

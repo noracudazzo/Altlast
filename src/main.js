@@ -6,6 +6,7 @@ let data = structuredClone(origData);
 
 const viewport = document.querySelector(".viewport");
 const start = document.querySelector(".start");
+const scenes = document.querySelectorAll(".scene");
 const continueButton = document.querySelector(".continue-button");
 const newGameButton = document.querySelector(".new-game-button");
 const creditsButton = document.querySelector(".credits-button");
@@ -26,6 +27,7 @@ const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorB
 const elevatorDoors = document.querySelector(".elevator-doors");
 const elevatorHotspots = document.querySelectorAll(".elevator .hotspot");
 const entrance = document.querySelector(".entrance");
+const doorBodies = document.querySelectorAll(".doorBody");
 
 let zoomed = false;
 let popupShown = false;
@@ -122,12 +124,15 @@ function resetClasses() {
   viewport.classList.remove("slow-fading", "fast-fading", "invisible", "noclick");
 
   // Scenes
-  const scenes = document.querySelectorAll(".scene");
   scenes.forEach(scene => {
     scene.classList.remove("shake", "leaveHovered");
   });
 
   elevatorDoors.classList.remove("no-transition");
+
+  doorBodies?.forEach(db => {
+    db.classList.remove("hidden");
+  });
 }
 
 
@@ -141,7 +146,6 @@ function saveGame() {
   };
 
   localStorage.setItem("gameState", JSON.stringify(state));
-  console.log("Game saved!");
 }
 
 function loadGame() {
@@ -180,6 +184,19 @@ function applyWorldStateToData(worldState) {
       }
     }
   }
+}
+
+function syncDoorsWithState() {
+  ROOMS.forEach(room => {
+    const doorBody = document.querySelector(`.door-to-${room} .doorBody`);
+    if (!doorBody) return;
+
+    if (data[room].isUnlocked) {
+      doorBody.classList.add("hidden");
+    } else {
+      doorBody.classList.remove("hidden");
+    }
+  });
 }
 
 function initGame() {
@@ -652,7 +669,6 @@ function prepareButton(button, parentId) {
       if (button.classList.contains("controlsButton") && currentRoom === "elevator") {
 
         const controlButtonBackground = button.querySelector(".controls-button-background");
-        console.log(button);
         controlButtonBackground.classList.add("clicked");
         setTimeout(() => controlButtonBackground.classList.remove("clicked"), 300);
         setTimeout(() => controlButtonBackground.classList.add("unclicked"), 300);
@@ -664,8 +680,8 @@ function prepareButton(button, parentId) {
             elevatorControls.classList.add("background");
             resetZoom();
             openElevator(); 
-            unlockRoom(nextRoom);
-            unlockRoom(nextRoom);
+            unlockNextRoom();
+            unlockNextRoom();
           }, 300);
         } else {
           errorSfx.play();
@@ -732,8 +748,8 @@ function canNextRoomBeUnlocked() {
 
     // Wenn es einen nächsten Raum gibt: freischalten
     if (nextRoom && data[nextRoom]) { 
-      unlockRoom(nextRoom);
-      showAssistantMessage(data[lastUnlockedRoom].startNarrative);
+      showAssistantMessage(data[nextRoom].startNarrative);
+      unlockNextRoom();
     } else {
       currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
     }
@@ -923,13 +939,19 @@ function openElevator() {
 } 
 }
 
-function unlockRoom(room) { 
+function unlockNextRoom() { 
   lastUnlockedRoom = ROOMS[nextRoomIndex];
-  console.log(nextRoomIndex);
-  console.log(`Raum freigeschaltet: ${lastUnlockedRoom}`);
   data[lastUnlockedRoom].isUnlocked = true;
+
   nextRoomIndex++;
+  nextRoom = ROOMS[nextRoomIndex];
+
   currentNarrative = data[lastUnlockedRoom].narrative;
+
+  const doorBody = document.querySelector(`.door-to-${lastUnlockedRoom} .doorBody`);
+  console.log(`.door-to-${lastUnlockedRoom} .doorBody`);
+  console.log(doorBody);
+  if(doorBody) doorBody.classList.add("hidden");
 }
 
 function getDoorTarget(door) {
@@ -957,7 +979,6 @@ function aborted(runId) {
 const saved = loadGame();
 
 if (saved) {
-  console.log("Loaded save:", saved);
 
   // Einzelne Variablen zurückschreiben
   gameStarted = saved.gameStarted;
@@ -967,6 +988,7 @@ if (saved) {
 
   // worldState wieder in data.js pushen
   applyWorldStateToData(saved.worldState);
+  syncDoorsWithState();
 
   // Für interne Abläufe aktualisieren
   nextRoom = ROOMS[nextRoomIndex];
@@ -1188,7 +1210,6 @@ document.addEventListener("click", (e) => {
 // Click (Zoom Out)
 document.addEventListener("click", e => {
   if (!zoomed) return;
-  console.log(document.getElementById("speechbubble"));
   if (
     e.target.closest(".main-navigation") || 
     e.target.closest("#popup.popup") ||
