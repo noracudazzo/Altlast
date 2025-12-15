@@ -125,7 +125,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
           left: "center",
@@ -142,7 +142,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Gamma C" },
         year: { title: "Herstellungsjahr", data: "53" },
         status: { title: "Status", data: "Gesund, automatische Bewässerung aktiv" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690"},
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt"},
       },
       textLocation: {
         left: "center",
@@ -178,7 +178,7 @@ export const data = {
         name: { title: "Objektname", data: "FoodSynth Sixteen 1" },
         year: { title: "Herstellungsjahr", data: "48" },
         status: { title: "Status", data: "Inaktiv" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         description: { title: "Beschreibung", data: "Multifunktionale Küchenmaschine."},
       },
       textLocation: {
@@ -353,7 +353,7 @@ export const data = {
         name: { title: "Objektname", data: "Television Reciever NM-X"},
         year: { title: "Herstellungsjahr", data: "43" },
         status: { title: "Status", data: "Inaktiv, Leistung eingeschränkt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
           right: 1000,
@@ -378,7 +378,7 @@ export const data = {
         bookTitle: { title: "Titel", data: "Die Lichtblicke des Lebens"},
         year: { title: "Veröffentlichungsjahr", data: "32" },
         genre: { title: "Genre", data: "Selbstoptimierung"},
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         // description: { title: "Beschreibung", data: "Lerne, auch die kleinen Dinge im Leben zu schätzen." },
       },
       textLocation: {
@@ -397,7 +397,7 @@ export const data = {
         bookTitle: { title: "Titel", data: "Urbane Ernährung"},
         year: { title: "Veröffentlichungsjahr", data: "51" },
         genre: { title: "Genre", data: "Ernährung"},
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         // description: { title: "Beschreibung", data: "Effiziente Nutrition von Anbau bis Verdauung." },
       },
       textLocation: {
@@ -416,7 +416,7 @@ export const data = {
         bookTitle: { title: "Titel", data: "Die Arbeit von morgen"},
         year: { title: "Veröffentlichungsjahr", data: "15" },
         genre: { title: "Genre", data: "Gesellschaft"},
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         // description: { title: "Beschreibung", data: "Wie wir Arbeit verringern und reformieren können." },
       },
       comment: [ 
@@ -458,7 +458,7 @@ export const data = {
         bookTitle: { title: "Titel", data: "Alltag meistern mit neuer Technologie"},
         year: { title: "Veröffentlichungsjahr", data: "9" },
         genre: { title: "Genre", data: "Wissenschaft"},
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
         // description: { title: "Beschreibung", data: "Wie künstliche Intelligenz unser Leben umkrempeln kann." },
       },
       comment: "Spoiler Alert: in diesem verstaubten Werk geht es auch um mich!",
@@ -564,18 +564,18 @@ export const data = {
 
     plant3: {
       scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      originX: 900,
+      originY: 2000, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
           left: "center",
-          bottom: 450,
+          top: 450,
       }
     },
 
@@ -597,83 +597,82 @@ export const data = {
     },
 
     drawers: {
-      scale: 4,
-      originX: 1200,
-      originY: 2500, 
+      scale: 5,
+      originX: 1000,
+      originY: 2300, 
       hasBeenClicked: false,
     },
 
     plushie: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 5,
+      originX: 3150,
+      originY: 2050, 
       hasBeenClicked: false,
       text: {
         name: { title: "Objektname", data: "StuffyMate 600" },
         year: { title: "Herstellungsjahr", data: "13" },
+        status: { title: "Status", data: "Abgenutzt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        belongsTo: { title: "Beschreibung", data: "Dekorationselement" },
       },
       comment: "Mit dem Fuchs hast du früher sehr oft gespielt, wenn du bei Oma Ellen zu Gast warst. Schöne Zeiten.",
       textLocation: {
-        right: 300,
-        top: 1250,
+        right: "center",
+        top: 450,
       }
     },
 
     shirt: {
       scale: 4,
-      originX: 0,
-      originY: 500, 
+      originX: 4900,
+      originY: 900, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
         name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
-        year: { title: "Herstellungsjahr", data: "2044"},
+        year: { title: "Herstellungsjahr", data: "2041"},
+        status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
       },
       comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
       textLocation: {
-        right: 300,
-        top: 1250,
+        left: 500,
+        top: "center",
       }
     },
 
     suit: {
-      scale: 4,
-      originX: 0,
-      originY: 500, 
+      scale: 2.5,
+      originX: 5464,
+      originY: 1000, 
       hasBeenClicked: false,
-      isAltlast: true,
+      isAltlast: false,
       text: {
-        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
-        year: { title: "Herstellungsjahr", data: "2044"},
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+        name: { title: "Objektname", data: "Day Flex Suit 7"},
+        year: { title: "Herstellungsjahr", data: "52"},
+        status: { title: "Status", data: "Leicht abgenutzt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
-        right: 300,
-        top: 1250,
+        left: 500,
+        top: "center",
       }
     },
 
     shoes: {
       scale: 4,
-      originX: 0,
-      originY: 500, 
+      originX: 5464,
+      originY: 2450, 
       hasBeenClicked: false,
-      isAltlast: true,
+      isAltlast: false,
       text: {
-        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
-        year: { title: "Herstellungsjahr", data: "2044"},
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
+        name: { title: "Objektname", data: "AgileBoots RC"},
+        year: { title: "Herstellungsjahr", data: "48"},
+        status: { title: "Status", data: "Leicht abgenutzt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
-      comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
       textLocation: {
-        right: 300,
-        top: 1250,
+        right: "center",
+        top: 450,
       }
     },
 
@@ -684,15 +683,15 @@ export const data = {
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        name: { title: "Objektname", data: "Taschenlampe"},
         year: { title: "Herstellungsjahr", data: "2044"},
+        status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-        belongsTo: { title: "Beschreibung", data: "Nicht verfügbar" },
       },
       comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
       textLocation: {
-        right: 300,
-        top: 1250,
+        left: "center",
+        top: 300,
       }
     },
 
@@ -721,7 +720,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
           left: "center",
@@ -751,7 +750,7 @@ export const data = {
         name: { title: "Objektname", data: "GreenUnit Delta II" },
         year: { title: "Herstellungsjahr", data: "52" },
         status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt #2690" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
           left: "center",
