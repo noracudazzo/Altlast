@@ -1,4 +1,4 @@
-// import "@fontsource/space-mono/latin";
+import "@fontsource/space-mono/latin";
 import { data as origData } from "./data";
 import { gsap } from "gsap";
 
@@ -28,6 +28,10 @@ const elevatorDoors = document.querySelector(".elevator-doors");
 const elevatorHotspots = document.querySelectorAll(".elevator .hotspot");
 const entrance = document.querySelector(".entrance");
 const doorBodies = document.querySelectorAll(".doorBody");
+const board = document.getElementById("board");
+const board1 = document.getElementById("board1");
+const board2 = document.getElementById("board2");
+const boardObjects = document.querySelectorAll(".board .object");
 
 let zoomed = false;
 let popupShown = false;
@@ -119,6 +123,9 @@ function resetClasses() {
   elevatorDoors.classList.add("no-transition");
   entrance.classList.add("hidden"); 
   elevatorDoorBackgroundPlaceholder.classList.remove("hidden");
+
+  // Office
+  // tbd Objects.classList.add("background");
 
   // Viewport
   viewport.classList.remove("slow-fading", "fast-fading", "invisible", "noclick");
@@ -272,13 +279,19 @@ function zoomTo(hotspot) {
   // Zoomed Klasse adden
   hotspot.classList.add("zoomed");
 
-  // Potentielle Buttons aktivieren WICHTIG
+  // Potentielle Buttons aktivieren
   const relatedButtons = document.querySelectorAll(`.${id}Button`);
 
   relatedButtons.forEach(button => {
     setTimeout(() => prepareButton(button, id), 500);
     activateableButtonsActive = true;
   });
+
+  // Potentielle Elemente klickbar machen
+  if(hotspot = board1 || board2) {
+    console.log("hotspot ist board");
+    activateElement(hotspot); // tbd
+  }
 }
 
 function deactivateElements() {
@@ -700,7 +713,16 @@ function activateElement(baseId) {
   activatedElement.classList.add("zoomed");
 
   if(baseId === "fridge") openFridgeSfx.play();
-  if(baseId === "shelf") openShelfSfx.play();
+  if(baseId === "shelf" || baseId === "shelf2" ) openShelfSfx.play();
+
+  // Booleans
+  setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
+
+  if(baseId = board1 || board2) {
+    console.log("ist identisch"); // tbd
+    boardObjects.forEach(el => el.classList.remove("background"));
+    return;
+  }
 
   fadeOutFast()
   setTimeout(() => {
@@ -710,8 +732,6 @@ function activateElement(baseId) {
     baseElement.classList.add("hidden");
   }, 400); 
 
-   // Booleans
-  setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
 }
 
 function deactivateElement(baseId) {
@@ -723,13 +743,18 @@ function deactivateElement(baseId) {
   if(baseId === "fridge" && activateableElementActivated) closeFridgeSfx.play();
   if(baseId === "shelf" && activateableElementActivated) closeShelfSfx.play();
 
-  // Sichtbar machen
-  activatedElement.classList.add("hidden");
-  baseElement.classList.remove("hidden");
-
   // Booleans
   activateableElementActivated = false;
   activateableButtonsActive = false;
+
+  if(baseId === board) {
+    boardObjects.forEach(el => el.classList.add("background"));
+    return; // tbd
+  }
+
+  // Sichtbar machen
+  activatedElement.classList.add("hidden");
+  baseElement.classList.remove("hidden");
 }
 
 function areAllHotspotsClicked(roomId) { // checkt, ob Raum fertig durchsucht ist

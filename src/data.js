@@ -633,7 +633,7 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
-      comment: "Schon wieder... ist scheinbar an der Zeit, das alles auszumisten.",
+      comment: "Das Shirt solltest du am Ende besser entsorgen.",
       textLocation: {
         left: 500,
         top: "center",
@@ -711,7 +711,404 @@ export const data = {
     canBeLeft: true,
     music: "scifi-intro-outro-352086.mp3",
 
-    smallPlants: {
+
+    board1: {
+      scale: 3.65,
+      originX: 3300,
+      originY: 1055, 
+      hasBeenClicked: false,
+    },
+
+    board2: {
+      scale: 3.65,
+      originX: 1900,
+      originY: 1055, 
+      hasBeenClicked: false,
+    },
+
+    document: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    wristband: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    id: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker1: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker2: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker3: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker4: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker5: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    sticker6: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    protestImage: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    voteDoc1: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    voteDoc2: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    flyer: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    poem: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    electricityMap: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    globe: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    shelf2: {
+      scale: 4,
+      originX: 500,
+      originY: 1900, 
+      hasBeenClicked: false,
+    },
+
+    batteries: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    flare: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    book10: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    clock: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    calendar: {
+      scale: 4,
+      originX: 3250,
+      originY: 1200, 
+      hasBeenClicked: false,
+      isAltlast: true,
+      text: {
+        name: { title: "Objektname", data: "GreenUnit Delta II" },
+        year: { title: "Herstellungsjahr", data: "52" },
+        status: { title: "Status", data: "Gesund" },
+        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+      },
+      textLocation: {
+          left: "center",
+          bottom: 450,
+      }
+    },
+
+    tv2: {
       scale: 4,
       originX: 3250,
       originY: 1200, 
