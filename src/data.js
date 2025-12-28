@@ -1140,7 +1140,7 @@ export const data = {
     narrative: "Gehe in den Entsorgungsraum.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "moebius-21329.mp3",
+    music: "485049__bolkmar__fx-cut-paper.wav",
 
     smallPlants: {
       scale: 4,

@@ -17,6 +17,49 @@
       <defs>
         <!-- Verläufe. tbd hier muss ich nochmal ran -->
         <linearGradient
+          id="Unbenannter_Verlauf_170"
+          x1="683.11"
+          x2="683.11"
+          y1="366.28"
+          y2="410.35"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#180e23" />
+          <stop offset=".3" stop-color="#132f4b" />
+          <stop offset=".58" stop-color="#104768" />
+          <stop offset=".83" stop-color="#0e567a" />
+          <stop offset="1" stop-color="#0e5c81" />
+        </linearGradient>
+        <linearGradient
+          id="Unbenannter_Verlauf_124"
+          x1="683.11"
+          x2="683.11"
+          y1="356.33"
+          y2="256.94"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#180e23" />
+          <stop offset=".02" stop-color="#170e23" />
+          <stop offset="1" stop-color="#152842" />
+        </linearGradient>
+        <linearGradient
+          xlink:href="#Unbenannter_Verlauf_124"
+          id="Unbenannter_Verlauf_124-2"
+          y1="694.08"
+          y2="406.5"
+        />
+        <linearGradient
+          id="Unbenannter_Verlauf_221"
+          x1="683.42"
+          x2="683.42"
+          y1="660.89"
+          y2="651.76"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#180e23" />
+          <stop offset="1" stop-color="#161e36" />
+        </linearGradient>
+        <linearGradient
           id="Unbenannter_Verlauf_117"
           x1="553.11"
           y1="492.81"
@@ -10581,6 +10624,81 @@
             class="layer foreground"
             src="src/assets/imgs/rooms/office/foreground.png"
           />
+      </div>
+
+      <!-- Garbage Room -->
+      <div class="scene garbageRoom hidden">
+          <img
+            class="layer background"
+            src="src/assets/imgs/rooms/garbageRoom/background.png"
+          />
+          <svg class="layer objects" viewBox="0 0 1366 768">
+            <g class="objects"> 
+                <g class="object hotspot" id="shredder">
+                  <path
+                    d="M429.44 366.28h507.34v44.07H429.44z"
+                    style="fill: url(#Unbenannter_Verlauf_170)"
+                  />
+                  <path
+                    d="m378.12 406.5 46.29-7.01v-92.85l-46.29-9.54v109.4zM988.11 406.5l-46.29-7.01v-92.85l46.29-9.54v109.4z"
+                    fill="#152842"
+                  />
+                  <path
+                    d="M424.41 256.94h517.4v99.39h-517.4z"
+                    style="fill: url(#Unbenannter_Verlauf_124)"
+                  />
+                  <path
+                    d="M377.53 406.5H988.7v287.58H377.53z"
+                    style="fill: url(#Unbenannter_Verlauf_124-2)"
+                  />
+                  <path
+                    d="M683 426.97 858.21 559.7 683 692.43 507.79 559.7 683 426.97z"
+                    style="fill: #00c3ff; opacity: 0.06"
+                  />
+                  <path
+                    d="M936.78 396.61v-30.33l33.31 30.33h-33.31zM396.04 396.61l33.49-30.33v30.33h-33.49z"
+                    fill="#212239"
+                  />
+                  <path d="M368.59 660.89h629.64v33.19H368.59z" fill="var(--color-black)" />
+                  <path
+                    d="M988.7 651.76H378.16l-9.57 9.13h629.66l-9.55-9.13z"
+                    style="fill: url(#Unbenannter_Verlauf_221)"
+                  />
+                  <g id="teeth2">
+                    <path
+                      d="m421.77 377.19-19.55 19.42h18.19l1.36-19.42zM455.13 377.33l-.14 19.28h-18.2l18.34-19.28zM487.94 377.46l1.09 19.15h-18.2l17.11-19.15zM520.68 377.6l2.31 19.01H504.8l15.88-19.01zM553.43 377.73l3.53 18.88h-18.2l14.67-18.88zM586.17 377.87l4.76 18.74h-18.2l13.44-18.74zM618.92 378l5.97 18.61H606.7L618.92 378zM651.66 378.14l7.2 18.47h-18.2l11-18.47zM684.41 378.27l8.42 18.34h-18.2l9.78-18.34zM717.15 378.41l9.64 18.2H708.6l8.55-18.2zM749.9 378.54l10.86 18.07h-18.2l7.34-18.07zM782.64 378.67l12.09 17.94h-18.2l6.11-17.94zM815.39 378.81l13.3 17.8H810.5l4.89-17.8zM848.13 378.94l14.53 17.67h-18.2l3.67-17.67zM880.87 379.08l15.76 17.53h-18.2l2.44-17.53zM913.58 379.21l16.97 17.4h-18.2l1.23-17.4zM946.36 379.35l18.2 17.26h-18.2v-17.26z"
+                      fill="var(--color-cyan)"
+                    />
+                  </g>
+                  <g id="teeth1">
+                    <path
+                      d="m429.53 383.55 18.2-17.27h-18.2v17.27zM463.47 383.69l-1.3-17.41h18.2l-16.9 17.41zM497.5 383.83l-2.61-17.55h18.2l-15.59 17.55zM531.48 383.98l-3.91-17.7h18.2l-14.29 17.7zM565.47 384.12l-5.22-17.84h18.2l-12.98 17.84zM599.45 384.26l-6.52-17.98h18.2l-11.68 17.98zM633.43 384.41l-7.82-18.13h18.2l-10.38 18.13zM667.42 384.55l-9.13-18.27h18.2l-9.07 18.27zM701.4 384.69l-10.43-18.41h18.2l-7.77 18.41zM735.38 384.84l-11.73-18.56h18.2l-6.47 18.56zM769.37 384.98l-13.04-18.7h18.2l-5.16 18.7zM803.35 385.12l-14.34-18.84h18.19l-3.85 18.84zM837.33 385.27l-15.64-18.99h18.19l-2.55 18.99zM871.31 385.41l-16.94-19.13h18.19l-1.25 19.13zM905.27 385.56l-18.25-19.28h18.19l.06 19.28zM938.6 385.7l-19.55-19.42h18.19l1.36 19.42z"
+                      fill="var(--color-cyan)"
+                    />
+                  </g>
+                  <path
+                    id="front"
+                    d="m997.67 410.35-53.32-58.02H422.08L368.4 410.5h.19v47.19h629.63v-47.34h-.55Zm-60.79-44.07 33.3 30.33H396.04l33.49-30.33h507.35Z"
+                    fill="var(--color-black)"
+                  />
+                </g>
+            </g>
+          </svg>
+          <img
+            class="layer foreground"
+            src="src/assets/imgs/rooms/garbageRoom/foreground.png"
+          />
+      </div>  
+      
+      <!-- Outro -->
+      <div class="scene outro hidden">
+        <p class="outroText1"> Das Spiel lässt dir keine Wahl. </p>
+        <p class="outroText1"> Doch wie wirst du dich im echten Leben entscheiden? </p>
+      </div>
+
+      <!-- Credits -->
+      <div class="scene credits hidden">
+        <p> tbd </p>
       </div>
     </main>
     <script type="module" src="/src/main.js"></script>

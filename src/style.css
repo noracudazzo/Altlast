@@ -563,6 +563,18 @@ span.altlastIdentified, strong.altlastIdentified {
   100% { bottom: 2.25rem; }
 }
 
+@keyframes moveLeft {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(17px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes moveRight {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-17px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
 @keyframes moveHouse {
   0% { transform: translateY(1rem); }
   50% { transform: translateY(3rem); } 
@@ -796,6 +808,18 @@ span.altlastIdentified, strong.altlastIdentified {
 
 #board1.hovered, #board2.hovered {
   fill: rgba(0, 195, 255, .15);
+}
+
+/* Office */ 
+
+#teeth1 {
+  animation: moveLeft 1.25s infinite;
+  transition: ease-in-out;
+}
+
+#teeth2 {
+  animation: moveRight 1.25s infinite;
+  transition: ease-in-out;
 }
 
 /* Media queries */
