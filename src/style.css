@@ -422,7 +422,7 @@ body .popup {
   padding: 2rem;
   z-index: 2;
   border: solid 1.5px white;
-  width: 40em;
+  width: 35em;
   transition: opacity .5s ease;
   opacity: 0;
   visibility: hidden;
@@ -793,6 +793,11 @@ span.altlastIdentified, strong.altlastIdentified {
 .lamp-beam {
   filter: blur(3px);
 }
+
+#board1.hovered, #board2.hovered {
+  fill: rgba(0, 195, 255, .15);
+}
+
 /* Media queries */
 
 @media (max-width: 1500px) {

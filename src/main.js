@@ -43,7 +43,7 @@ let activateableElementActivated = false;
 let gameStarted = false;
 
 // Rooms
-const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office"];
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom"];
 let currentRoom = ROOMS[0]; 
 let lastUnlockedRoom = ROOMS[0]; 
 let nextRoomIndex = 1;
@@ -319,7 +319,7 @@ function zoomOut() {
 
   zoomed = false;
 
-  scene.style.transition = "transform 0.9s cubic-bezier(0.33, 1, 0.68, 1)";
+  scene.style.transition = "transform 1s cubic-bezier(0.33, 1, 0.68, 1)";
   requestAnimationFrame(() => {
     scene.style.transform = "scale(1)";
   });
@@ -768,8 +768,6 @@ function canNextRoomBeUnlocked() {
     if (nextRoom && data[nextRoom]) { 
       showAssistantMessage(data[nextRoom].startNarrative);
       unlockNextRoom();
-    } else {
-      currentNarrative = `Du hast den letzten Raum abgeschlossen! 🎉`; // tbd, Platzhalter
     }
   }
 }
@@ -916,6 +914,7 @@ function startGame() {
 
 function continueGame() {
   soundOn = true;
+  currentNarrative = lastUnlockedRoomData.narrative;
   showAssistantMessage(currentNarrative); 
   changeRoom(currentRoom);
 }
