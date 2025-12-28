@@ -76,11 +76,13 @@ const elevatorMovementSfx = sfx(`/sounds/effects/341190__yoyodaman234__elevator-
 const elevatorDoorSfx = sfx(`/sounds/effects/581369__audiotorp__hydraulic_door_scifi_withdecompression.wav`);
 const elevatorIsThereSfx = sfx(`/sounds/effects/529559__drmrsir__ping.wav`);
 const openDoorSfx = sfx(`/sounds/effects/400329__n-razm__door_open.wav`, 0.1); 
-const closeDoorSfx = sfx(`/sounds/effects/426734__samuelgremaud__door-closing.wav`, 0.2); 
+const closeDoorSfx = sfx(`/sounds/effects/426734__samuelgremaud__door-closing.wav`, 0.1); 
 const openFridgeSfx = sfx(`/sounds/effects/8865__harri__1_fridge_open.mp3`, 0.3); 
 const closeFridgeSfx = sfx(`/sounds/effects/8876__harri__2_fridge_close.mp3`, 0.3); 
 const openShelfSfx = sfx(`/sounds/effects/131888__vtownpunks__cupboard-4.wav`); 
 const closeShelfSfx = sfx(`/sounds/effects/131889__vtownpunks__cupboard-3.wav`); 
+const openDrawersSfx = sfx(`/sounds/effects/360949__marcusgar__drawer.wav`, 0.7); 
+const closeDrawersSfx = sfx(`/sounds/effects/569035__jdolea__drawer-closing.wav`, 0.025); 
 const altlastIdentifiedSfx = sfx(`/sounds/effects/448745__lilmati__futuristic-city-terminal.wav`, 0.1); 
 const altlastWarningSfx = sfx(`/sounds/effects/657938__lilmati__scifi-popup-warning-notice-or-note.wav`, 0.1);
 const altlastAlertSfx = sfx(`/sounds/effects/547250__eminyildirim__warning-ui.wav`, 1, true); 
@@ -236,6 +238,7 @@ function zoomTo(hotspot) {
 
   endHoverHotspot(hotspot);
   zoomed = true;
+
   const id = hotspot.id;
   const roomData = data[currentRoom];
   if (!roomData) return;
@@ -286,12 +289,6 @@ function zoomTo(hotspot) {
     setTimeout(() => prepareButton(button, id), 500);
     activateableButtonsActive = true;
   });
-
-  // Potentielle Elemente klickbar machen
-  if(hotspot = board1 || board2) {
-    console.log("hotspot ist board");
-    activateElement(hotspot); // tbd
-  }
 }
 
 function deactivateElements() {
@@ -714,15 +711,10 @@ function activateElement(baseId) {
 
   if(baseId === "fridge") openFridgeSfx.play();
   if(baseId === "shelf" || baseId === "shelf2" ) openShelfSfx.play();
+  if(baseId === "drawers") openDrawersSfx.play();
 
   // Booleans
   setTimeout(() => activateableElementActivated = true, 100); // Verzögerung, damit Popup nicht im Klick angezeigt wird
-
-  if(baseId = board1 || board2) {
-    console.log("ist identisch"); // tbd
-    boardObjects.forEach(el => el.classList.remove("background"));
-    return;
-  }
 
   fadeOutFast()
   setTimeout(() => {
@@ -741,7 +733,8 @@ function deactivateElement(baseId) {
   if (!baseElement || !activatedElement) return;
 
   if(baseId === "fridge" && activateableElementActivated) closeFridgeSfx.play();
-  if(baseId === "shelf" && activateableElementActivated) closeShelfSfx.play();
+  if(baseId === "shelf" || "shelf2" && activateableElementActivated) closeShelfSfx.play();
+  if(baseId === "drawers" && activateableElementActivated) closeDrawersSfx.play();
 
   // Booleans
   activateableElementActivated = false;
@@ -1120,10 +1113,13 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       zoomTo(hs);
       showPopUp(hs);
       clickSfx.play();
+      return;
     }
-    else if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) {
+
+    if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) {
       showPopUp(hs);
       clickSfx.play();
+      return;
     }
   });
 });

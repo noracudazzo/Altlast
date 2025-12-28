@@ -628,7 +628,7 @@ export const data = {
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: 'Shirt der Vereinigung "Lumen"'},
+        name: { title: "Objektname", data: '"Lumen" T-Shirt' },
         year: { title: "Herstellungsjahr", data: "2041"},
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
@@ -727,16 +727,17 @@ export const data = {
     },
 
     document: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 5.75,
+      originX: 2700,
+      originY: 1350, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: 'Ankündigungsdokument' },
+        bookTitle: { title: "Titel", data: "Übergangsordnung Berlin"},
+        year: { title: "Veröffentlichungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -745,34 +746,34 @@ export const data = {
     },
 
     wristband: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 3150,
+      originY: 1450, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: '"Lumen" Protestarmband' },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     id: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 2000,
+      originY: 850, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Deutsche Identifikationskarte" },
+        year: { title: "Herstellungsjahr", data: "2039" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -781,34 +782,34 @@ export const data = {
     },
 
     sticker1: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 1700,
+      originY: 750, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: '"Black lives are important" Sticker' },
+        year: { title: "Herstellungsjahr", data: "2020" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     sticker2: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 9,
+      originX: 1625,
+      originY: 1400, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: '"Fridays for tomorrow" Sticker' },
+        year: { title: "Herstellungsjahr", data: "2021" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -817,34 +818,34 @@ export const data = {
     },
 
     sticker3: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 2050,
+      originY: 1250, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: 'Proteststicker gegen die "Botswana Koalition"' },
+        year: { title: "Herstellungsjahr", data: "2032" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
-          bottom: 450,
+          top: 450,
       }
     },
 
     sticker4: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 11,
+      originX: 2725,
+      originY: 800, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: 'Proteststicker gegen die "Nationale Schutzallianz"' },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -853,16 +854,16 @@ export const data = {
     },
 
     sticker5: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 12,
+      originX: 2800,
+      originY: 1050,  
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: 'Proteststicker gegen die "Nationale Schutzallianz"' },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -871,16 +872,16 @@ export const data = {
     },
 
     sticker6: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 12,
+      originX: 3075,
+      originY: 1050,
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: '"Lumen" Sticker' },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -889,52 +890,52 @@ export const data = {
     },
 
     protestImage: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 8,
+      originX: 3025,
+      originY: 800,
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Fotografie eines Völkeraufstands" },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
-          bottom: 450,
+          top: 450,
       }
     },
 
     voteDoc1: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 3625,
+      originY: 1300, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Stimmzettel Volksentscheid 2043" },
+        year: { title: "Veröffentlichungsjahr", data: "2043" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
-          bottom: 450,
+          top: 450,
       }
     },
 
     voteDoc2: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 10,
+      originX: 3500,
+      originY: 1550, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Auswertung Volksentscheid 2043" },
+        year: { title: "Veröffentlichungsjahr", data: "2043" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -943,52 +944,54 @@ export const data = {
     },
 
     flyer: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 8,
+      originX: 3150,
+      originY: 1475, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Politischer Flyer" },
+        bookTitle: { title: "Titel", data: "Lasst uns nach vorne schauen!"},
+        year: { title: "Veröffentlichungsjahr", data: "2043" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        left: 450,
+        top: 1250,
       }
     },
 
     poem: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 6.5,
+      originX: 3700,
+      originY: 825, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Gedicht" },
+        bookTitle: { title: "Titel", data: "Morgen"},
+        year: { title: "Veröffentlichungsjahr", data: "2043" },
+        genre: { title: "Genre", data: "Unbekannt"},
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     electricityMap: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 7,
+      originX: 2200,
+      originY: 1350, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Stromausfallkarte" },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
           left: "center",
@@ -997,15 +1000,16 @@ export const data = {
     },
 
     globe: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 5,
+      originX: 550,
+      originY: 2400, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
+        name: { title: "Objektname", data: "PhotoGlobe XT" },
+        year: { title: "Herstellungsjahr", data: "42" },
+        status: { title: "Status", data: "Intakt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        description: { title: "Beschreibung", data: "Ellens Enkelkind Alex im Alter von 2 Jahren." },
       },
       textLocation: {
           left: "center",
@@ -1015,113 +1019,113 @@ export const data = {
 
     shelf2: {
       scale: 4,
-      originX: 500,
-      originY: 1900, 
+      originX: 550,
+      originY: 1800, 
       hasBeenClicked: false,
     },
 
     batteries: {
       scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      originX: 550,
+      originY: 1800, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "AA Batterien" },
+        year: { title: "Herstellungsjahr", data: "2040" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250, 
       }
     },
 
     flare: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 4,      
+      originX: 550,
+      originY: 1800, 
       hasBeenClicked: false,
       isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Bengalfeuer" },
+        year: { title: "Herstellungsjahr", data: "2041" },
+        status: { title: "Status", data: "Unbekannt" },
+        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250, 
       }
     },
 
     book10: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 5.5,
+      originX: 600,
+      originY: 850, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "SmartBook 2.0" },
+        bookTitle: { title: "Titel", data: "Zukunftsethik"},
+        year: { title: "Veröffentlichungsjahr", data: "55" },
+        genre: { title: "Genre", data: "Gesellschaft"},
+        belongsTo: { title: "Zugehörigkeit", data: "Ministerium für Bildung CW-D" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     clock: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 5,
+      originX: 4700,
+      originY: 700, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
+        name: { title: "Objektname", data: "Uhr TT" },
+        year: { title: "Herstellungsjahr", data: "46" },
+        status: { title: "Status", data: "Inaktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     calendar: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
+      scale: 5,
+      originX: 4700,
+      originY: 1350, 
       hasBeenClicked: false,
-      isAltlast: true,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
+        name: { title: "Objektname", data: "Kalender TT" },
+        year: { title: "Herstellungsjahr", data: "54" },
+        status: { title: "Status", data: "Aktuell" }, // tbd
+        belongsTo: { title: "Zugehörigkeit", data: "Archivkreis7" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+        right: 300,
+        top: 1250,
       }
     },
 
     tv2: {
-      scale: 4,
-      originX: 3250,
+      scale: 2.25,
+      originX: 5464,
       originY: 1200, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
+        name: { title: "Objektname", data: "Television Reciever NM-X"},
+        year: { title: "Herstellungsjahr", data: "43" },
+        status: { title: "Status", data: "Inaktiv, Leistung eingeschränkt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
       textLocation: {
-          left: "center",
-          bottom: 450,
+          left: 1000,
+          bottom: 1100,
       }
     },
   },
