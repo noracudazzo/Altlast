@@ -32,6 +32,8 @@ const board = document.getElementById("board");
 const board1 = document.getElementById("board1");
 const board2 = document.getElementById("board2");
 const boardObjects = document.querySelectorAll(".board .object");
+const shredder = document.getElementById("shredder");
+const outroText1 = document.getElementById("outroText1");
 
 let zoomed = false;
 let popupShown = false;
@@ -43,7 +45,7 @@ let activateableElementActivated = false;
 let gameStarted = false;
 
 // Rooms
-const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom"];
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom", "outro"];
 let currentRoom = ROOMS[0]; 
 let lastUnlockedRoom = ROOMS[0]; 
 let nextRoomIndex = 1;
@@ -956,6 +958,12 @@ function openElevator() {
 } 
 }
 
+function finishGame() { // tbd, dirty
+  scene.classList.add("hidden");
+  const outro = document.querySelector(".outro");
+  outro.classList.remove("hidden");
+}
+
 function unlockNextRoom() { 
   lastUnlockedRoom = ROOMS[nextRoomIndex];
   data[lastUnlockedRoom].isUnlocked = true;
@@ -1009,7 +1017,7 @@ if (saved) {
 
   // Für interne Abläufe aktualisieren
   nextRoom = ROOMS[nextRoomIndex];
-  lastUnlockedRoomData = data[currentRoom];
+  lastUnlockedRoomData = data[lastUnlockedRoom];
   currentNarrative = lastUnlockedRoomData.narrative;
   lastAssistantMessage = currentNarrative;
 }
@@ -1108,6 +1116,12 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
 
   hs.addEventListener("click", () => {
+    console.log(hs);
+    console.log(shredder);
+    if(hs === elevatorControls) {
+      finishGame();
+      return;
+    }
     if (!zoomed) {
       zoomTo(hs);
       showPopUp(hs);

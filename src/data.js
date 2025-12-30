@@ -1131,33 +1131,27 @@ export const data = {
   },
 
   garbageRoom: {
-
     displayName: "Entsorgungsraum",
     akkusativ: "den",
     dativ: "in den", 
     isUnlocked: false,
-    startNarrative: "Du hast alles im Büro fertig durchsucht. Gehe nun bitte sofort in den Entsorgungsraum.",
-    narrative: "Gehe in den Entsorgungsraum.",
+    startNarrative: "Entsorge sofort all die Altlast, die du in Ellens Büro gefunden hast.",
+    narrative: "Entsorge jetzt die Altlast.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "485049__bolkmar__fx-cut-paper.wav",
 
-    smallPlants: {
-      scale: 4,
-      originX: 3250,
-      originY: 1200, 
-      hasBeenClicked: false,
-      text: {
-        name: { title: "Objektname", data: "GreenUnit Delta II" },
-        year: { title: "Herstellungsjahr", data: "52" },
-        status: { title: "Status", data: "Gesund" },
-        belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-      },
-      textLocation: {
-          left: "center",
-          bottom: 450,
-      }
-    },
+    shredder: {
+      hasBeenClicked: false, 
+    }
+  },
+
+  outro: {
+    displayName: "Outro",
+    isUnlocked: false,
+    hasBeenEntered: false,
+    canBeLeft: true,
+    music: "485049__bolkmar__fx-cut-paper.wav",
   },
 
 
