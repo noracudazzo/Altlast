@@ -16,11 +16,13 @@ const warning = document.getElementById("warning")
 const assistant = document.getElementById("assistant");
 const assistantButton = document.getElementById("assistantButton");
 const assistantSpeechbubble = document.getElementById("speechbubble");
+const mainNav = document.getElementById("main-navigation");
 const homeButton = document.querySelector(".home-button");
 const soundButton = document.querySelector(".sound-button");
 const soundOnIcon = document.querySelector(".sound-on-icon");
 const soundOffIcon = document.querySelector(".sound-off-icon");
 const roomName = document.querySelector(".room-name p");
+const stageElements = document.querySelectorAll(".stage-element");
 const heightDisplay = document.getElementById("height-display");
 const elevatorControls = document.getElementById("controls");
 const elevatorDoorBackgroundPlaceholder = document.getElementById("elevatorDoorBackgroundPlaceholder");
@@ -33,7 +35,11 @@ const board1 = document.getElementById("board1");
 const board2 = document.getElementById("board2");
 const boardObjects = document.querySelectorAll(".board .object");
 const shredder = document.getElementById("shredder");
-const outroText1 = document.getElementById("outroText1");
+const outro = document.querySelector(".outro");
+const outroText = document.querySelectorAll(".outroText");
+const outroText1 = document.querySelector(".outroText1");
+const outroText2 = document.querySelector(".outroText2");
+const credits = document.querySelector(".credits");
 
 let zoomed = false;
 let popupShown = false;
@@ -45,7 +51,7 @@ let activateableElementActivated = false;
 let gameStarted = false;
 
 // Rooms
-const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom", "outro"];
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom", "outro", "credits"];
 let currentRoom = ROOMS[0]; 
 let lastUnlockedRoom = ROOMS[0]; 
 let nextRoomIndex = 1;
@@ -128,9 +134,10 @@ function resetClasses() {
   entrance.classList.add("hidden"); 
   elevatorDoorBackgroundPlaceholder.classList.remove("hidden");
 
-  // Office
-  // tbd Objects.classList.add("background");
-
+  // Stage Elements
+  stageElements.forEach(stageEl => {
+    stageEl.classList.remove("hidden");
+  });
   // Viewport
   viewport.classList.remove("slow-fading", "fast-fading", "invisible", "noclick");
 
@@ -143,6 +150,11 @@ function resetClasses() {
 
   doorBodies?.forEach(db => {
     db.classList.remove("hidden");
+  });
+
+  outroText?.forEach(text => {
+    text.classList.remove("hidden");
+    text.classList.remove("invisible");
   });
 }
 
@@ -872,6 +884,11 @@ function fadeInSlow() {
   }, 2000); 
 }
 
+function fadeOutSlow() {
+  viewport.classList.add("slow-fading");
+  viewport.classList.add("invisible");
+}
+
 function fadeOutFast() {
   viewport.classList.add("fast-fading");
   viewport.classList.add("invisible");
@@ -959,9 +976,28 @@ function openElevator() {
 }
 
 function finishGame() { // tbd, dirty
-  scene.classList.add("hidden");
-  const outro = document.querySelector(".outro");
-  outro.classList.remove("hidden");
+  changeRoom("outro"); // tbd
+  stageElements.forEach(stageEl => {
+    stageEl.classList.add("hidden");
+  });
+  setTimeout(() => {
+    outroText1.classList.add("invisible");
+  }, 4000);
+  setTimeout(() => {
+    outroText1.classList.add("hidden");
+    outroText2.classList.remove("hidden");
+  }, 6000);
+  setTimeout(() => {
+    outroText2.classList.add("invisible");
+  }, 15000);
+  setTimeout(() => {
+    outroText2.classList.add("hidden");
+  }, 17000);
+  setTimeout(() => {
+    mainNav.classList.remove("hidden");
+    outro.classList.add("hidden");
+    credits.classList.remove("hidden");
+  }, 20000);
 }
 
 function unlockNextRoom() { 
@@ -1118,7 +1154,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("click", () => {
     console.log(hs);
     console.log(shredder);
-    if(hs === elevatorControls) {
+    if(hs === shredder) {
       finishGame();
       return;
     }

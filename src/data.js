@@ -711,7 +711,6 @@ export const data = {
     canBeLeft: true,
     music: "scifi-intro-outro-352086.mp3",
 
-
     board1: {
       scale: 3.65,
       originX: 3300,
@@ -901,6 +900,7 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: "Die Altlastaufnahmen stammen aus einer Zeit des Chaos. Nie wieder.",
       textLocation: {
           left: "center",
           top: 450,
@@ -937,6 +937,7 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: "Diese Wahlzettel sollten nicht mehr existieren. Bitte entferne sie später.",
       textLocation: {
           left: "center",
           bottom: 450,
@@ -975,6 +976,11 @@ export const data = {
         genre: { title: "Genre", data: "Unbekannt"},
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: "",
+      comment: [ 
+        "Wer hätte gedacht, dass in Ellen eine waschechte Poetin steckte?",
+        "Aber die Inhalte des Gedichts sind Altlast. Bitte entsorge den Zettel später.",
+      ],
       textLocation: {
         right: 300,
         top: 1250,
@@ -993,6 +999,11 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [ 
+        "Die Karte ist sehr sehr alt. Keine Sorge.",
+        "So etwas könnte heute in Zentralstadt auf keinen Fall mehr passieren.",
+        "Es ist enorm wichtig, dass du diese Altlast später entfernst.",
+      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -1009,8 +1020,9 @@ export const data = {
         year: { title: "Herstellungsjahr", data: "42" },
         status: { title: "Status", data: "Intakt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
-        description: { title: "Beschreibung", data: "Ellens Enkelkind Alex im Alter von 2 Jahren." },
+        description: { title: "Beschreibung", data: "Ellens Enkelkind im Kindesalter" },
       },
+      comment: "Wenn ich mich richtig erinnere, warst du da gerade mal 2 Jahre alt.",
       textLocation: {
           left: "center",
           bottom: 450,
@@ -1089,6 +1101,7 @@ export const data = {
         status: { title: "Status", data: "Inaktiv" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
       },
+      comment: "Die Uhr ist wohl stehen geblieben...",
       textLocation: {
         right: 300,
         top: 1250,
@@ -1103,9 +1116,10 @@ export const data = {
       text: {
         name: { title: "Objektname", data: "Kalender TT" },
         year: { title: "Herstellungsjahr", data: "54" },
-        status: { title: "Status", data: "Aktuell" }, // tbd
+        status: { title: "Status", data: "Intakt" }, // tbd
         belongsTo: { title: "Zugehörigkeit", data: "Archivkreis7" },
       },
+      comment: "Das Objekt verwendet eine falsche Zeitrechnung und sollte besser entsorgt werden.",
       textLocation: {
         right: 300,
         top: 1250,
@@ -1139,7 +1153,10 @@ export const data = {
     narrative: "Entsorge jetzt die Altlast.",
     hasBeenEntered: false,
     canBeLeft: true,
-    music: "485049__bolkmar__fx-cut-paper.wav",
+    music: "ten-a-number-397379.mp3",
+    musicVolume: "0.1",
+    ambiance: "485049__bolkmar__fx-cut-paper.wav",
+    ambianceVolume: "0.03",
 
     shredder: {
       hasBeenClicked: false, 
@@ -1149,9 +1166,15 @@ export const data = {
   outro: {
     displayName: "Outro",
     isUnlocked: false,
-    hasBeenEntered: false,
     canBeLeft: true,
-    music: "485049__bolkmar__fx-cut-paper.wav",
+    music: "ten-a-number-397379.mp3",
+  },
+
+  credits: {
+    displayName: "Credits",
+    isUnlocked: false,
+    canBeLeft: true,
+    music: "ten-a-number-397379.mp3",
   },
 
 
