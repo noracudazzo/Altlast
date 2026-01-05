@@ -380,6 +380,7 @@ async function typeText(el, text, speed = 85, isSpeaking, textIsAltlast) {
     // Bei Skip sofort ganzen Satz anzeigen
     if (typingController.skip) {
       el.textContent = text;
+      clickSfx.play();
       return;
     }
 
@@ -390,7 +391,7 @@ async function typeText(el, text, speed = 85, isSpeaking, textIsAltlast) {
         typeSfx.play();
         typeSfx.currentTime = 0;
       }
-    }
+    } 
 
     await new Promise(r => setTimeout(r, speed));
   }
@@ -492,6 +493,7 @@ async function showAssistantMessage(comment = null) {
       if (!fullyShown) {
         // Wenn noch tippt: sofort fertig anzeigen
         typingController.skip = true;
+        clickSfx.play();
       } else {
         // Wenn fertig: weiter
         p.onclick = null;
@@ -509,6 +511,7 @@ async function showAssistantMessage(comment = null) {
     if (i < texts.length - 1) {
       p.classList.add("clickNextMessage");
       p.onclick = () => {
+        clickSfx.play();
         p.onclick = null;
         showIndex(i + 1);
       };
@@ -996,6 +999,8 @@ function finishGame() { // tbd, dirty
   setTimeout(() => {
     mainNav.classList.remove("hidden");
     outro.classList.add("hidden");
+    outroText2.classList.remove("hidden");
+    outroText1.classList.remove("hidden");
     credits.classList.remove("hidden");
   }, 20000);
 }

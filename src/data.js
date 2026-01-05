@@ -738,6 +738,10 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Zentralstadt war nicht immer so lebenswert wie heute. Aber diese Geschichte wollten wir bewusst hinter uns lassen.",
+        "Das Dokument muss umgehend entfernt werden.",
+      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -774,6 +778,7 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: "Dieses veraltete Ausweisdokument ist nicht mehr brauchbar und sollte umgehend vernichtet werden.",
       textLocation: {
           left: "center",
           bottom: 450,
@@ -810,6 +815,10 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Dieser alte Sticker thematisiert ein Problem, das wir mittlerweile sehr gut im Griff haben.",
+        "Bewegungen wie diese werden daher nicht mehr benötigt und sollten in der Vergangenheit bleiben.",
+      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -828,6 +837,11 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Die Thematik dieses Stickers ist schon lange nicht mehr relevant.",
+        "Es ist besorgniserregend, wie viel Altlast deine Oma behalten hat.",
+        "Das ist nicht nur gegen die Regeln. Es reißt auch alte Wunden auf, die eigentlich verheilt waren.",
+      ],
       textLocation: {
           left: "center",
           top: 450,
@@ -864,6 +878,10 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Die hier thematisierte Gruppierung gibt es schon lange nicht mehr.",
+        "Du kannst die Sticker also problemlos wegwerfen."
+      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -882,6 +900,12 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Wir haben der Gruppe viel zu verdanken. ",
+        "Aber heute brauchen wir keine Rebellionen mehr, es geht uns schließlich sehr gut, oder nicht?",
+        "Und wir wollen niemanden dazu inspirieren, auf dumme Gedanken zu kommen.",
+        "Daher bitte ich dich darum, später alle Erinnerungsstücke an die Lumen Bewegung zu entsorgen.",
+      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -900,7 +924,11 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
-      comment: "Die Altlastaufnahmen stammen aus einer Zeit des Chaos. Nie wieder.",
+      comment: [
+        "Die Altlastaufnahmen stammen aus einer Zeit des Chaos.", 
+        "Aber mach dir keine Sorgen, das haben wir hinter uns gelassen und das wird so nicht mehr passieren.",
+        "Nie wieder.",
+      ],
       textLocation: {
           left: "center",
           top: 450,
