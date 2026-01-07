@@ -350,7 +350,7 @@ export const data = {
       originY: 1200, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "Television Reciever NM-X"},
+        name: { title: "Objektname", data: "Television Receiver NM-X"},
         year: { title: "Herstellungsjahr", data: "43" },
         status: { title: "Status", data: "Inaktiv, Leistung eingeschränkt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
@@ -1160,7 +1160,7 @@ export const data = {
       originY: 1200, 
       hasBeenClicked: false,
       text: {
-        name: { title: "Objektname", data: "Television Reciever NM-X"},
+        name: { title: "Objektname", data: "Television Receiver NM-X"},
         year: { title: "Herstellungsjahr", data: "43" },
         status: { title: "Status", data: "Inaktiv, Leistung eingeschränkt" },
         belongsTo: { title: "Zugehörigkeit", data: "Privathaushalt" },
