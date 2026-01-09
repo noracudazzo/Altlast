@@ -45,6 +45,10 @@ footer, header, hgroup, menu, nav, section {
   filter: drop-shadow(0 0 8px var(--color-dark-purple2)); 
 }
 
+.smallHotspot.hovered {
+  filter: drop-shadow(0 0 3px white);
+}
+
 /* Font */
 
 @font-face {
@@ -405,12 +409,12 @@ main {
 
 .main-navigation .sound-button img {
   object-fit: cover;
-  margin: 0.5rem;
+  width: 75%;
 }
 
 .main-navigation .home-button img {
   object-fit: cover;
-  margin: 1.2rem;
+  width: 40%;
 }
 
 /* Popup */

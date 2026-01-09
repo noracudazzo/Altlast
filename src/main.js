@@ -805,13 +805,9 @@ function changeRoom(room) {
   if(assistantActive) closeAssistantMessage();
 
   const config = data[currentRoom];
-  const currentStartNarrative = config.startNarrative;
-  
-  // Start-Narrative nur einmal abspielen
 
   if (!config.hasBeenEntered) { 
     unlockedSfx.play();
-    if (currentStartNarrative) showAssistantMessage(currentStartNarrative);
     config.hasBeenEntered = true;
   };
 
@@ -1135,7 +1131,7 @@ document.addEventListener("mousemove", e => {
     } 
 
     // Wenn über Objekt
-    if (target.closest(".activatedElement .hotspot")) {
+    if (target.closest(".activatedElement .hotspot") || target.closest("#shredder")) {
       setCursor("click");
       return;
     } 
@@ -1157,8 +1153,6 @@ document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
 
   hs.addEventListener("click", () => {
-    console.log(hs);
-    console.log(shredder);
     if(hs === shredder) {
       finishGame();
       return;
