@@ -533,8 +533,8 @@ export const data = {
       isAltlast: true,
       text: {
         name: { title: "Objektname", data: "Buch" },
-        bookTitle: { title: "Titel", data: "Animal Farm"},
-        year: { title: "Veröffentlichungsjahr", data: "1945" },
+        bookTitle: { title: "Titel", data: "Die Chaoszeit"},
+        year: { title: "Veröffentlichungsjahr", data: "2042" },
         genre: { title: "Genre", data: "Unregistriert"},
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
