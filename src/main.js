@@ -1011,8 +1011,6 @@ function unlockNextRoom() {
   currentNarrative = data[lastUnlockedRoom].narrative;
 
   const doorBody = document.querySelector(`.door-to-${lastUnlockedRoom} .doorBody`);
-  console.log(`.door-to-${lastUnlockedRoom} .doorBody`);
-  console.log(doorBody);
   if(doorBody) doorBody.classList.add("hidden");
 }
 
@@ -1078,7 +1076,7 @@ document.addEventListener("mousemove", e => {
     scene.classList.remove("leaveHovered");
   }
 
-  const target = e.target;
+  const { target } = e;
   const hotspot = target.closest(".hotspot");
   const door = target.closest(".door");
 
@@ -1101,12 +1099,13 @@ document.addEventListener("mousemove", e => {
     return;
   }
 
-
   // Fall 2: Gezoomt
   if (zoomed && !activateableElementActivated) {
-
     // Wenn Activation Button vorhanden
-    if (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown ) {
+    if (
+      (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown) ||
+      (hotspot && !["board1", "board2"].includes(target.id))
+    ) {
       setCursor("click");
       return;
     }
@@ -1139,7 +1138,6 @@ document.addEventListener("mousemove", e => {
     setCursor("zoomOut"); // Sonst: Zoom out
     return;
   }
-
 });
 
 // Click & Hover (Hotspots)
@@ -1147,7 +1145,11 @@ document.addEventListener("mousemove", e => {
 document.querySelectorAll(".hotspot").forEach(hs => {
   hs.addEventListener("mouseenter", () => {
     // Nur erlaubt, wenn nicht gezoomt ODER aktivierbares Objekt sichtbar
-    if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) startHoverHotspot(hs);
+    if (!zoomed || (zoomed && (
+      (activateableElementActivated && hs.closest(".activatedElement")) ||
+      (hs.closest(".board .object.hotspot:not(#board1):not(#board2)"))
+    )))
+      startHoverHotspot(hs);
   });
 
   hs.addEventListener("mouseleave", () => endHoverHotspot(hs));
@@ -1164,7 +1166,10 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       return;
     }
 
-    if (!zoomed || (zoomed && activateableElementActivated && hs.closest(".activatedElement"))) {
+    if (
+      (activateableElementActivated && hs.closest(".activatedElement")) ||
+      (hs.closest(".board") && !["board1", "board2"].includes(hs.id))
+    ) {
       showPopUp(hs);
       clickSfx.play();
       return;
@@ -1285,9 +1290,10 @@ document.addEventListener("click", e => {
     e.target.closest(".assistant #assistantButton") ||
     e.target.closest("#speechbubble.speechbubble") ||
     e.target.closest(".clickNextMessage") ||
-    e.target.closest(".zoomed") 
+    e.target.closest(".zoomed") ||
+    e.target.closest(".board .object.hotspot:not(#board1):not(#board2)")
   )
-  return;
+    return;
   resetZoom();
 });
 
