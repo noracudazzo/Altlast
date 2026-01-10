@@ -1100,6 +1100,7 @@ document.addEventListener("mousemove", e => {
 
   // Fall 2: Gezoomt
   if (zoomed && !activateableElementActivated) {
+
     // Wenn Activation Button vorhanden
     if (
       (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown) ||
@@ -1110,7 +1111,7 @@ document.addEventListener("mousemove", e => {
     }
 
     // Wenn über gezoomtem Element oder Popup 
-    if (target.closest(".zoomed") || target.closest(".popup")) {
+    if (target.closest(".zoomed") || target.closest(".board") || target.closest(".popup")) {
       setCursor("default");
       return;
     } 
@@ -1162,6 +1163,7 @@ document.querySelectorAll(".hotspot").forEach(hs => {
     if (hs === board1 || board2) { 
       board1.classList.add("invisible");
       board2.classList.add("invisible");
+      board.classList.add("zoomed");
     } 
 
     if (!zoomed) {
