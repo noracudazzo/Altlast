@@ -33,7 +33,7 @@ const doorBodies = document.querySelectorAll(".doorBody");
 const board = document.getElementById("board");
 const board1 = document.getElementById("board1");
 const board2 = document.getElementById("board2");
-const boardObjects = document.querySelectorAll(".board .object");
+const boardObjects = document.querySelectorAll(".boardObjects .object");
 const shredder = document.getElementById("shredder");
 const outro = document.querySelector(".outro");
 const outroText = document.querySelectorAll(".outroText");
@@ -282,13 +282,11 @@ function zoomTo(hotspot) {
 
   tl.to(scene, {
     scale: config.scale,
-    // filter: "blur(2px)",
     duration: 0.4,
     ease: "power2.inOut"
   });
 
   tl.to(scene, {
-    // filter: "blur(0px)",
     duration: 0.5,
     ease: "power1.out",
   });
@@ -333,13 +331,13 @@ function zoomOut() {
 
   zoomed = false;
 
+  // Klasse entfernen
+  document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
+
   scene.style.transition = "transform 1s cubic-bezier(0.33, 1, 0.68, 1)";
   requestAnimationFrame(() => {
     scene.style.transform = "scale(1)";
   });
-
-  // Klasse entfernen
-  document.querySelectorAll(".zoomed").forEach(el => el.classList.remove("zoomed"));
 }
 
 function resetZoom() {
@@ -349,6 +347,12 @@ function resetZoom() {
   if(activateableElementActivated || activateableButtonsActive) {
     deactivateElements();
   }
+
+  //Büro Pinnwand wieder klickbar machen
+  if(currentRoom === "office") {
+    board1.classList.remove("invisible");
+    board2.classList.remove("invisible");
+  } 
 
   // Popup schließen
   if (popupShown) {
@@ -440,7 +444,7 @@ async function playAltlastEffect(el, speed) {
 }
 
 function endAltlastPopup() {
-  altlastWarningSfx.play();
+  altlastWarningSfx.stop();
   warning.classList.add("visible");
   warning.classList.remove("invisible");
   popupText.classList.add("blurred");
@@ -756,11 +760,6 @@ function deactivateElement(baseId) {
   // Booleans
   activateableElementActivated = false;
   activateableButtonsActive = false;
-
-  if(baseId === board) {
-    boardObjects.forEach(el => el.classList.add("background"));
-    return; // tbd
-  }
 
   // Sichtbar machen
   activatedElement.classList.add("hidden");
@@ -1159,6 +1158,12 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       finishGame();
       return;
     }
+
+    if (hs === board1 || board2) { 
+      board1.classList.add("invisible");
+      board2.classList.add("invisible");
+    } 
+
     if (!zoomed) {
       zoomTo(hs);
       showPopUp(hs);
@@ -1166,9 +1171,22 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       return;
     }
 
+    if (hs.closest(".board") && !["board1", "board2"].includes(hs.id)) {
+      clickSfx.play();
+      fadeOutFast();
+      setTimeout(() => {
+        resetZoom();
+        zoomTo(hs);
+      }, 500);
+      setTimeout(() => {
+        fadeInFast();
+        showPopUp(hs);
+      }, 1000);
+      return; 
+    }
+
     if (
-      (activateableElementActivated && hs.closest(".activatedElement")) ||
-      (hs.closest(".board") && !["board1", "board2"].includes(hs.id))
+      (activateableElementActivated && hs.closest(".activatedElement"))
     ) {
       showPopUp(hs);
       clickSfx.play();
