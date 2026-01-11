@@ -250,6 +250,8 @@ function endHoverHotspot(hotspot) {
 
 function zoomTo(hotspot) {
 
+  setCursor("default");
+
   endHoverHotspot(hotspot);
   zoomed = true;
 
@@ -341,18 +343,13 @@ function zoomOut() {
 }
 
 function resetZoom() {
+  setCursor("default");
   zoomOut();
 
   // Elemente deaktivieren
   if(activateableElementActivated || activateableButtonsActive) {
     deactivateElements();
   }
-
-  //Büro Pinnwand wieder klickbar machen
-  if(currentRoom === "office") {
-    board1.classList.remove("invisible");
-    board2.classList.remove("invisible");
-  } 
 
   // Popup schließen
   if (popupShown) {
@@ -444,7 +441,7 @@ async function playAltlastEffect(el, speed) {
 }
 
 function endAltlastPopup() {
-  altlastWarningSfx.stop();
+  altlastWarningSfx.play();
   warning.classList.add("visible");
   warning.classList.remove("invisible");
   popupText.classList.add("blurred");
@@ -534,12 +531,6 @@ async function showAssistantMessage(comment = null) {
       p.classList.add("lastMessage");
       activateClick();
       assistantActive = false;
-
-//      setTimeout(() => { zu verbuggt, tbd
-//        if (!assistantActive) {
-//          closeAssistantMessage();
-//        }
-//      }, 30000);
     }
   }
   await showIndex(0);
@@ -1103,25 +1094,28 @@ document.addEventListener("mousemove", e => {
 
     // Wenn Activation Button vorhanden
     if (
-      (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown) ||
-      (hotspot && !["board1", "board2"].includes(target.id))
-    ) {
+      (target.closest(".activeButton") && activateableButtonsActive || target.closest(".speechbubble") && assistantShown)) {
       setCursor("click");
       return;
     }
 
     // Wenn über gezoomtem Element oder Popup 
-    if (target.closest(".zoomed") || target.closest(".board") || target.closest(".popup")) {
+    if (target.closest(".zoomed") || target.closest(".popup")) {
       setCursor("default");
       return;
     } 
+
+    if (target.closest(".board .object.hotspot:not(#board1):not(#board2)")) {
+      setCursor("zoomIn");
+      return;
+    }
 
     setCursor("zoomOut"); // Sonst: Zoom out
     return;
   }
 
   // Fall 2: Gezoomt und aktiviertes Objekt
-  if (zoomed && activateableElementActivated) {
+  if (zoomed && activateableElementActivated || target.closest(".board .object")) {
 
     // Wenn über Element Body oder Popup 
     if (target.closest(".activateableBody") || target.closest(".popup")) {
@@ -1159,12 +1153,6 @@ document.querySelectorAll(".hotspot").forEach(hs => {
       finishGame();
       return;
     }
-
-    if (hs === board1 || board2) { 
-      board1.classList.add("invisible");
-      board2.classList.add("invisible");
-      board.classList.add("zoomed");
-    } 
 
     if (!zoomed) {
       zoomTo(hs);
