@@ -2,6 +2,12 @@ import "@fontsource/space-mono/latin";
 import "@fontsource/open-sans/latin-400"; 
 import { data as origData } from "./data";
 import { gsap } from "gsap";
+import cursorDefault from './assets/imgs/ui/cursor.png';
+import cursorZoomIn from './assets/imgs/ui/cursor-zoomin.png';
+import cursorZoomOut from './assets/imgs/ui/cursor-zoomout.png';
+import cursorClick from './assets/imgs/ui/cursor-click.png';
+import cursorLeave from './assets/imgs/ui/cursor-leave.png';
+
 
 let data = structuredClone(origData);
 
@@ -108,11 +114,11 @@ let soundOn = false;
 
 // Cursor Manager
 const CURSORS = {
-  default: "url(/src/assets/imgs/ui/cursor.png), auto",
-  zoomIn: "url(/src/assets/imgs/ui/cursor-zoomin.png), zoom-in",
-  zoomOut: "url(/src/assets/imgs/ui/cursor-zoomout.png), zoom-out",
-  click: "url(/src/assets/imgs/ui/cursor-click.png), pointer",
-  leave: "url(/src/assets/imgs/ui/cursor-leave.png), s-resize",
+  default: `url(${cursorDefault}), auto`,
+  zoomIn: `url(${cursorZoomIn}), zoom-in`,
+  zoomOut: `url(${cursorZoomOut}), zoom-out`,
+  click: `url(${cursorClick}), pointer`, 
+  leave: `url(${cursorLeave}), s-resize`, 
 };
 
 function resetClasses() {
