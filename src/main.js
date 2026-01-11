@@ -1,4 +1,5 @@
 import "@fontsource/space-mono/latin";
+import "@fontsource/open-sans/latin-400"; 
 import { data as origData } from "./data";
 import { gsap } from "gsap";
 

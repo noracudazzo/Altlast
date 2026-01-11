@@ -1194,14 +1194,14 @@ export const data = {
   outro: {
     displayName: "Outro",
     isUnlocked: false,
-    canBeLeft: true,
+    canBeLeft: false,
     music: "ten-a-number-397379.mp3",
   },
 
   credits: {
     displayName: "Credits",
     isUnlocked: false,
-    canBeLeft: true,
+    canBeLeft: false,
     music: "ten-a-number-397379.mp3",
   },
 

@@ -846,7 +846,7 @@ span.altlastIdentified, strong.altlastIdentified {
 }
 
 .outro .outroText2 p {
-  font-family: sans-serif;
+  font-family: "Open Sans";
   animation: flickerHard 1.5s infinite;
 }
 
