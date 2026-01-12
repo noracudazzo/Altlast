@@ -1195,14 +1195,16 @@ export const data = {
     displayName: "Outro",
     isUnlocked: false,
     canBeLeft: false,
-    music: "ten-a-number-397379.mp3",
+    music: "736443__feveran__video-introduction-music-2.mp3",
+    musicVolume: 0.3,
   },
 
   credits: {
     displayName: "Credits",
     isUnlocked: false,
     canBeLeft: false,
-    music: "ten-a-number-397379.mp3",
+    music: "moebius-21329.mp3",
+    musicVolume: 0.1,
   },
 
 

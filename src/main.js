@@ -46,6 +46,7 @@ const outro = document.querySelector(".outro");
 const outroText = document.querySelectorAll(".outroText");
 const outroText1 = document.querySelector(".outroText1");
 const outroText2 = document.querySelector(".outroText2");
+const outroText3 = document.querySelector(".outroText3");
 const credits = document.querySelector(".credits");
 
 let zoomed = false;
@@ -101,6 +102,8 @@ const closeDrawersSfx = sfx(`/sounds/effects/569035__jdolea__drawer-closing.wav`
 const altlastIdentifiedSfx = sfx(`/sounds/effects/448745__lilmati__futuristic-city-terminal.wav`, 0.1); 
 const altlastWarningSfx = sfx(`/sounds/effects/657938__lilmati__scifi-popup-warning-notice-or-note.wav`, 0.1);
 const altlastAlertSfx = sfx(`/sounds/effects/547250__eminyildirim__warning-ui.wav`, 1, true); 
+const shredSfx = sfx(`/sounds/effects/705629__airwavexv__destruction_misc1.wav`, 0.1);
+const shredderStartSfx = sfx(`/sounds/effects/743125__gregorquendel__sci-fi-powerup_powerdown-layer-2.mp3`, 1);
 
 
 // needed: music bedroom or living room, waste room, start Screen 
@@ -972,30 +975,57 @@ function openElevator() {
 }
 
 function finishGame() { // tbd, dirty
-  changeRoom("outro"); // tbd
-  stageElements.forEach(stageEl => {
-    stageEl.classList.add("hidden");
-  });
+  fadeOutFast();
+
+  setTimeout(() => {
+    changeRoom("outro"); 
+    stageElements.forEach(stageEl => {
+      stageEl.classList.add("hidden");
+    });
+  }, 2000);
+
+  setTimeout(() => {
+    shredSfx.play();
+  }, 1000);
+
+  setTimeout(() => {
+    fadeInFast();
+  }, 9500);
+
   setTimeout(() => {
     outroText1.classList.add("invisible");
-  }, 4000);
+  }, 11300);
+
   setTimeout(() => {
     outroText1.classList.add("hidden");
     outroText2.classList.remove("hidden");
-  }, 6000);
+  }, 13880);
+
   setTimeout(() => {
     outroText2.classList.add("invisible");
-  }, 15000);
+  }, 20000);
+
   setTimeout(() => {
     outroText2.classList.add("hidden");
-  }, 17000);
+    outroText3.classList.remove("hidden");
+  }, 22850);
+
+  setTimeout(() => {
+    stopMusic();
+    outroText3.classList.add("invisible");
+  }, 28000);
+
   setTimeout(() => {
     mainNav.classList.remove("hidden");
+    continueButton.classList.add("hidden");
     outro.classList.add("hidden");
-    outroText2.classList.remove("hidden");
-    outroText1.classList.remove("hidden");
-    credits.classList.remove("hidden");
-  }, 20000);
+    outroText?.forEach(text => {
+      text.classList.remove("hidden");
+      text.classList.remove("invisible");
+    });
+    changeRoom("credits");
+  }, 35000);
+
 }
 
 function unlockNextRoom() { 
