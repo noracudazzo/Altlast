@@ -1183,8 +1183,6 @@ export const data = {
     canBeLeft: true,
     music: "ten-a-number-397379.mp3",
     musicVolume: "0.1",
-    ambiance: "485049__bolkmar__fx-cut-paper.wav",
-    ambianceVolume: "0.03",
 
     shredder: {
       hasBeenClicked: false, 

@@ -103,7 +103,7 @@ const altlastIdentifiedSfx = sfx(`/sounds/effects/448745__lilmati__futuristic-ci
 const altlastWarningSfx = sfx(`/sounds/effects/657938__lilmati__scifi-popup-warning-notice-or-note.wav`, 0.1);
 const altlastAlertSfx = sfx(`/sounds/effects/547250__eminyildirim__warning-ui.wav`, 1, true); 
 const shredSfx = sfx(`/sounds/effects/705629__airwavexv__destruction_misc1.wav`, 0.1);
-const shredderStartSfx = sfx(`/sounds/effects/743125__gregorquendel__sci-fi-powerup_powerdown-layer-2.mp3`, 1);
+
 
 
 // needed: music bedroom or living room, waste room, start Screen 
