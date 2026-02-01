@@ -59,7 +59,7 @@ let activateableElementActivated = false;
 let gameStarted = false;
 
 // Rooms
-const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom", "outro", "credits"];
+const ROOMS = ["elevator", "hallway", "kitchen", "livingRoom", "bedroom", "office", "garbageRoom", "outro"];
 let currentRoom = ROOMS[0]; 
 let lastUnlockedRoom = ROOMS[0]; 
 let nextRoomIndex = 1;
@@ -1048,9 +1048,13 @@ function finishGame() { // tbd, dirty
       text.classList.remove("hidden");
       text.classList.remove("invisible");
     });
-    changeRoom("credits");
+    showCredits();
   }, 35000);
 
+}
+
+function showCredits() {
+  credits.classList.remove("hidden");
 }
 
 function unlockNextRoom() { 
@@ -1294,7 +1298,7 @@ document.querySelectorAll(".start").forEach(button => {
   });
 
   creditsButton.addEventListener("click", () => {
-    // Open credits screen
+    showCredits();
   });
 });
 
@@ -1318,6 +1322,7 @@ homeButton.addEventListener("click", () => {
   clickSfx.play();
   start.classList.remove("hidden");
   resetZoom();
+  credits.classList.add("hidden");
 });
 
 // Click (Controls)

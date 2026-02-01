@@ -24,6 +24,12 @@ time, mark, audio, video {
   user-select: none;
 }
 
+h1 {
+  font-family: "AldotheApache";
+  font-size: 12rem;
+  color: var(--color-black)
+}
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -258,7 +264,8 @@ main {
 .scene .foreground { z-index: 4; pointer-events: none;} /* tbd schrank Küche */
 .scene .activateableObject { z-index: 2; }
 #assistant, #main-navigation, .room-name { z-index: 99;}
-.start, .credits, .settings { z-index: 149; } /* tbd */
+.start, .settings { z-index: 149; } 
+.credits { z-index: 10; }
 
 /* Buttons */
 
@@ -624,15 +631,9 @@ span.altlastIdentified, strong.altlastIdentified {
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 0%;
-	}
-	50% {
-		background-position: 100% 100%;
-	}
-	100% {
-		background-position: 0% 0%;
-	}
+	0% {background-position: 0% 0%;}
+	50% {background-position: 100% 100%;}
+	100% {background-position: 0% 0%;}
 }
 
 @keyframes outlineThickness {
@@ -647,7 +648,28 @@ span.altlastIdentified, strong.altlastIdentified {
 	}
 }
 
-
+@keyframes credits {
+	0% {
+    transform: translateY(47%);
+    opacity: 0;
+  }
+	10% {
+    transform: translateY(42%);
+    opacity: 1;
+  }
+  87% {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}
 
 
 /* Start Screen */
@@ -673,12 +695,6 @@ span.altlastIdentified, strong.altlastIdentified {
   object-fit: cover;
   height: 85%;
   animation: moveHouse 6s infinite;
-}
-
-.start h1 {
-  font-family: "AldotheApache";
-  font-size: 12rem;
-  color: var(--color-black)
 }
 
 .start-content {
@@ -837,7 +853,12 @@ span.altlastIdentified, strong.altlastIdentified {
   pointer-events: none;
 }
 
-.outro .text-wrap, .credits .text-wrap {
+.outro .outroText3 p {
+  font-family: "Open Sans";
+  animation: flickerHard 1.5s infinite;
+}
+
+.outro .text-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -845,15 +866,95 @@ span.altlastIdentified, strong.altlastIdentified {
   height: 100%;
 }
 
-.outro .outroText3 p {
-  font-family: "Open Sans";
-  animation: flickerHard 1.5s infinite;
-}
-
 .outro p, .credits .text-wrap p {
   font-size: 2rem;
   color: var(--color-white);
   text-align: center;
+}
+
+/* Credits */
+
+.credits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--scene-offset);
+  height: 100%;
+  color: var(--color-white);
+  font-size: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.credits .credits-wrap {
+  position: absolute;
+  animation: credits 40s linear;
+  transform: translateY(47%);
+}
+
+.credits .credits-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.credits .credits-key-info {
+  margin-bottom: 10rem;
+}
+
+.credits h1 {
+  font-size: 7rem;
+  color: var(--color-white);
+  height: fit-content;
+  width: fit-content;
+}
+
+.credits h2 {
+  font-weight: bold;
+}
+
+.credits .owner-info {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.credits .hs-logo {
+  width: 11rem;
+  margin-top: 2rem;
+}
+
+.credits .credits-audio {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.credits .audio-wrap {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  gap: 3rem;
+}
+
+.credits .audio {
+  display: flex;
+  text-align: left;
+  align-self: baseline;
+  flex-direction: column;
+  font-size: 1.1rem;
+}
+
+.credits .credits-legal {
+  font-size: 1.25rem;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 10rem;
 }
 
 /* Media queries */
@@ -869,10 +970,6 @@ span.altlastIdentified, strong.altlastIdentified {
 
   .start-buttons {
     gap: 1rem;
-  }
-
-  .start h1 {
-    font-size: 9rem;
   }
 
   .start .button {
@@ -892,10 +989,6 @@ span.altlastIdentified, strong.altlastIdentified {
 
   .start-buttons {
     gap: 0.5rem;
-  }
-
-  .start h1 {
-    font-size: 4.5rem;
   }
 
   .start .button {
