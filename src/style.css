@@ -653,20 +653,22 @@ span.altlastIdentified, strong.altlastIdentified {
     transform: translateY(47%);
     opacity: 0;
   }
-	10% {
-    transform: translateY(42%);
+	5% {
     opacity: 1;
   }
-  87% {
+  75% {
     transform: translateY(-50%);
     opacity: 1;
   }
-  90% {
+  80% {
     transform: translateY(-50%);
-    opacity: 1;
+    opacity: 0;
+  }
+  81% {
+    transform: translateY(47%);
+    opacity: 0;
   }
   100% {
-    transform: translateY(-50%);
     opacity: 0;
   }
 }
@@ -889,7 +891,7 @@ span.altlastIdentified, strong.altlastIdentified {
 
 .credits .credits-wrap {
   position: absolute;
-  animation: credits 40s linear;
+  animation: credits 50s ease-in-out infinite;
   transform: translateY(47%);
 }
 

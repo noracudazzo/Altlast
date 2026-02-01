@@ -89,8 +89,7 @@ const bleepSfx = sfx(`/sounds/effects/263133__mossy4__tone-beep.wav`, 0.4);
 const typeSfx = sfx(`/sounds/effects/738440__chris112233__key-clack1.wav`, 0.3); 
 const retypeSfx = sfx(`/sounds/effects/786190__danymo__sci-fi_computing_tr1.mp3`);
 const elevatorMovementSfx = sfx(`/sounds/effects/341190__yoyodaman234__elevator-travel-6a.wav`);
-const elevatorDoorSfx = sfx(`/sounds/effects/581369__audiotorp__hydraulic_door_scifi_withdecompression.wav`);
-const elevatorIsThereSfx = sfx(`/sounds/effects/529559__drmrsir__ping.wav`);
+const elevatorDoorSfx = sfx(`/sounds/effects/581369__audiotorp__hydraulic_door_scifi_withdecompression.wav`, 0.2);
 const openDoorSfx = sfx(`/sounds/effects/400329__n-razm__door_open.wav`, 0.1); 
 const closeDoorSfx = sfx(`/sounds/effects/426734__samuelgremaud__door-closing.wav`, 0.1); 
 const openFridgeSfx = sfx(`/sounds/effects/8865__harri__1_fridge_open.mp3`, 0.3); 
@@ -984,8 +983,7 @@ function openElevator() {
         scene.classList.remove("shake");
         elevatorDoorSfx.play();
         setTimeout(() => {
-          elevatorIsThereSfx.play();
-        }, 500
+        }, 470
       );
         setTimeout(() => {
           elevatorDoorBackgroundPlaceholder.classList.add("hidden");
