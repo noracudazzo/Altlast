@@ -997,7 +997,7 @@ function openElevator() {
 } 
 }
 
-function finishGame() { // tbd, dirty
+function finishGame() { 
   fadeOutFast();
 
   setTimeout(() => {

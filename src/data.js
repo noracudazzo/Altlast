@@ -1046,7 +1046,7 @@ export const data = {
       text: {
         name: { title: "Objektname", data: "Kalender TT" },
         year: { title: "Herstellungsjahr", data: "54" },
-        status: { title: "Status", data: "Intakt" }, // tbd
+        status: { title: "Status", data: "Intakt" }, 
         belongsTo: { title: "Zugehörigkeit", data: "Archivkreis7" },
       },
       comment: "Das Objekt verwendet eine falsche Zeitrechnung und sollte besser entsorgt werden.",

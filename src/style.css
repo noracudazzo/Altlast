@@ -261,7 +261,7 @@ main {
 .scene .background.one-back { z-index: -2; }
 .scene .background.two-back { z-index: -3; }
 .scene .object { z-index: 0;}
-.scene .foreground { z-index: 4; pointer-events: none;} /* tbd schrank Küche */
+.scene .foreground { z-index: 4; pointer-events: none;} 
 .scene .activateableObject { z-index: 2; }
 #assistant, #main-navigation, .room-name { z-index: 99;}
 .start, .settings { z-index: 149; } 
@@ -1001,7 +1001,7 @@ span.altlastIdentified, strong.altlastIdentified {
 
 }
 
-@media (min-aspect-ratio: 5464/3072) { /* tbd: wenn Rand nur minimal ist auf 100% einpassen */
+@media (min-aspect-ratio: 5464/3072) { 
   .viewport {
     width: calc(100vh * 1366 / 768);
     height: 100vh;
