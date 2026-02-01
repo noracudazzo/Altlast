@@ -414,7 +414,7 @@ main {
 
 .main-navigation .home-button img {
   object-fit: cover;
-  width: 40%;
+  width: 50%;
 }
 
 /* Popup */
@@ -775,7 +775,7 @@ span.altlastIdentified, strong.altlastIdentified {
   opacity: 0.4;
 }
 
-.elevator .hotspot.glow {
+.hotspot.glow {
   animation: pulseGlowWhite 2s infinite;
 }
 

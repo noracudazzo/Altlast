@@ -760,6 +760,12 @@ export const data = {
         status: { title: "Status", data: "Unbekannt" },
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
+      comment: [
+        "Wir haben der Gruppe viel zu verdanken. ",
+        "Aber heute brauchen wir keine Rebellionen mehr, es geht uns schließlich sehr gut, oder nicht?",
+        "Und wir wollen niemanden dazu inspirieren, auf dumme Gedanken zu kommen.",
+        "Daher bitte ich dich darum, später alle Erinnerungsstücke an die Lumen Bewegung zu entsorgen.",
+      ],
       textLocation: {
         right: 300,
         top: 1250,
@@ -779,46 +785,6 @@ export const data = {
         belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
       },
       comment: "Dieses veraltete Ausweisdokument ist nicht mehr brauchbar und sollte umgehend vernichtet werden.",
-      textLocation: {
-          left: "center",
-          bottom: 450,
-      }
-    },
-
-    sticker1: {
-      scale: 10,
-      originX: 1700,
-      originY: 750, 
-      hasBeenClicked: false,
-      isAltlast: true,
-      text: {
-        name: { title: "Objektname", data: '"Black lives are important" Sticker' },
-        year: { title: "Herstellungsjahr", data: "2020" },
-        status: { title: "Status", data: "Unbekannt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-      },
-      textLocation: {
-        right: 300,
-        top: 1250,
-      }
-    },
-
-    sticker2: {
-      scale: 9,
-      originX: 1625,
-      originY: 1400, 
-      hasBeenClicked: false,
-      isAltlast: true,
-      text: {
-        name: { title: "Objektname", data: '"Fridays for tomorrow" Sticker' },
-        year: { title: "Herstellungsjahr", data: "2021" },
-        status: { title: "Status", data: "Unbekannt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-      },
-      comment: [
-        "Dieser alte Sticker thematisiert ein Problem, das wir mittlerweile sehr gut im Griff haben.",
-        "Bewegungen wie diese werden daher nicht mehr benötigt und sollten in der Vergangenheit bleiben.",
-      ],
       textLocation: {
           left: "center",
           bottom: 450,
@@ -845,70 +811,6 @@ export const data = {
       textLocation: {
           left: "center",
           top: 450,
-      }
-    },
-
-    sticker4: {
-      scale: 11,
-      originX: 2725,
-      originY: 800, 
-      hasBeenClicked: false,
-      isAltlast: true,
-      text: {
-        name: { title: "Objektname", data: 'Proteststicker gegen die "Nationale Schutzallianz"' },
-        year: { title: "Herstellungsjahr", data: "2041" },
-        status: { title: "Status", data: "Unbekannt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-      },
-      textLocation: {
-          left: "center",
-          bottom: 450,
-      }
-    },
-
-    sticker5: {
-      scale: 12,
-      originX: 2800,
-      originY: 1050,  
-      hasBeenClicked: false,
-      isAltlast: true,
-      text: {
-        name: { title: "Objektname", data: 'Proteststicker gegen die "Nationale Schutzallianz"' },
-        year: { title: "Herstellungsjahr", data: "2041" },
-        status: { title: "Status", data: "Unbekannt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-      },
-      comment: [
-        "Die hier thematisierte Gruppierung gibt es schon lange nicht mehr.",
-        "Du kannst die Sticker also problemlos wegwerfen."
-      ],
-      textLocation: {
-          left: "center",
-          bottom: 450,
-      }
-    },
-
-    sticker6: {
-      scale: 12,
-      originX: 3075,
-      originY: 1050,
-      hasBeenClicked: false,
-      isAltlast: true,
-      text: {
-        name: { title: "Objektname", data: '"Lumen" Sticker' },
-        year: { title: "Herstellungsjahr", data: "2041" },
-        status: { title: "Status", data: "Unbekannt" },
-        belongsTo: { title: "Zugehörigkeit", data: "Unregistriert" },
-      },
-      comment: [
-        "Wir haben der Gruppe viel zu verdanken. ",
-        "Aber heute brauchen wir keine Rebellionen mehr, es geht uns schließlich sehr gut, oder nicht?",
-        "Und wir wollen niemanden dazu inspirieren, auf dumme Gedanken zu kommen.",
-        "Daher bitte ich dich darum, später alle Erinnerungsstücke an die Lumen Bewegung zu entsorgen.",
-      ],
-      textLocation: {
-          left: "center",
-          bottom: 450,
       }
     },
 
@@ -1177,8 +1079,8 @@ export const data = {
     akkusativ: "den",
     dativ: "in den", 
     isUnlocked: false,
-    startNarrative: "Entsorge sofort all die Altlast, die du in Ellens Büro gefunden hast.",
-    narrative: "Entsorge jetzt die Altlast.",
+    startNarrative: "Gehe jetzt in den Entsorgungsraum und entsorge sofort all die Altlast, die du in Ellens Büro gefunden hast.",
+    narrative: "Gehe jetzt in den Entsorgungsraum und entsorge die Altlast.",
     hasBeenEntered: false,
     canBeLeft: true,
     music: "ten-a-number-397379.mp3",

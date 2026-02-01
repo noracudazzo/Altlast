@@ -486,6 +486,8 @@ async function showAssistantMessage(comment = null) {
 
   lastAssistantMessage = source;
 
+  if ((source === currentNarrative) && (currentRoom === lastUnlockedRoom)) highlightMissingObjects(lastUnlockedRoom);
+
   assistantSpeechbubble.classList.remove("hidden");
   assistant.classList.add("activeAssistant");
 
@@ -823,6 +825,29 @@ function changeRoom(room) {
   });
 }
 
+function highlightMissingObjects(roomId) {
+
+  const room = data[roomId];
+  if (!room) return [];
+  const missingObjects = findMissingObjects(room);
+
+  const domMissingHotspots = missingObjects
+  .map(hs => document.getElementById(hs.id))
+  .filter(Boolean);
+
+  domMissingHotspots.forEach(hs => {
+    hs.classList.add("glow");
+    setTimeout(() => { hs.classList.remove("glow"); }, 8000);
+  }); 
+}
+
+function findMissingObjects(room) {
+  return Object.entries(room)
+    .filter(([, item]) => item && Object.prototype.hasOwnProperty.call(item, "hasBeenClicked"))
+    .filter(([, item]) => item.hasBeenClicked === false)
+    .map(([key, item]) => ({ id: key, ...item })); 
+}
+
 function playMusic(room) {
   if(currentMusic) stopMusic();
 
@@ -1120,7 +1145,8 @@ document.addEventListener("mousemove", e => {
 
   // Fall 1: Nicht gezoomt
   if (!zoomed) {
-    if (hotspot) setCursor("zoomIn");
+    if (hotspot === shredder) setCursor("click");
+    else if (hotspot) setCursor("zoomIn");
     else if (door) setCursor("click");
     else setCursor("default");
     return;
@@ -1161,10 +1187,10 @@ document.addEventListener("mousemove", e => {
     } 
 
     // Wenn über Objekt
-    if (target.closest(".activatedElement .hotspot") || target.closest("#shredder")) {
-      setCursor("click");
+    if (target.closest(".activatedElement .hotspot")) {
+      setCursor("zoomIn");
       return;
-    } 
+    }
 
     setCursor("zoomOut"); // Sonst: Zoom out
     return;
