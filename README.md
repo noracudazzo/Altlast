@@ -1,6 +1,6 @@
 # Altlast
 
-[![Static Badge](https://img.shields.io/badge/itch-io-red?logo=itchdotio)](https://itch.io/)
+[![Static Badge](https://img.shields.io/badge/itch-io-red?logo=itchdotio)](https://noragry.itch.io/altlast)
 
 <p align="center">
   <img src="./docs/screenshot_01.png" width="45%">
