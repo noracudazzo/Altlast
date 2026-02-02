@@ -891,7 +891,7 @@ span.altlastIdentified, strong.altlastIdentified {
 
 .credits .credits-wrap {
   position: absolute;
-  animation: credits 50s ease-in-out infinite;
+  animation: credits 40s ease-in-out infinite;
   transform: translateY(47%);
 }
 
@@ -929,20 +929,20 @@ span.altlastIdentified, strong.altlastIdentified {
   margin-top: 2rem;
 }
 
-.credits .credits-audio {
+.credits .credits-source {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.credits .audio-wrap {
+.credits .source-wrap {
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
   gap: 3rem;
 }
 
-.credits .audio {
+.credits .source {
   display: flex;
   text-align: left;
   align-self: baseline;
