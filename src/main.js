@@ -50,6 +50,7 @@ const outroText3 = document.querySelector(".outroText3");
 const credits = document.querySelector(".credits");
 
 let zoomed = false;
+let elevatorButtonLocked = false;
 let popupShown = false;
 let activePopupRunId = 0;
 let assistantShown = false;
@@ -707,14 +708,16 @@ function prepareButton(button, parentId) {
         setTimeout(() => controlButtonBackground.classList.add("unclicked"), 300);
 
         if (button.classList.contains("rightButton")) {
+          if (elevatorButtonLocked) return;
+          elevatorButtonLocked = true;
+          elevatorControls.classList.remove("hotspot");
+          elevatorControls.classList.add("background");
+          unlockNextRoom();
+          unlockNextRoom();
           clickSfx.play();
           setTimeout(() => {
-            elevatorControls.classList.remove("hotspot");
-            elevatorControls.classList.add("background");
             resetZoom();
             openElevator(); 
-            unlockNextRoom();
-            unlockNextRoom();
           }, 300);
         } else {
           errorSfx.play();
@@ -929,6 +932,10 @@ function startGame() {
   // Save löschen
   localStorage.removeItem("gameState");
   data = structuredClone(origData);
+
+  worldState = extractStateFromData(data);
+  resetClasses();
+
   // Variablen zurücksetzen
   
   gameStarted = false;
@@ -940,9 +947,7 @@ function startGame() {
   currentNarrative = lastUnlockedRoomData.narrative;
   lastAssistantMessage = currentNarrative;
   soundOn = true;
-
-  worldState = extractStateFromData(data);
-  resetClasses();
+  elevatorButtonLocked = false;
 
   changeRoom("elevator");
 

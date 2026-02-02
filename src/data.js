@@ -85,7 +85,7 @@ export const data = {
       originX: 5000,
       originY: 1450, 
       hasBeenClicked: false,
-      falseClickMessage: "Das Aufzug Control Panel ist momentan nur für den 26. Stock freigeschalten."
+      falseClickMessage: "Nur für den 26. Stock freigeschalten."
     },
   },
 
